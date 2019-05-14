@@ -1,0 +1,34 @@
+{
+    "resolutions": [
+        {
+            "id": 1,
+            "name": "01/03/2019",
+            "date": "10/03/2019",
+            "description": "uchwała ......",
+            "finish_date": "31/03/2019"
+        }
+    ],
+    "members": [
+        {
+            "id":1,
+            "first_name": "Jan",
+            "last_name": "Kowalski",
+            "address": "Cztery poru 1"
+        },
+        {
+            "id":2,
+
+            "first_name": "Katarzyna",
+            "last_name": "Nowak ",
+            "address": "Cztery poru 5"
+        }
+    ],
+    "signatures": [
+        {
+            "data": "15/03/2019",
+            "type_of_sign":1,
+            "id_member":2,
+            "id_resolution":1
+        }
+    ]
+}
