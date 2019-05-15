@@ -1,4 +1,4 @@
-import 'package:cztery_pory_roku/models/members.dart';
+import '../models/members.dart';
 
 var members = [
   Members(id: 1, address: "Sadowa", firstName: "Jan",lastName: "Kowalski"),

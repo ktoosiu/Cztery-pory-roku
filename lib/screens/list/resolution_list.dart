@@ -1,7 +1,8 @@
-import 'package:cztery_pory_roku/models/resolutions.dart';
-import 'package:cztery_pory_roku/screens/list/resolution_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+
+import '../../models/resolutions.dart';
+import '../../screens/list/resolution_list_item.dart';
 import '../../mocks/resolution_mocks.dart';
 
 class ResolutionList extends StatefulWidget {
@@ -19,7 +20,6 @@ class ResolutionListState extends State<ResolutionList> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
 
     return ListView.builder(
       padding: const EdgeInsets.all(16.0),

@@ -1,5 +1,6 @@
-import 'package:cztery_pory_roku/screens/list/resolution_list.dart';
 import 'package:flutter/material.dart';
+
+import './screens/list/resolution_list.dart';
 
 void main() => runApp(MyApp());
 
