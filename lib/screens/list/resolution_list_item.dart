@@ -47,3 +47,5 @@ class ResolutionListItem extends StatelessWidget {
 //alert dialog
 //szare tło dla nieaktywnych
 //refresh
+
+//add isolate (compute) - https://flutter.dev/docs/cookbook/networking/background-parsing#4-move-this-work-to-a-separate-isolate

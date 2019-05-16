@@ -11,7 +11,8 @@ class ResolutionList extends StatefulWidget {
 }
 
 class ResolutionListState extends State<ResolutionList> {
-  final _resolutions = <Resolution>[];
+  // var _resolutions = <Resolution>[];
+  var _resolutions = <Resolution>[];
   @override
   void initState() {
     super.initState();
@@ -23,8 +24,8 @@ class ResolutionListState extends State<ResolutionList> {
         future: fetchResolution(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
-            // _resolutions = snapshot.data;
-            _resolutions.addAll(snapshot.data);
+            _resolutions = snapshot.data;
+            // _resolutions.addAll(snapshot.data);
 
             return ListView.builder(
                 padding: const EdgeInsets.all(16.0),
