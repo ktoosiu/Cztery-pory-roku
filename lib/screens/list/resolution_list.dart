@@ -31,7 +31,7 @@ class ResolutionListState extends State<ResolutionList> {
                 padding: const EdgeInsets.all(16.0),
                 itemCount: _resolutions.length,
                 itemBuilder: (context, i) {
-                  return ResolutionListItem(resolution: _resolutions[i]);
+                  return ResolutionListItem(resolution: _resolutions[i] );
                 });
           } else {
             return new CircularProgressIndicator();
