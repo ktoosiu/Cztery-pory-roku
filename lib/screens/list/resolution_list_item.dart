@@ -41,10 +41,9 @@ class ResolutionListItem extends StatelessWidget {
     );
   }
 }
-//todo: 
-//pobieranie danych przez http
-//stworzyć serwis pobierający dane z jsonserver używać tych danych, mocki usunąć
+
 //ewentualnie: navigator, widok detali
 
 //alert dialog
 //szare tło dla nieaktywnych
+//refresh

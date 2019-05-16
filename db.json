@@ -4,7 +4,20 @@
             "id": 1,
             "name": "01/03/2019",
             "date": "10/03/2019",
-            "description": "uchwała ......",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            "finish_date": "31/03/2019"
+        },{
+            "id": 2,
+            "name": "02/03/2019",
+            "date": "12/03/2019",
+            "description": "Turpis massa tincidunt dui ut ornare lectus sit amet est. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere. Sed tempus urna et pharetra pharetra massa. Risus in hendrerit gravida rutrum quisque non tellus orci. Donec ultrices tincidunt arcu non sodales neque sodales ut etiam. Feugiat sed lectus vestibulum mattis. Purus viverra accumsan in nisl nisi scelerisque eu ultrices vitae. ",
+            "finish_date": "31/03/2019"
+        },
+        {
+            "id": 3,
+            "name": "03/03/2019",
+            "date": "15/03/2019",
+            "description": "Urna porttitor rhoncus dolor purus. Ut tristique et egestas quis ipsum suspendisse ultrices. Eget est lorem ipsum dolor sit amet. Feugiat in ante metus dictum at tempor commodo. Ut faucibus pulvinar elementum integer enim neque volutpat ac. Ut sem nulla pharetra diam. Tortor id aliquet lectus proin.",
             "finish_date": "31/03/2019"
         }
     ],
