@@ -11,43 +11,40 @@ class ResolutionListItem extends StatelessWidget {
   const ResolutionListItem({Key key, this.resolution}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 0),
-      child: GestureDetector(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context)=>ResolutionDetails()),
-          );
-        },
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                // Icon(Icons.assignment,),
-                Text(
-                  resolution.name,
-                  style: TextStyle(
-                    fontSize: 22.0,
-                    fontWeight: FontWeight.bold,
-                  ),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context)=>ResolutionDetails(item: resolution,)),
+        );
+      },
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              // Icon(Icons.assignment,),
+              Text(
+                resolution.name,
+                style: TextStyle(
+                  fontSize: 22.0,
+                  fontWeight: FontWeight.bold,
                 ),
-                Text(DateFormat('dd-MM-yyyy').format(resolution.date))
-                //Text(resolution.date.day.toString()+"/"+resolution.date.month.toString()+"/"+resolution.date.year.toString())//tak też można
-              ],
-            ),
-            Container(
-              child: Text(
-                resolution.description,
-                maxLines: 3,
-                overflow: TextOverflow.ellipsis,
               ),
-              padding: EdgeInsets.all(4.0),
+              Text(DateFormat('dd-MM-yyyy').format(resolution.date))
+              //Text(resolution.date.day.toString()+"/"+resolution.date.month.toString()+"/"+resolution.date.year.toString())//tak też można
+            ],
+          ),
+          Container(
+            child: Text(
+              resolution.description,
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
             ),
-            Divider(),
-          ],
-        ),
+            padding: EdgeInsets.all(4.0),
+          ),
+          Divider(),
+        ],
       ),
     );
   }

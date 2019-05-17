@@ -1,5 +1,6 @@
 import 'package:cztery_pory_roku/api/http_data.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 import '../../models/resolutions.dart';
@@ -13,15 +14,17 @@ class ResolutionList extends StatefulWidget {
 class ResolutionListState extends State<ResolutionList> {
   // var _resolutions = <Resolution>[];
   var _resolutions = <Resolution>[];
+  Future<List<Resolution>> resolutionFuture;
   @override
   void initState() {
+    resolutionFuture=fetchResolution();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: fetchResolution(),
+        future: resolutionFuture,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
             _resolutions = snapshot.data;
@@ -34,7 +37,16 @@ class ResolutionListState extends State<ResolutionList> {
                   return ResolutionListItem(resolution: _resolutions[i] );
                 });
           } else {
-            return new CircularProgressIndicator();
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                children: <Widget>[
+                  CircularProgressIndicator(),
+                  
+                ],
+              ),
+            );
           }
         });
   }

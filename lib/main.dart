@@ -1,3 +1,4 @@
+import 'package:cztery_pory_roku/screens/login/login.dart';
 import 'package:flutter/material.dart';
 
 import './screens/list/resolution_list.dart';
@@ -13,12 +14,16 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text("Resolutions"),
-        ),
-        body: ResolutionList(),
-      ),
+      home: Login(),
     );
   }
 }
+
+//TODO: dokończenie widoku logowania 
+//2 textformfield + button login -osobny stateful widget 
+//po naciśnieciu logi zapytanie do api czy użytkownik istnieje 
+//jeżeli tak to zapisać id do shared preferences żeby można było odczytywać
+//nawigacja do resolution screen
+//metoda post signature
+//
+// jeżeli nie ma użytkownika to post z tworzeniem/albo snackbar nei ma użytkownika

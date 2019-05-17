@@ -4,8 +4,10 @@ class Resolution {
   final DateTime date;
   final String description;
   final DateTime finishDate;
+
   Resolution(
       {this.id, this.name, this.date, this.description, this.finishDate});
+
   factory Resolution.fromJson(Map<String, dynamic> json) {
     return Resolution(
       id: json['id'],
@@ -15,6 +17,14 @@ class Resolution {
       finishDate: jsonToDate(json['finish_date']),
     );
   }
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'date': date,
+        'description': description,
+        'finish_date': finishDate
+      };
 }
 
 DateTime jsonToDate(String date) {

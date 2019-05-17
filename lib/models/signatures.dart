@@ -1,13 +1,13 @@
-class Signatures{
+class Signature{
   final int id;
   final DateTime date;
   final TypeOfSign type;
   final int idMember;
   final int idResolution;
 
-  Signatures({this.id, this.date, this.type, this.idMember, this.idResolution});
-  factory Signatures.fromJson(Map<String, dynamic> json) {
-    return Signatures(
+  Signature({this.id, this.date, this.type, this.idMember, this.idResolution});
+  factory Signature.fromJson(Map<String, dynamic> json) {
+    return Signature(
       id: json['id'],
       date: json['date'],
       type: json['type'],
@@ -16,9 +16,16 @@ class Signatures{
 
     );
   }
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'date': date,
+        'type': type,
+        'id_member': idMember,
+        'id_resolution': idResolution
+      };
 }
 enum TypeOfSign{
   accepted,
-  declaimed,
+  declined,
   abstained
 }

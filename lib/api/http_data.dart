@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cztery_pory_roku/models/signatures.dart';
 import 'package:http/http.dart' as http;
 
 import '../models/resolutions.dart';
@@ -17,3 +18,13 @@ Future<List<Resolution>> fetchResolution() async {
     throw Exception('Failed to load post');
   }
 }
+
+// Future<Signature> createPost(Signature post) async{
+//   final response = await http.post('$url',
+//       headers: {
+//         HttpHeaders.contentTypeHeader: 'application/json'
+//       },
+//       body: postToJson(post)
+//   );
+//   return postFromJson(response.body);
+// }
