@@ -1,10 +1,11 @@
-import 'package:cztery_pory_roku/api/http_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 import '../../models/resolutions.dart';
 import '../../screens/list/resolution_list_item.dart';
+import '../../api/http_data.dart';
+
 
 class ResolutionList extends StatefulWidget {
   @override
@@ -12,9 +13,7 @@ class ResolutionList extends StatefulWidget {
 }
 
 class ResolutionListState extends State<ResolutionList> {
-  // var _resolutions = <Resolution>[];
   var _resolutions = <Resolution>[];
-  var r2;
   Future<List<Resolution>> resolutionFuture;
   @override
   initState() {

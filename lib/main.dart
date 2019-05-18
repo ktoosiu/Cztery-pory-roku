@@ -16,11 +16,15 @@ class MyApp extends StatelessWidget {
       home: Login(),
     );
   }
-
-// TODO:po naciśnieciu logi zapytanie do api czy użytkownik istnieje
+//czy dobrze wysyłka formularza jest zrobiona i sprawdzanie tekstu
+// TODO:po naciśnieciu logi zapytanie do api czy użytkownik istnieje - metoda sprawdzająca 
 //jeżeli tak to zapisać id do shared preferences żeby można było odczytywać
 //nawigacja do resolution screen
 //metoda post signature
-//
+//case sensitive
 // jeżeli nie ma użytkownika to post z tworzeniem/albo snackbar nei ma użytkownika
+
+
+//szare tło dla nieaktywnych
+//add isolate (compute) - https://flutter.dev/docs/cookbook/networking/background-parsing#4-move-this-work-to-a-separate-isolate
 }

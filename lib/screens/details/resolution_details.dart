@@ -1,7 +1,8 @@
-import 'package:cztery_pory_roku/models/resolutions.dart';
-import 'package:cztery_pory_roku/screens/details/resolution_form.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
+import '../../models/resolutions.dart';
+import 'resolution_form.dart';
 
 class ResolutionDetails extends StatelessWidget {
   final Resolution item;

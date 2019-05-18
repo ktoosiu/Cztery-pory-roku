@@ -1,7 +1,8 @@
-import 'package:cztery_pory_roku/models/signatures.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+
+import '../../models/signatures.dart';
 
 class ResolutionForm extends StatefulWidget {
   @override

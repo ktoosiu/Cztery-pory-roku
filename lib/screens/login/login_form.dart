@@ -1,4 +1,7 @@
+import '../../api/http_data.dart';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class LoginForm extends StatefulWidget {
   @override
@@ -7,6 +10,20 @@ class LoginForm extends StatefulWidget {
 
 class LoginFormState extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
+  final formController = [
+    TextEditingController(),
+    TextEditingController(),
+    TextEditingController()
+  ];
+
+  @override
+  void dispose() {
+    // Clean up the controller when the Widget is disposed
+    for (var controller in formController) {
+      controller.dispose();
+    }
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,22 +34,55 @@ class LoginFormState extends State<LoginForm> {
         child: Column(
           children: [
             TextFormField(
-                decoration: InputDecoration(hintText: 'ID'),
-                validator: (value) {
-                  if (value.isEmpty) return 'Enter ID';
-                }),
+              controller: formController[0],
+              inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(hintText: 'ID'),
+              validator: (value) {
+                if (value.isEmpty) return 'Enter ID';
+              },
+              autofocus: false,
+            ),
             TextFormField(
-                decoration: InputDecoration(hintText: 'Fullname'),
-                validator: (value) {
-                  if (value.isEmpty) return 'Enter Fullname';
-                }),
+              controller: formController[1],
+              decoration: InputDecoration(hintText: 'First Name'),
+              validator: (value) {
+                if (value.isEmpty) return 'Enter First Name';
+              },
+            ),
+            TextFormField(
+              controller: formController[2],
+              decoration: InputDecoration(hintText: 'Last Name'),
+              validator: (value) {
+                if (value.isEmpty) return 'Enter Last Name';
+              },
+            ),
             Padding(
               padding: const EdgeInsets.only(top: 16.0),
               child: RaisedButton(
                 child: Text('Sign In'),
-                onPressed: () {
+                onPressed: () async {
                   if (_formKey.currentState.validate()) {
-                    // TODO: implement sending form
+                    if (await checkMember(
+                        id: formController[0].text,
+                        firstName: formController[1].text,
+                        lastName: formController[2].text)) {
+                      Scaffold.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                              'User ${formController[0].text} ${formController[1].text} ${formController[2].text} exists!'),
+                          backgroundColor: Colors.green,
+                        ),
+                      );
+                    } else {
+                      Scaffold.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                              'User ${formController[0].text} ${formController[1].text} ${formController[2].text} doesn\'t exist!'),
+                          backgroundColor: Colors.redAccent[100],
+                        ),
+                      );
+                    }
                   } else {
                     Scaffold.of(context).showSnackBar(SnackBar(
                       content: Text("Please enter values"),
@@ -48,6 +98,3 @@ class LoginFormState extends State<LoginForm> {
     );
   }
 }
-
-//commit: Login Form created,
-//http get service changed to generic

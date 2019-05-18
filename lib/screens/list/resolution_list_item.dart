@@ -1,9 +1,9 @@
-import 'package:cztery_pory_roku/screens/details/resolution_details.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart'; //Date formatting library
+import 'package:intl/intl.dart'; 
 
 import '../../models/resolutions.dart';
 import '../details/resolution_details.dart';
+import '../../screens/details/resolution_details.dart';
 
 class ResolutionListItem extends StatelessWidget {
   final Resolution resolution;
@@ -23,7 +23,6 @@ class ResolutionListItem extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              // Icon(Icons.assignment,),
               Text(
                 resolution.name,
                 style: TextStyle(
@@ -32,7 +31,6 @@ class ResolutionListItem extends StatelessWidget {
                 ),
               ),
               Text(DateFormat('dd-MM-yyyy').format(resolution.date))
-              //Text(resolution.date.day.toString()+"/"+resolution.date.month.toString()+"/"+resolution.date.year.toString())//tak też można
             ],
           ),
           Container(
@@ -49,11 +47,3 @@ class ResolutionListItem extends StatelessWidget {
     );
   }
 }
-
-//ewentualnie: navigator, widok detali
-
-//alert dialog
-//szare tło dla nieaktywnych
-//refresh
-
-//add isolate (compute) - https://flutter.dev/docs/cookbook/networking/background-parsing#4-move-this-work-to-a-separate-isolate

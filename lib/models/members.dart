@@ -11,9 +11,6 @@ class Members{
       firstName: json['first_name'],
       lastName: json['last_name'],
       address: json['address'],
-
     );
   }
-
-
 }
