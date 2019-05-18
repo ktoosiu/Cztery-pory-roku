@@ -1,14 +1,16 @@
+import 'package:cztery_pory_roku/screens/login/login_form.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatelessWidget {
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Row(mainAxisSize: MainAxisSize.max, children: [
         Expanded(
           child: Container(
-            color: Colors.blue,
+            color: Colors.lightBlueAccent[100],
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -16,7 +18,8 @@ class Login extends StatelessWidget {
                 Text(
                   'Login',
                   style: TextStyle(fontSize: 36),
-                )
+                ),
+                LoginForm()
               ],
             ),
           ),

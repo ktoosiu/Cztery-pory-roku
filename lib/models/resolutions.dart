@@ -21,7 +21,7 @@ class Resolution {
   Map<String, dynamic> toJson() => {
         'id': id,
         'name': name,
-        'date': date,
+        'date': date,// TODO: zamienić na datę taką jaką mamy w db
         'description': description,
         'finish_date': finishDate
       };

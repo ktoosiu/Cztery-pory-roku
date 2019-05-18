@@ -14,10 +14,12 @@ class ResolutionList extends StatefulWidget {
 class ResolutionListState extends State<ResolutionList> {
   // var _resolutions = <Resolution>[];
   var _resolutions = <Resolution>[];
+  var r2;
   Future<List<Resolution>> resolutionFuture;
   @override
-  void initState() {
-    resolutionFuture=fetchResolution();
+  initState() {
+    resolutionFuture = fetchResolution();
+    // TODO: refresh
     super.initState();
   }
 
@@ -28,13 +30,11 @@ class ResolutionListState extends State<ResolutionList> {
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
             _resolutions = snapshot.data;
-            // _resolutions.addAll(snapshot.data);
-
             return ListView.builder(
                 padding: const EdgeInsets.all(16.0),
                 itemCount: _resolutions.length,
                 itemBuilder: (context, i) {
-                  return ResolutionListItem(resolution: _resolutions[i] );
+                  return ResolutionListItem(resolution: _resolutions[i]);
                 });
           } else {
             return Center(
@@ -43,7 +43,6 @@ class ResolutionListState extends State<ResolutionList> {
                 mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
                   CircularProgressIndicator(),
-                  
                 ],
               ),
             );

@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:cztery_pory_roku/models/signatures.dart';
 import 'package:http/http.dart' as http;
 
 import '../models/resolutions.dart';
@@ -11,6 +10,7 @@ Future<List<Resolution>> fetchResolution() async {
 
   if (response.statusCode == 200) {
     // If server returns an OK response, parse the JSON
+    // TODO: zamienić na generyczną
     final parsed = json.decode(response.body).cast<Map<String, dynamic>>();
     return parsed.map<Resolution>((json) => Resolution.fromJson(json)).toList();
   } else {
