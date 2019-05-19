@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart'; 
+import 'package:intl/intl.dart';
 
 import '../../models/resolutions.dart';
 import '../details/resolution_details.dart';
@@ -9,13 +9,22 @@ class ResolutionListItem extends StatelessWidget {
   final Resolution resolution;
 
   const ResolutionListItem({Key key, this.resolution}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        // Navigator.pushNamed(
+        //   context,
+        //   '/details',
+        //   arguments: resolution,
+        // );
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context)=>ResolutionDetails(item: resolution,)),
+          MaterialPageRoute(
+              builder: (context) => ResolutionDetails(
+                    item: resolution,
+                  )),
         );
       },
       child: Column(

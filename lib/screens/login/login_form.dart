@@ -1,4 +1,5 @@
 import '../../api/http_data.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,13 +10,19 @@ class LoginForm extends StatefulWidget {
 }
 
 class LoginFormState extends State<LoginForm> {
-  final _formKey = GlobalKey<FormState>();
+  final _loginFormKey = GlobalKey<FormState>();
   final formController = [
     TextEditingController(),
     TextEditingController(),
     TextEditingController()
   ];
 
+  Future setUserId(int value) async {
+    final SharedPreferences id = await SharedPreferences.getInstance();
+    id.setInt('id', value);
+  }
+
+  //SharedPreferences userID = await SharedPreferences.getInstance();
   @override
   void dispose() {
     // Clean up the controller when the Widget is disposed
@@ -30,7 +37,7 @@ class LoginFormState extends State<LoginForm> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 32),
       child: Form(
-        key: _formKey,
+        key: _loginFormKey,
         child: Column(
           children: [
             TextFormField(
@@ -62,18 +69,13 @@ class LoginFormState extends State<LoginForm> {
               child: RaisedButton(
                 child: Text('Sign In'),
                 onPressed: () async {
-                  if (_formKey.currentState.validate()) {
+                  if (_loginFormKey.currentState.validate()) {
                     if (await checkMember(
                         id: formController[0].text,
                         firstName: formController[1].text,
                         lastName: formController[2].text)) {
-                      Scaffold.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(
-                              'User ${formController[0].text} ${formController[1].text} ${formController[2].text} exists!'),
-                          backgroundColor: Colors.green,
-                        ),
-                      );
+                      setUserId(int.parse(formController[0].text));
+                      Navigator.pushNamed(context, '/resolution');
                     } else {
                       Scaffold.of(context).showSnackBar(
                         SnackBar(
@@ -86,7 +88,7 @@ class LoginFormState extends State<LoginForm> {
                   } else {
                     Scaffold.of(context).showSnackBar(SnackBar(
                       content: Text("Please enter values"),
-                      backgroundColor: Colors.red,
+                      backgroundColor: Colors.redAccent[100],
                     ));
                   }
                 },

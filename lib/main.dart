@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import './screens/details/resolution_details.dart';
+import './screens/list/resolution_screen.dart';
 import './screens/login/login.dart';
 
 void main() => runApp(MyApp());
@@ -13,17 +15,25 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Login(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => Login(),
+        '/resolution': (context) => ResolutionScreen(),
+        // '/details': (context) => ResolutionDetails()
+      },
     );
   }
-//czy dobrze wysyłka formularza jest zrobiona i sprawdzanie tekstu
-// TODO:po naciśnieciu logi zapytanie do api czy użytkownik istnieje - metoda sprawdzająca 
-//jeżeli tak to zapisać id do shared preferences żeby można było odczytywać
-//nawigacja do resolution screen
-//metoda post signature
-//case sensitive
-// jeżeli nie ma użytkownika to post z tworzeniem/albo snackbar nei ma użytkownika
+//singlechildscroll w loginie?
+//routing z parametrem
+//jak nie ma połączenia to exception ale nic nie pokazuje
+//jeżeli tak to zapisać id do shared preferences żeby można było odczytywać -- shared preferences pamięta po zamknięciu
 
+//metoda post signature
+//login case sensitive?
+//test czy już pobrałem
+//sprawdzi czy nie głosowałem
+// jeżeli nie ma użytkownika to post z tworzeniem/albo snackbar nei ma użytkownika
+//można zmienić java/kotlin
 
 //szare tło dla nieaktywnych
 //add isolate (compute) - https://flutter.dev/docs/cookbook/networking/background-parsing#4-move-this-work-to-a-separate-isolate

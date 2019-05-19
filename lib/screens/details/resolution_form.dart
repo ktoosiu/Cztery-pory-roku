@@ -11,15 +11,14 @@ class ResolutionForm extends StatefulWidget {
 
 class ResolutionFormState extends State<ResolutionForm> {
   TypeOfSign selectedValue;
-  final _formKey = GlobalKey<FormState>();
+  final _resolutionFormKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: _formKey,
+      key: _resolutionFormKey,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          
           TextFormField(
             decoration: InputDecoration(hintText: 'Enter Fullname'),
             validator: (value) {
@@ -70,15 +69,16 @@ class ResolutionFormState extends State<ResolutionForm> {
             child: RaisedButton(
               child: Text('Send'),
               onPressed: () {
-                if (selectedValue != null && _formKey.currentState.validate()) {
+                if (selectedValue != null &&
+                    _resolutionFormKey.currentState.validate()) {
                   Scaffold.of(context).showSnackBar(SnackBar(
                     content: Text("Sent"),
-                    backgroundColor: Colors.green,
+                    backgroundColor: Colors.greenAccent[400],
                   ));
                 } else {
                   Scaffold.of(context).showSnackBar(SnackBar(
                     content: Text("Please select value"),
-                    backgroundColor: Colors.red,
+                    backgroundColor: Colors.redAccent[100],
                   ));
                 }
               },
