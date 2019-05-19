@@ -1,4 +1,8 @@
-class Signature{
+import 'package:intl/intl.dart';
+
+import 'json_to_date.dart';
+
+class Signature {
   final int id;
   final DateTime date;
   final TypeOfSign type;
@@ -9,23 +13,19 @@ class Signature{
   factory Signature.fromJson(Map<String, dynamic> json) {
     return Signature(
       id: json['id'],
-      date: json['date'],
+      date: jsonToDate(json['date']),
       type: json['type'],
       idMember: json['id_member'],
       idResolution: json['id_resolution'],
-
     );
   }
   Map<String, dynamic> toJson() => {
         'id': id,
-        'date': date,
-        'type': type,
+        'date': DateFormat('dd/MM/yyyy').format(date).toString(),
+        'type': type.index,
         'id_member': idMember,
         'id_resolution': idResolution
       };
 }
-enum TypeOfSign{
-  accepted,
-  declined,
-  abstained
-}
+
+enum TypeOfSign { accepted, declined, abstained }

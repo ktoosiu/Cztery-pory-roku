@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import './screens/details/resolution_details.dart';
 import './screens/list/resolution_screen.dart';
 import './screens/login/login.dart';
 
@@ -23,17 +22,18 @@ class MyApp extends StatelessWidget {
       },
     );
   }
+
 //singlechildscroll w loginie?
 //routing z parametrem
 //jak nie ma połączenia to exception ale nic nie pokazuje
 //jeżeli tak to zapisać id do shared preferences żeby można było odczytywać -- shared preferences pamięta po zamknięciu
+//wywala exception przy ładowaniu username
 
-//metoda post signature
 //login case sensitive?
+//mieszamy językami
 //test czy już pobrałem
-//sprawdzi czy nie głosowałem
+//csprawdzi czy nie głosowałem, czy data się zgadza
 // jeżeli nie ma użytkownika to post z tworzeniem/albo snackbar nei ma użytkownika
-//można zmienić java/kotlin
 
 //szare tło dla nieaktywnych
 //add isolate (compute) - https://flutter.dev/docs/cookbook/networking/background-parsing#4-move-this-work-to-a-separate-isolate

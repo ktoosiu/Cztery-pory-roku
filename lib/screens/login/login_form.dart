@@ -17,12 +17,13 @@ class LoginFormState extends State<LoginForm> {
     TextEditingController()
   ];
 
-  Future setUserId(int value) async {
-    final SharedPreferences id = await SharedPreferences.getInstance();
-    id.setInt('id', value);
+  Future setUser(String id, String firstName, String lastName) async {
+    final SharedPreferences user = await SharedPreferences.getInstance();
+    user.setInt('id', int.parse(id));
+    user.setString('firstName', firstName);
+    user.setString('lastName', lastName);
   }
 
-  //SharedPreferences userID = await SharedPreferences.getInstance();
   @override
   void dispose() {
     // Clean up the controller when the Widget is disposed
@@ -74,7 +75,8 @@ class LoginFormState extends State<LoginForm> {
                         id: formController[0].text,
                         firstName: formController[1].text,
                         lastName: formController[2].text)) {
-                      setUserId(int.parse(formController[0].text));
+                      setUser(formController[0].text, formController[1].text,
+                          formController[2].text);
                       Navigator.pushNamed(context, '/resolution');
                     } else {
                       Scaffold.of(context).showSnackBar(

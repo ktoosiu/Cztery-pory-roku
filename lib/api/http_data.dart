@@ -1,7 +1,9 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:http/http.dart' as http;
 
+import '../models/signatures.dart';
 import '../models/resolutions.dart';
 
 Future<List<Resolution>> fetchResolution() async {
@@ -31,7 +33,7 @@ Future<bool> checkMember({String id, String firstName, String lastName}) async {
       if (item["id"] == int.parse(id) &&
           item["first_name"] == firstName.toString() &&
           item["last_name"] == lastName.toString()) {
-        return  Future<bool>.value(true);
+        return Future<bool>.value(true);
       }
     }
 
@@ -42,12 +44,24 @@ Future<bool> checkMember({String id, String firstName, String lastName}) async {
   }
 }
 
-// Future<Signature> createPost(Signature post) async{
-//   final response = await http.post('$url',
-//       headers: {
-//         HttpHeaders.contentTypeHeader: 'application/json'
-//       },
-//       body: postToJson(post)
+// Future createSignature(Signature signature) async {
+//   var url = 'http://10.0.2.2:3000/signatures';
+//   final response = await http.post(
+//     url,
+//     headers: {HttpHeaders.contentTypeHeader: 'application/json'},
+//     body: signature.toJson(),
 //   );
-//   return postFromJson(response.body);
+//   //return Signature.fromJson(json.decode(response.body));
 // }
+Future<http.Response> createSignature(Signature signature) async {
+  var url = "http://10.0.2.2:3000/signatures";
+  var body = json.encode(signature.toJson());
+
+  Map<String, String> headers = {
+    'Content-type': 'application/json',
+    'Accept': 'application/json',
+  };
+
+  final response = await http.post(url, body: body, headers: headers);
+  return response;
+}
