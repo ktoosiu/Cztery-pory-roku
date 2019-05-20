@@ -22,17 +22,14 @@ class MyApp extends StatelessWidget {
       },
     );
   }
-
+// TODO: check if user can send a Signature (outdated/already sent)
+// TODO: refresh
 //singlechildscroll w loginie?
 //routing z parametrem
 //jak nie ma połączenia to exception ale nic nie pokazuje
 //jeżeli tak to zapisać id do shared preferences żeby można było odczytywać -- shared preferences pamięta po zamknięciu
-//wywala exception przy ładowaniu username
-
 //login case sensitive?
 //mieszamy językami
-//test czy już pobrałem
-//csprawdzi czy nie głosowałem, czy data się zgadza
 // jeżeli nie ma użytkownika to post z tworzeniem/albo snackbar nei ma użytkownika
 
 //szare tło dla nieaktywnych

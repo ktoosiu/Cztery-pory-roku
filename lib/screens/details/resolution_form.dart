@@ -18,16 +18,30 @@ class ResolutionForm extends StatefulWidget {
 class ResolutionFormState extends State<ResolutionForm> {
   TypeOfSign selectedValue;
   final _resolutionFormKey = GlobalKey<FormState>();
-  String tempName;
-  int tempID;
+  int userID;
+  int signatureID;
+  @override
+  initState() {
+    getUserId();
+    getSignatureId();
+    super.initState();
+  }
 
-  Future<String> getUser() async {
+  Future<int> getUser() async {
     final SharedPreferences user = await SharedPreferences.getInstance();
-    var fullName =
-        user.getString('firstName') + ' ' + user.getString('lastName');
-    tempName = fullName;
-    tempID = user.getInt('id');
-    return fullName;
+    //userID = user.getInt('id');
+    var temp = user.getInt('id');
+    return temp;
+  }
+
+  getUserId() async {
+    final val = await getUser();
+    userID = val;
+  }
+
+  getSignatureId() async {
+    final val = await checkSignatureId();
+    signatureID = val;
   }
 
   @override
@@ -37,42 +51,6 @@ class ResolutionFormState extends State<ResolutionForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                FutureBuilder(
-                  future: getUser(),
-                  builder: (BuildContext context, AsyncSnapshot snapshot) {
-                    if (snapshot.hasData) {
-                      return Text(
-                        '$tempName ',
-                        style: TextStyle(fontSize: 18),
-                      );
-                    } else {
-                      throw Exception('No user data'); // TODO: tu wywala
-                    }
-                  },
-                ),
-              ],
-            ),
-          ),
-          // TextFormField(
-          //   decoration: InputDecoration(hintText: 'Enter Fullname'),
-          //   validator: (value) {
-          //     if (value.isEmpty) {
-          //       return "Enter Name";
-          //     }
-          //   },
-          // ),
-          // TextFormField(
-          //   decoration: InputDecoration(hintText: 'Enter Address'),
-          //   validator: (value) {
-          //     if (value.isEmpty) {
-          //       return "Enter Address";
-          //     }
-          //   },
-          // ),
           RadioButtonWiget(
             selectedValue: selectedValue,
             onChangeCallback: (TypeOfSign value) {
@@ -109,14 +87,13 @@ class ResolutionFormState extends State<ResolutionForm> {
               onPressed: () {
                 if (selectedValue != null &&
                     _resolutionFormKey.currentState.validate()) {
-                  var signature = Signature(
-                      id: 2,
-                      idMember: tempID,
+                  createSignature(Signature(
+                      id: signatureID,
                       date: DateTime.now(),
+                      idMember: userID,
                       idResolution: widget.resolutionId,
-                      type:
-                          selectedValue); // TODO: Resolution ID, resolution check
-                  createSignature(signature);
+                      type: selectedValue));
+
                   Scaffold.of(context).showSnackBar(SnackBar(
                     content: Text("Sent"),
                     backgroundColor: Colors.greenAccent[400],

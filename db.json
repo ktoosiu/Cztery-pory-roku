@@ -39,17 +39,24 @@
   "signatures": [
     {
       "id": 1,
-      "date": "15/03/2019",
-      "type": 1,
-      "id_member": 2,
+      "date": "20/05/2019",
+      "type": 0,
+      "id_member": 1,
       "id_resolution": 1
     },
     {
       "id": 2,
-      "date": "19/05/2019",
-      "type": 0,
+      "date": "20/05/2019",
+      "type": 2,
       "id_member": 1,
-      "id_resolution": 1
+      "id_resolution": 2
+    },
+    {
+      "id": 3,
+      "date": "20/05/2019",
+      "type": 1,
+      "id_member": 1,
+      "id_resolution": 3
     }
   ]
 }

@@ -6,7 +6,6 @@ import '../../models/resolutions.dart';
 import '../../screens/list/resolution_list_item.dart';
 import '../../api/http_data.dart';
 
-
 class ResolutionList extends StatefulWidget {
   @override
   ResolutionListState createState() => ResolutionListState();
@@ -18,7 +17,6 @@ class ResolutionListState extends State<ResolutionList> {
   @override
   initState() {
     resolutionFuture = fetchResolution();
-    // TODO: refresh
     super.initState();
   }
 

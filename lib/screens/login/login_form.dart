@@ -17,11 +17,9 @@ class LoginFormState extends State<LoginForm> {
     TextEditingController()
   ];
 
-  Future setUser(String id, String firstName, String lastName) async {
+  Future setUserId(String id) async {
     final SharedPreferences user = await SharedPreferences.getInstance();
     user.setInt('id', int.parse(id));
-    user.setString('firstName', firstName);
-    user.setString('lastName', lastName);
   }
 
   @override
@@ -75,8 +73,7 @@ class LoginFormState extends State<LoginForm> {
                         id: formController[0].text,
                         firstName: formController[1].text,
                         lastName: formController[2].text)) {
-                      setUser(formController[0].text, formController[1].text,
-                          formController[2].text);
+                      setUserId(formController[0].text);
                       Navigator.pushNamed(context, '/resolution');
                     } else {
                       Scaffold.of(context).showSnackBar(

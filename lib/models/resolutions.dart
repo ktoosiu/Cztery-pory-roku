@@ -19,13 +19,4 @@ class Resolution {
       finishDate: jsonToDate(json['finish_date']),
     );
   }
-
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'name': name,
-        'date': date,// TODO: zamienić na datę taką jaką mamy w db
-        'description': description,
-        'finish_date': finishDate
-      };
 }
-
