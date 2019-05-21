@@ -1,3 +1,5 @@
+import 'package:cztery_pory_roku/utils/routes.dart';
+
 import '../../api/http_data.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -17,6 +19,12 @@ class LoginFormState extends State<LoginForm> {
     TextEditingController()
   ];
 
+  @override
+  initState() {
+    checkUser(context);
+    super.initState();
+  }
+
   Future setUserId(String id) async {
     final SharedPreferences user = await SharedPreferences.getInstance();
     user.setInt('id', int.parse(id));
@@ -29,6 +37,14 @@ class LoginFormState extends State<LoginForm> {
       controller.dispose();
     }
     super.dispose();
+  }
+
+  Future checkUser(context) async {
+    final SharedPreferences user = await SharedPreferences.getInstance();
+    var userIdTest = user.getInt('id');
+    if (userIdTest != null) {
+      Navigator.pushNamed(context, Routes.resolutions);
+    }
   }
 
   @override
@@ -74,7 +90,7 @@ class LoginFormState extends State<LoginForm> {
                         firstName: formController[1].text,
                         lastName: formController[2].text)) {
                       setUserId(formController[0].text);
-                      Navigator.pushNamed(context, '/resolution');
+                      Navigator.pushNamed(context, Routes.resolutions);
                     } else {
                       Scaffold.of(context).showSnackBar(
                         SnackBar(

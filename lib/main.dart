@@ -1,4 +1,6 @@
+import 'package:cztery_pory_roku/utils/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import './screens/list/resolution_screen.dart';
 import './screens/login/login.dart';
@@ -7,6 +9,7 @@ void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -16,14 +19,14 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => Login(),
-        '/resolution': (context) => ResolutionScreen(),
-        // '/details': (context) => ResolutionDetails()
+        Routes.home: (context) => Login(),
+        Routes.resolutions: (context) => ResolutionScreen(),
       },
     );
   }
+
 // TODO: check if user can send a Signature (outdated/already sent)
-// TODO: refresh
+// TODO: refresh - RefreshIndicator
 //singlechildscroll w loginie?
 //routing z parametrem
 //jak nie ma połączenia to exception ale nic nie pokazuje

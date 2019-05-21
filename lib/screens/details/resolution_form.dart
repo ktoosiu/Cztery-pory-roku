@@ -19,11 +19,11 @@ class ResolutionFormState extends State<ResolutionForm> {
   TypeOfSign selectedValue;
   final _resolutionFormKey = GlobalKey<FormState>();
   int userID;
-  int signatureID;
+  int newSignatureID;
+  Signature signature;
   @override
   initState() {
     getUserId();
-    getSignatureId();
     super.initState();
   }
 
@@ -36,12 +36,21 @@ class ResolutionFormState extends State<ResolutionForm> {
 
   getUserId() async {
     final val = await getUser();
+    getSignatureId(val);
     userID = val;
   }
 
-  getSignatureId() async {
-    final val = await checkSignatureId();
-    signatureID = val;
+  getSignatureId(int userId) async {
+    final val = await checkSignatureId(widget.resolutionId, userId);
+    print(val);
+    if (val is int) {
+      newSignatureID = val;
+    } else {
+      signature = Signature.fromJson(val);
+      setState(() {
+        selectedValue = signature.type;
+      });
+    }
   }
 
   @override
@@ -87,15 +96,19 @@ class ResolutionFormState extends State<ResolutionForm> {
               onPressed: () {
                 if (selectedValue != null &&
                     _resolutionFormKey.currentState.validate()) {
-                  createSignature(Signature(
-                      id: signatureID,
-                      date: DateTime.now(),
-                      idMember: userID,
-                      idResolution: widget.resolutionId,
-                      type: selectedValue));
+                  if (newSignatureID != null) {
+                    createSignature(Signature(
+                        id: newSignatureID,
+                        date: DateTime.now(),
+                        idMember: userID,
+                        idResolution: widget.resolutionId,
+                        type: selectedValue));
+                  } else {
+                    updateSignature(id: signature.id, choice: selectedValue);
+                  }
 
                   Scaffold.of(context).showSnackBar(SnackBar(
-                    content: Text("Sent"),
+                    content: Text(newSignatureID != null ? 'Sent' : 'Updated'),
                     backgroundColor: Colors.greenAccent[400],
                   ));
                 } else {
