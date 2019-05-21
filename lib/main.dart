@@ -1,14 +1,12 @@
-import 'package:cztery_pory_roku/utils/routes.dart';
 import 'package:flutter/material.dart';
 
+import './utils/routes.dart';
 import './screens/list/resolution_screen.dart';
 import './screens/login/login.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -24,19 +22,19 @@ class MyApp extends StatelessWidget {
     );
   }
 
-//data ostatniej zmiany-details
-//pull to refresh
-//resolution list jeśli odpowiedziałem to info na co zagłosowałem-list
-//redesign
-//floating buttons z dodawaniem ustawy
-//finish date check
+// TODO: user id w list na sztywno
+//TODO:pull to refresh RefreshIndicator
+//TODO:floating buttons z dodawaniem ustawy
+//TODO:finish date check (colours), check if user can send a Signature
+//TODO:redesign
+//TODO: Loader wszędzie gdzie async
+// TODO: nie updatuje jeśli nie przeładuje ale tylko po dodaniu
 
-// TODO: check if user can send a Signature (outdated/already sent)
-// TODO: refresh - RefreshIndicator
 //login case sensitive?
-//mieszamy językami
-
-//szare tło dla nieaktywnych
+//mieszamy językami/translacja
 
 // DONE: multiple updates podczas jednej sesji na formularzu
+//    data ostatniej zmiany-details
+//    resolution list jeśli odpowiedziałem to info na co zagłosowałem
+
 }

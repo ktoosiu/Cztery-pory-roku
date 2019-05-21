@@ -5,7 +5,6 @@ import '../../screens/login/login_form.dart';
 class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // TODO: Loader wszędzie gdzie async
     return Scaffold(
       body: Row(mainAxisSize: MainAxisSize.max, children: [
         Expanded(

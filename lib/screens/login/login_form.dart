@@ -1,10 +1,10 @@
-import 'package:cztery_pory_roku/utils/routes.dart';
-
-import '../../api/http_data.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+import '../../utils/routes.dart';
+import '../../api/http_data.dart';
 
 class LoginForm extends StatefulWidget {
   @override
@@ -41,8 +41,8 @@ class LoginFormState extends State<LoginForm> {
 
   Future checkUser(context) async {
     final SharedPreferences user = await SharedPreferences.getInstance();
-    var userIdTest = user.getInt('id');
-    if (userIdTest != null) {
+    var savedId = user.getInt('id');
+    if (savedId != null) {
       Navigator.pushNamed(context, Routes.resolutions);
     }
   }

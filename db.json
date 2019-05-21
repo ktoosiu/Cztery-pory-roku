@@ -38,15 +38,7 @@
   ],
   "signatures": [
     {
-      "id": 3,
-      "date": "20/05/2019",
-      "type": 0,
-      "id_member": 1,
-      "id_resolution": 3,
-      "update_date": "21/05/2019"
-    },
-    {
-      "id": 4,
+      "id": 1,
       "date": "21/05/2019",
       "type": 0,
       "id_member": 1,
@@ -54,11 +46,20 @@
       "update_date": "21/05/2019"
     },
     {
-      "id": 5,
+      "id": 2,
       "date": "21/05/2019",
-      "type": 0,
+      "type": 1,
       "id_member": 1,
-      "id_resolution": 2
+      "id_resolution": 2,
+      "update_date": "21/05/2019"
+    },
+    {
+      "id": 3,
+      "date": "21/05/2019",
+      "type": 2,
+      "id_member": 1,
+      "id_resolution": 3,
+      "update_date": "21/05/2019"
     }
   ]
 }

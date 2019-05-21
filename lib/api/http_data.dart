@@ -53,7 +53,7 @@ Future<http.Response> createSignature(Signature signature) async {
   };
 
   final response = await http.post(url, body: body, headers: headers);
-  print(response.body);
+
   return response;
 }
 
@@ -81,15 +81,19 @@ checkSignatureId(int resolutionId, int memberID) async {
   if (response.statusCode == 200) {
     // If server returns an OK response, parse the JSON
     final parsed = json.decode(response.body);
-    print(parsed);
+
     var possibleResolution = parsed.firstWhere(
         (signature) =>
             signature['id_resolution'] == resolutionId &&
             signature['id_member'] == memberID,
         orElse: () => null);
     if (possibleResolution == null) {
-      var tempId = parsed.last['id'] + 1;
-      return tempId;
+      if (parsed.isNotEmpty) {
+        var tempId = parsed.last['id'] + 1; //int
+        return tempId;
+      } else {
+        return 1;
+      }
     } else {
       return possibleResolution;
     }

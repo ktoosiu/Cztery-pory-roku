@@ -14,6 +14,7 @@ class ResolutionList extends StatefulWidget {
 class ResolutionListState extends State<ResolutionList> {
   var _resolutions = <Resolution>[];
   Future<List<Resolution>> resolutionFuture;
+
   @override
   initState() {
     resolutionFuture = fetchResolution();

@@ -1,5 +1,3 @@
-import 'package:cztery_pory_roku/api/http_data.dart';
-import 'package:cztery_pory_roku/utils/json_to_date.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -7,6 +5,8 @@ import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../models/signatures.dart';
+import '../../api/http_data.dart';
+import '../../utils/json_to_date.dart';
 
 class ResolutionForm extends StatefulWidget {
   final resolutionId;
@@ -44,14 +44,16 @@ class ResolutionFormState extends State<ResolutionForm> {
 
   getSignatureId(int userId) async {
     final val = await checkSignatureId(widget.resolutionId, userId);
-    print(val);
+
     if (val is int) {
       newSignatureID = val;
     } else {
       signature = Signature.fromJson(val);
       setState(() {
         selectedValue = signature.type;
-        editDate = jsonToDate(val['update_date']);
+        if (val['update_date'] != null) {
+          editDate = jsonToDate(val['update_date']);
+        }
       });
     }
   }
@@ -64,10 +66,12 @@ class ResolutionFormState extends State<ResolutionForm> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Center(
-            child: Text(
-              'Last updated: ${DateFormat('dd/MM/yyyy').format(editDate)}',
-              style: TextStyle(fontStyle: FontStyle.italic),
-            ),
+            child: editDate != null
+                ? Text(
+                    'Last updated: ${DateFormat('dd/MM/yyyy').format(editDate)}',
+                    style: TextStyle(fontStyle: FontStyle.italic),
+                  )
+                : null,
           ),
           RadioButtonWiget(
             selectedValue: selectedValue,
