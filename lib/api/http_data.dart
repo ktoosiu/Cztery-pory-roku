@@ -62,7 +62,7 @@ Future<http.Response> updateSignature(
   var url = urlBuilder('/signatures/$id');
   var body = json.encode({
     'type': choice.index,
-    'date': DateFormat('dd/MM/yyyy').format(DateTime.now())
+    'update_date': DateFormat('dd/MM/yyyy').format(DateTime.now()),
   });
 
   Map<String, String> headers = {
@@ -98,10 +98,3 @@ checkSignatureId(int resolutionId, int memberID) async {
     throw Exception('Connection error: failed to load signatures');
   }
 }
-// TODO: multiple updates podczas jednej sesji na formularzu
-//data ostatniej zmiany
-//pull to refresh
-//resolution list jeśli odpowiedziałem to info na co zagłosowałem
-//redesign
-//floating buttons z dodawaniem ustawy
-//finish date check

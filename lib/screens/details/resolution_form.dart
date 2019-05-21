@@ -1,7 +1,9 @@
 import 'package:cztery_pory_roku/api/http_data.dart';
+import 'package:cztery_pory_roku/utils/json_to_date.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../models/signatures.dart';
@@ -20,6 +22,7 @@ class ResolutionFormState extends State<ResolutionForm> {
   final _resolutionFormKey = GlobalKey<FormState>();
   int userID;
   int newSignatureID;
+  DateTime editDate;
   Signature signature;
   @override
   initState() {
@@ -29,7 +32,6 @@ class ResolutionFormState extends State<ResolutionForm> {
 
   Future<int> getUser() async {
     final SharedPreferences user = await SharedPreferences.getInstance();
-    //userID = user.getInt('id');
     var temp = user.getInt('id');
     return temp;
   }
@@ -49,6 +51,7 @@ class ResolutionFormState extends State<ResolutionForm> {
       signature = Signature.fromJson(val);
       setState(() {
         selectedValue = signature.type;
+        editDate = jsonToDate(val['update_date']);
       });
     }
   }
@@ -60,6 +63,12 @@ class ResolutionFormState extends State<ResolutionForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Center(
+            child: Text(
+              'Last updated: ${DateFormat('dd/MM/yyyy').format(editDate)}',
+              style: TextStyle(fontStyle: FontStyle.italic),
+            ),
+          ),
           RadioButtonWiget(
             selectedValue: selectedValue,
             onChangeCallback: (TypeOfSign value) {
@@ -104,7 +113,10 @@ class ResolutionFormState extends State<ResolutionForm> {
                         idResolution: widget.resolutionId,
                         type: selectedValue));
                   } else {
-                    updateSignature(id: signature.id, choice: selectedValue);
+                    updateSignature(
+                      id: signature.id,
+                      choice: selectedValue,
+                    );
                   }
 
                   Scaffold.of(context).showSnackBar(SnackBar(

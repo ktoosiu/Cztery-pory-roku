@@ -1,4 +1,4 @@
-import 'json_to_date.dart';
+import 'package:cztery_pory_roku/utils/json_to_date.dart';
 
 class Resolution {
   final int id;

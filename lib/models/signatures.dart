@@ -1,6 +1,5 @@
+import 'package:cztery_pory_roku/utils/json_to_date.dart';
 import 'package:intl/intl.dart';
-
-import 'json_to_date.dart';
 
 class Signature {
   final int id;

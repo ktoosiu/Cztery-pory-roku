@@ -1,6 +1,5 @@
 import 'package:cztery_pory_roku/utils/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import './screens/list/resolution_screen.dart';
 import './screens/login/login.dart';
@@ -25,16 +24,19 @@ class MyApp extends StatelessWidget {
     );
   }
 
+//data ostatniej zmiany-details
+//pull to refresh
+//resolution list jeśli odpowiedziałem to info na co zagłosowałem-list
+//redesign
+//floating buttons z dodawaniem ustawy
+//finish date check
+
 // TODO: check if user can send a Signature (outdated/already sent)
 // TODO: refresh - RefreshIndicator
-//singlechildscroll w loginie?
-//routing z parametrem
-//jak nie ma połączenia to exception ale nic nie pokazuje
-//jeżeli tak to zapisać id do shared preferences żeby można było odczytywać -- shared preferences pamięta po zamknięciu
 //login case sensitive?
 //mieszamy językami
-// jeżeli nie ma użytkownika to post z tworzeniem/albo snackbar nei ma użytkownika
 
 //szare tło dla nieaktywnych
-//add isolate (compute) - https://flutter.dev/docs/cookbook/networking/background-parsing#4-move-this-work-to-a-separate-isolate
+
+// DONE: multiple updates podczas jednej sesji na formularzu
 }
