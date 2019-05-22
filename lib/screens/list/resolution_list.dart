@@ -34,34 +34,44 @@ class ResolutionListState extends State<ResolutionList> {
     userId = val;
   }
 
+  Future<void> _refresh() async {
+    setState(() {
+      resolutionFuture = fetchResolution();
+      getUserId();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-        future: resolutionFuture,
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          if (snapshot.hasData) {
-            _resolutions = snapshot.data;
+    return RefreshIndicator(
+      child: FutureBuilder(
+          future: resolutionFuture,
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            if (snapshot.hasData) {
+              _resolutions = snapshot.data;
 
-            return ListView.builder(
-                padding: const EdgeInsets.all(16.0),
-                itemCount: _resolutions.length,
-                itemBuilder: (context, i) {
-                  return ResolutionListItem(
-                    resolution: _resolutions[i],
-                    userId: userId,
-                  );
-                });
-          } else {
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.max,
-                children: <Widget>[
-                  CircularProgressIndicator(),
-                ],
-              ),
-            );
-          }
-        });
+              return ListView.builder(
+                  padding: const EdgeInsets.all(16.0),
+                  itemCount: _resolutions.length,
+                  itemBuilder: (context, i) {
+                    return ResolutionListItem(
+                      resolution: _resolutions[i],
+                      userId: userId,
+                    );
+                  });
+            } else {
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.max,
+                  children: <Widget>[
+                    CircularProgressIndicator(),
+                  ],
+                ),
+              );
+            }
+          }),
+      onRefresh: _refresh,
+    );
   }
 }

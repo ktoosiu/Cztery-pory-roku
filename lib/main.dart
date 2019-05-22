@@ -23,11 +23,11 @@ class MyApp extends StatelessWidget {
       },
     );
   }
+  // TODO: dodać kto wysłał rezolucję
 // TODO: resolution details na początku przy pustym daje mi update a nie send
-//TODO:floating buttons z dodawaniem ustawy // TODO: dodać kto wysłał
 //TODO:finish date check (colours), check if user can send a Signature
 //odświeżanie rezolucji przy wyjściu z add
-//TODO:pull to refresh RefreshIndicator
+
 //TODO:redesign
 //TODO: Loader wszędzie gdzie async
 // TODO: spacje z loginu itp
@@ -36,6 +36,8 @@ class MyApp extends StatelessWidget {
 //login case sensitive?
 //mieszamy językami/translacja
 
+//Done:floating buttons z dodawaniem ustawy
+//Done:pull to refresh
 // DONE: multiple updates podczas jednej sesji na formularzu
 //    data ostatniej zmiany-details
 //    resolution list jeśli odpowiedziałem to info na co zagłosowałem

@@ -108,9 +108,6 @@ class ResolutionFormState extends State<ResolutionForm> {
             child: RaisedButton(
               child: Text(newSignatureID != null ? 'Send' : 'Update'),
               onPressed: () {
-                setState(() {
-                  getSignatureId(userId);
-                });
                 if (selectedValue != null &&
                     _resolutionFormKey.currentState.validate()) {
                   if (newSignatureID != null) {
