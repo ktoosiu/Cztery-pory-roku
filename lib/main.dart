@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import './screens/new/create_resolution.dart';
 import './utils/routes.dart';
 import './screens/list/resolution_screen.dart';
 import './screens/login/login.dart';
@@ -18,17 +19,20 @@ class MyApp extends StatelessWidget {
       routes: {
         Routes.home: (context) => Login(),
         Routes.resolutions: (context) => ResolutionScreen(),
+        Routes.createResolution: (context) => CreateResolution()
       },
     );
   }
-
-//TODO:pull to refresh RefreshIndicator
-//TODO:floating buttons z dodawaniem ustawy
+// TODO: resolution details na początku przy pustym daje mi update a nie send
+//TODO:floating buttons z dodawaniem ustawy // TODO: dodać kto wysłał
 //TODO:finish date check (colours), check if user can send a Signature
+//odświeżanie rezolucji przy wyjściu z add
+//TODO:pull to refresh RefreshIndicator
 //TODO:redesign
 //TODO: Loader wszędzie gdzie async
-// TODO: nie updatuje jeśli nie przeładuje ale tylko po dodaniu
 // TODO: spacje z loginu itp
+//Todo wysyłka może być jako floatingactionwidget
+//jakieś tam okienko z potwierdzeniem?
 //login case sensitive?
 //mieszamy językami/translacja
 

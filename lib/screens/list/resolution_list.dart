@@ -41,6 +41,7 @@ class ResolutionListState extends State<ResolutionList> {
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
             _resolutions = snapshot.data;
+
             return ListView.builder(
                 padding: const EdgeInsets.all(16.0),
                 itemCount: _resolutions.length,

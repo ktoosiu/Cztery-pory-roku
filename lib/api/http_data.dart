@@ -102,3 +102,17 @@ checkSignatureId(int resolutionId, int memberID) async {
     throw Exception('Connection error: failed to load signatures');
   }
 }
+
+Future<http.Response> createResolution(Resolution resolution) async {
+  var url = urlBuilder('/resolutions');
+  var body = json.encode(resolution.toJson());
+
+  Map<String, String> headers = {
+    'Content-type': 'application/json',
+    'Accept': 'application/json',
+  };
+
+  final response = await http.post(url, body: body, headers: headers);
+
+  return response;
+}

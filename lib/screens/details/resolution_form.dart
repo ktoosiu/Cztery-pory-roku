@@ -48,6 +48,7 @@ class ResolutionFormState extends State<ResolutionForm> {
     if (val is int) {
       newSignatureID = val;
     } else {
+      newSignatureID = null;
       signature = Signature.fromJson(val);
       setState(() {
         selectedValue = signature.type;
@@ -105,8 +106,11 @@ class ResolutionFormState extends State<ResolutionForm> {
           ),
           Center(
             child: RaisedButton(
-              child: Text('Send'),
+              child: Text(newSignatureID != null ? 'Send' : 'Update'),
               onPressed: () {
+                setState(() {
+                  getSignatureId(userId);
+                });
                 if (selectedValue != null &&
                     _resolutionFormKey.currentState.validate()) {
                   if (newSignatureID != null) {
@@ -116,7 +120,6 @@ class ResolutionFormState extends State<ResolutionForm> {
                         idMember: userId,
                         idResolution: widget.resolutionId,
                         type: selectedValue));
-                    newSignatureID = null;
                   } else {
                     updateSignature(
                       id: signature.id,
@@ -124,22 +127,28 @@ class ResolutionFormState extends State<ResolutionForm> {
                     );
                   }
 
-                  Scaffold.of(context).showSnackBar(SnackBar(
-                    content: Text(newSignatureID != null ? 'Sent' : 'Updated'),
-                    backgroundColor: Colors.greenAccent[400],
-                  ));
+                  Scaffold.of(context).showSnackBar(
+                    SnackBar(
+                      content:
+                          Text(newSignatureID != null ? 'Sent' : 'Updated'),
+                      backgroundColor: Colors.greenAccent[400],
+                    ),
+                  );
+                  setState(
+                    () {
+                      getSignatureId(userId);
+                      newSignatureID = null;
+                    },
+                  );
                 } else {
                   Scaffold.of(context).showSnackBar(SnackBar(
                     content: Text("Please select value"),
                     backgroundColor: Colors.redAccent[100],
                   ));
                 }
-                setState(() {
-                  getSignatureId(userId);
-                });
               },
             ),
-          )
+          ),
         ],
       ),
     );

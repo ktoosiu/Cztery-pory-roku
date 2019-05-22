@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../utils/routes.dart';
 import '../../screens/list/resolution_list.dart';
 
 class ResolutionScreen extends StatelessWidget {
@@ -17,6 +18,12 @@ class ResolutionScreen extends StatelessWidget {
             icon: Icon(Icons.exit_to_app),
           )
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, Routes.createResolution);
+        },
+        child: Icon(Icons.add),
       ),
       body: ResolutionList(),
     );

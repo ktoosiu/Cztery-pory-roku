@@ -1,4 +1,5 @@
-import 'package:cztery_pory_roku/utils/json_to_date.dart';
+import '../utils/json_to_date.dart';
+import 'package:intl/intl.dart';
 
 class Resolution {
   final int id;
@@ -19,4 +20,11 @@ class Resolution {
       finishDate: jsonToDate(json['finish_date']),
     );
   }
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'date': DateFormat('dd/MM/yyyy').format(date),
+        'description': description,
+        'finish_date': DateFormat('dd/MM/yyyy').format(finishDate)
+      };
 }
