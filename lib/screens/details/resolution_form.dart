@@ -116,6 +116,7 @@ class ResolutionFormState extends State<ResolutionForm> {
                         idMember: userId,
                         idResolution: widget.resolutionId,
                         type: selectedValue));
+                    newSignatureID = null;
                   } else {
                     updateSignature(
                       id: signature.id,
@@ -133,6 +134,9 @@ class ResolutionFormState extends State<ResolutionForm> {
                     backgroundColor: Colors.redAccent[100],
                   ));
                 }
+                setState(() {
+                  getSignatureId(userId);
+                });
               },
             ),
           )

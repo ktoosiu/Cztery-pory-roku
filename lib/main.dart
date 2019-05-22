@@ -22,7 +22,6 @@ class MyApp extends StatelessWidget {
     );
   }
 
-// TODO: user id w list na sztywno
 //TODO:pull to refresh RefreshIndicator
 //TODO:floating buttons z dodawaniem ustawy
 //TODO:finish date check (colours), check if user can send a Signature
@@ -36,5 +35,6 @@ class MyApp extends StatelessWidget {
 // DONE: multiple updates podczas jednej sesji na formularzu
 //    data ostatniej zmiany-details
 //    resolution list jeśli odpowiedziałem to info na co zagłosowałem
+// DONE: user id w list na sztywno
 
 }
