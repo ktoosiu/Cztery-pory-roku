@@ -10,8 +10,9 @@ import '../../screens/details/resolution_details.dart';
 
 class ResolutionListItem extends StatelessWidget {
   final Resolution resolution;
-
-  const ResolutionListItem({Key key, this.resolution}) : super(key: key);
+  final int userId;
+  const ResolutionListItem({Key key, this.resolution, this.userId})
+      : super(key: key);
 
   checkChoice(int userId, int resolutionId) async {
     final val = await checkSignatureId(resolutionId, userId);
@@ -70,7 +71,7 @@ class ResolutionListItem extends StatelessWidget {
           ),
           Container(
             child: FutureBuilder(
-                future: checkChoice(1, resolution.id),
+                future: checkChoice(userId, resolution.id),
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
                   if (snapshot.hasData) {
                     if (snapshot.data != '') {

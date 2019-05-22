@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
 //TODO:redesign
 //TODO: Loader wszędzie gdzie async
 // TODO: nie updatuje jeśli nie przeładuje ale tylko po dodaniu
-
+// TODO: spacje z loginu itp
 //login case sensitive?
 //mieszamy językami/translacja
 

@@ -20,7 +20,7 @@ class ResolutionForm extends StatefulWidget {
 class ResolutionFormState extends State<ResolutionForm> {
   TypeOfSign selectedValue;
   final _resolutionFormKey = GlobalKey<FormState>();
-  int userID;
+  int userId;
   int newSignatureID;
   DateTime editDate;
   Signature signature;
@@ -39,7 +39,7 @@ class ResolutionFormState extends State<ResolutionForm> {
   getUserId() async {
     final val = await getUser();
     getSignatureId(val);
-    userID = val;
+    userId = val;
   }
 
   getSignatureId(int userId) async {
@@ -113,7 +113,7 @@ class ResolutionFormState extends State<ResolutionForm> {
                     createSignature(Signature(
                         id: newSignatureID,
                         date: DateTime.now(),
-                        idMember: userID,
+                        idMember: userId,
                         idResolution: widget.resolutionId,
                         type: selectedValue));
                   } else {
