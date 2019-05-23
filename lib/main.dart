@@ -23,13 +23,15 @@ class MyApp extends StatelessWidget {
       },
     );
   }
-//TODO: Loader wszędzie gdzie async
-//TODO:redesign
+  //kolory dopasować
+  //add wycentrować
+  //usunąć new i widget
 
 // spacje z loginu itp?
 //login case sensitive?
 //jakieś tam okienko z potwierdzeniem?
 
+//Done:redesign
 //done odświeżanie rezolucji przy wyjściu z add
 //Done: dodać kto wysłał rezolucję
 //Done:finish date check (colours), check if user can send a Signature

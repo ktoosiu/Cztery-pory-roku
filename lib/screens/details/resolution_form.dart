@@ -114,45 +114,63 @@ class ResolutionFormState extends State<ResolutionForm> {
             radioValue: TypeOfSign.abstained,
           ),
           Center(
-            child: RaisedButton(
-              child: Text(newSignatureID != null ? 'Send' : 'Update'),
-              onPressed: () {
-                if (selectedValue != null &&
-                    _resolutionFormKey.currentState.validate()) {
-                  if (newSignatureID != null) {
-                    createSignature(Signature(
-                        id: newSignatureID,
-                        date: DateTime.now(),
-                        idMember: userId,
-                        idResolution: widget.resolutionId,
-                        type: selectedValue));
-                  } else {
-                    updateSignature(
-                      id: signature.id,
-                      choice: selectedValue,
-                    );
-                  }
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 64),
+              child: FlatButton(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0)),
+                splashColor: Colors.blue[900],
+                color: Colors.lightBlue[200],
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 12.0),
+                        child: Text(
+                          newSignatureID != null ? 'Send' : 'Update',
+                          style: TextStyle(fontSize: 20),
+                        )),
+                  ],
+                ),
+                onPressed: () {
+                  if (selectedValue != null &&
+                      _resolutionFormKey.currentState.validate()) {
+                    if (newSignatureID != null) {
+                      createSignature(Signature(
+                          id: newSignatureID,
+                          date: DateTime.now(),
+                          idMember: userId,
+                          idResolution: widget.resolutionId,
+                          type: selectedValue));
+                    } else {
+                      updateSignature(
+                        id: signature.id,
+                        choice: selectedValue,
+                      );
+                    }
 
-                  Scaffold.of(context).showSnackBar(
-                    SnackBar(
-                      content:
-                          Text(newSignatureID != null ? 'Sent' : 'Updated'),
-                      backgroundColor: Colors.greenAccent[400],
-                    ),
-                  );
-                  setState(
-                    () {
-                      getSignatureId(userId);
-                      newSignatureID = null;
-                    },
-                  );
-                } else {
-                  Scaffold.of(context).showSnackBar(SnackBar(
-                    content: Text("Please select value"),
-                    backgroundColor: Colors.redAccent[100],
-                  ));
-                }
-              },
+                    Scaffold.of(context).showSnackBar(
+                      SnackBar(
+                        content:
+                            Text(newSignatureID != null ? 'Sent' : 'Updated'),
+                        backgroundColor: Colors.greenAccent[400],
+                      ),
+                    );
+                    setState(
+                      () {
+                        getSignatureId(userId);
+                        newSignatureID = null;
+                      },
+                    );
+                  } else {
+                    Scaffold.of(context).showSnackBar(SnackBar(
+                      content: Text("Please select value"),
+                      backgroundColor: Colors.redAccent[100],
+                    ));
+                  }
+                },
+              ),
             ),
           ),
         ],

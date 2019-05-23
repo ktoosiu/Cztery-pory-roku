@@ -43,35 +43,38 @@ class ResolutionListState extends State<ResolutionList> {
 
   @override
   Widget build(BuildContext context) {
-    return RefreshIndicator(
-      child: FutureBuilder(
-          future: resolutionFuture,
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
-            if (snapshot.hasData) {
-              _resolutions = snapshot.data;
+    return Container(
+      color: Colors.lightBlue[100],
+      child: RefreshIndicator(
+        child: FutureBuilder(
+            future: resolutionFuture,
+            builder: (BuildContext context, AsyncSnapshot snapshot) {
+              if (snapshot.hasData) {
+                _resolutions = snapshot.data;
 
-              return ListView.builder(
-                  padding: const EdgeInsets.all(16.0),
-                  itemCount: _resolutions.length,
-                  itemBuilder: (context, i) {
-                    return ResolutionListItem(
-                      resolution: _resolutions[i],
-                      userId: userId,
-                    );
-                  });
-            } else {
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.max,
-                  children: <Widget>[
-                    CircularProgressIndicator(),
-                  ],
-                ),
-              );
-            }
-          }),
-      onRefresh: refresh,
+                return ListView.builder(
+                    padding: const EdgeInsets.all(16.0),
+                    itemCount: _resolutions.length,
+                    itemBuilder: (context, i) {
+                      return ResolutionListItem(
+                        resolution: _resolutions[i],
+                        userId: userId,
+                      );
+                    });
+              } else {
+                return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      CircularProgressIndicator(),
+                    ],
+                  ),
+                );
+              }
+            }),
+        onRefresh: refresh,
+      ),
     );
   }
 }

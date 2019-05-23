@@ -80,9 +80,21 @@ class LoginFormState extends State<LoginForm> {
               },
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 16.0),
-              child: RaisedButton(
-                child: Text('Sign In'),
+              padding: const EdgeInsets.fromLTRB(64, 24, 64, 8),
+              child: FlatButton(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0)),
+                splashColor: Colors.blue,
+                color: Colors.lightBlue[50],
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 20.0),
+                      child: Text('Sign In'),
+                    ),
+                  ],
+                ),
                 onPressed: () async {
                   if (_loginFormKey.currentState.validate()) {
                     if (await checkMember(

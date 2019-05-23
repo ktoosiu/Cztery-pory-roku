@@ -48,67 +48,74 @@ class ResolutionListItem extends StatelessWidget {
           ),
         );
       },
-      child: Container(
-        decoration: BoxDecoration(
-            color: resolution.finishDate.isAfter(DateTime.now())
-                ? Colors.white
-                : Colors.grey[300]),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 8),
+        child: Card(
+            child: Container(
+          decoration: BoxDecoration(
+              color: resolution.finishDate.isAfter(DateTime.now())
+                  ? Colors.lightBlue[50]
+                  : Colors.grey[300]),
+          child: ListTile(
+            title: Column(
               children: [
-                Text(
-                  resolution.name,
-                  style: TextStyle(
-                    fontSize: 22.0,
-                    fontWeight: FontWeight.bold,
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      resolution.name,
+                      style: TextStyle(
+                        fontSize: 22.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(DateFormat('dd-MM-yyyy').format(resolution.date))
+                  ],
                 ),
-                Text(DateFormat('dd-MM-yyyy').format(resolution.date))
               ],
             ),
-            Container(
-              child: Text(
-                resolution.description,
-                maxLines: 3,
-                overflow: TextOverflow.ellipsis,
-              ),
-              padding: EdgeInsets.all(4.0),
+            subtitle: Column(
+              children: [
+                Text(
+                  resolution.description,
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                Container(
+                  child: FutureBuilder(
+                      future: checkChoice(userId, resolution.id),
+                      builder: (BuildContext context, AsyncSnapshot snapshot) {
+                        if (snapshot.hasData) {
+                          if (snapshot.data != '') {
+                            return Text(
+                              'User choice: ${snapshot.data}',
+                              style: TextStyle(fontStyle: FontStyle.italic),
+                            );
+                          } else {
+                            return Container();
+                          }
+                        } else {
+                          return Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                CircularProgressIndicator(),
+                              ],
+                            ),
+                          );
+                        }
+                      }),
+                ),
+                Container(
+                    child: resolution.finishDate.isAfter(DateTime.now())
+                        ? Container()
+                        : Text('Resolution closed.')),
+              ],
             ),
-            Container(
-              child: FutureBuilder(
-                  future: checkChoice(userId, resolution.id),
-                  builder: (BuildContext context, AsyncSnapshot snapshot) {
-                    if (snapshot.hasData) {
-                      if (snapshot.data != '') {
-                        return Text(
-                          'User choice: ${snapshot.data}',
-                          style: TextStyle(fontStyle: FontStyle.italic),
-                        );
-                      } else {
-                        return Container();
-                      }
-                    } else {
-                      return Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            CircularProgressIndicator(),
-                          ],
-                        ),
-                      );
-                    }
-                  }),
-            ),
-            Container(
-                child: resolution.finishDate.isAfter(DateTime.now())
-                    ? Container()
-                    : Text('Resolution closed')),
-            Divider(),
-          ],
-        ),
+            isThreeLine: true,
+          ),
+        )),
       ),
     );
   }

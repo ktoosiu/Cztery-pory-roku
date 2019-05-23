@@ -1,18 +1,8 @@
-import 'package:cztery_pory_roku/utils/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../screens/login/login_form.dart';
 
 class Login extends StatelessWidget {
-  Future checkUser(context) async {
-    final SharedPreferences user = await SharedPreferences.getInstance();
-    var savedId = user.getInt('id');
-    if (savedId != null && savedId is int) {
-      Navigator.pushNamed(context, Routes.resolutions);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,16 +10,22 @@ class Login extends StatelessWidget {
         child: Row(mainAxisSize: MainAxisSize.max, children: [
           Expanded(
             child: Container(
-              color: Colors.lightBlueAccent[100],
+              color: Colors.lightBlue[50],
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    'Login',
-                    style: TextStyle(fontSize: 36),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 16.0),
+                    child: Text(
+                      'Login',
+                      style: TextStyle(fontSize: 36),
+                    ),
                   ),
-                  LoginForm()
+                  Card(
+                    child: LoginForm(),
+                    color: Colors.lightBlueAccent[100],
+                  )
                 ],
               ),
             ),

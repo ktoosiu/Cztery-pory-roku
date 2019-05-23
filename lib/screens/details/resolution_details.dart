@@ -36,64 +36,75 @@ class ResolutionDetails extends StatelessWidget {
         appBar: AppBar(
           title: Text(item.name),
         ),
-        body: SingleChildScrollView(
+        body: Container(
+          color: Colors.lightBlue[100],
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                Text(item.description),
-                item.proposedBy != null
-                    ? Text('Resolution proposed by ${item.proposedBy}')
-                    : Container(),
-                Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
-                  child: Text(
-                    "Finish Date: ${DateFormat('dd-MM-yyyy').format(item.finishDate)}",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+            padding: const EdgeInsets.all(16.0),
+            child: Card(
+              child: Container(
+                color: Colors.lightBlue[50],
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    children: [
+                      Text(item.description),
+                      item.proposedBy != null
+                          ? Text('Resolution proposed by ${item.proposedBy}')
+                          : Container(),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8.0),
+                        child: Text(
+                          "Finish Date: ${DateFormat('dd-MM-yyyy').format(item.finishDate)}",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 22),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: item.finishDate.isAfter(DateTime.now())
+                            ? ResolutionForm(
+                                resolutionId: item.id,
+                              )
+                            : Column(children: [
+                                Text(
+                                  'Resolution is closed.',
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontStyle: FontStyle.italic),
+                                ),
+                                FutureBuilder(
+                                    future: checkChoice(userId, item.id),
+                                    builder: (BuildContext context,
+                                        AsyncSnapshot snapshot) {
+                                      if (snapshot.hasData) {
+                                        if (snapshot.data != '') {
+                                          return Text(
+                                            'Your choice: ${snapshot.data}',
+                                            style: TextStyle(
+                                                fontStyle: FontStyle.italic),
+                                          );
+                                        } else {
+                                          return Text('You didn\'t vote.');
+                                        }
+                                      } else {
+                                        return Center(
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              CircularProgressIndicator(),
+                                            ],
+                                          ),
+                                        );
+                                      }
+                                    }),
+                              ]),
+                      )
+                    ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: item.finishDate.isAfter(DateTime.now())
-                      ? ResolutionForm(
-                          resolutionId: item.id,
-                        )
-                      : Column(children: [
-                          Text(
-                            'Resolution is closed.',
-                            style: TextStyle(
-                                fontSize: 20, fontStyle: FontStyle.italic),
-                          ),
-                          FutureBuilder(
-                              future: checkChoice(userId, item.id),
-                              builder: (BuildContext context,
-                                  AsyncSnapshot snapshot) {
-                                if (snapshot.hasData) {
-                                  if (snapshot.data != '') {
-                                    return Text(
-                                      'Your choice: ${snapshot.data}',
-                                      style: TextStyle(
-                                          fontStyle: FontStyle.italic),
-                                    );
-                                  } else {
-                                    return Text('You didn\'t vote.');
-                                  }
-                                } else {
-                                  return Center(
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        CircularProgressIndicator(),
-                                      ],
-                                    ),
-                                  );
-                                }
-                              }),
-                        ]),
-                )
-              ],
+              ),
             ),
           ),
         ));
