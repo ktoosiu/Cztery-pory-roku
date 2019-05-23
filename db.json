@@ -20,22 +20,6 @@
       "date": "15/03/2019",
       "description": "Urna porttitor rhoncus dolor purus. Ut tristique et egestas quis ipsum suspendisse ultrices. Eget est lorem ipsum dolor sit amet. Feugiat in ante metus dictum at tempor commodo. Ut faucibus pulvinar elementum integer enim neque volutpat ac. Ut sem nulla pharetra diam. Tortor id aliquet lectus proin.",
       "finish_date": "31/06/2019"
-    },
-    {
-      "id": 4,
-      "name": "asdas",
-      "date": "23/05/2019",
-      "description": "asfafsfas",
-      "finish_date": "31/05/2019",
-      "proposed_by": "Jan Kowalski"
-    },
-    {
-      "id": 5,
-      "name": "ram",
-      "date": "23/05/2019",
-      "description": "Pam pam",
-      "finish_date": "31/05/2019",
-      "proposed_by": "Jan Kowalski"
     }
   ],
   "members": [
@@ -71,11 +55,11 @@
     },
     {
       "id": 3,
-      "date": "22/05/2019",
+      "date": "23/05/2019",
       "type": 1,
       "id_member": 1,
       "id_resolution": 3,
-      "update_date": "22/05/2019"
+      "update_date": "23/05/2019"
     }
   ]
 }

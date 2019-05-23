@@ -26,7 +26,14 @@ class ResolutionFormState extends State<ResolutionForm> {
   Signature signature;
   @override
   initState() {
-    getUserId();
+    getUserId().then((result) {
+      // If we need to rebuild the widget with the resulting data,
+      // make sure to use `setState`
+      setState(() {
+        newSignatureID = result;
+      });
+    });
+
     super.initState();
   }
 
@@ -40,6 +47,7 @@ class ResolutionFormState extends State<ResolutionForm> {
     final val = await getUser();
     getSignatureId(val);
     userId = val;
+    return getSignatureId(val);
   }
 
   getSignatureId(int userId) async {
@@ -47,6 +55,7 @@ class ResolutionFormState extends State<ResolutionForm> {
 
     if (val is int) {
       newSignatureID = val;
+      return newSignatureID;
     } else {
       newSignatureID = null;
       signature = Signature.fromJson(val);

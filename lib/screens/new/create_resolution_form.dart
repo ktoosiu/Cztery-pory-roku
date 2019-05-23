@@ -129,7 +129,7 @@ class CreateResolutionFormState extends State<CreateResolutionForm> {
                               finishDate: finishDate,
                               proposedBy: fullName),
                         );
-
+                        lastId++;
                         Scaffold.of(context).showSnackBar(SnackBar(
                           content: Text('Sent'),
                           backgroundColor: Colors.greenAccent[400],
