@@ -7,9 +7,14 @@ class Resolution {
   final DateTime date;
   final String description;
   final DateTime finishDate;
-
+  final String proposedBy;
   Resolution(
-      {this.id, this.name, this.date, this.description, this.finishDate});
+      {this.id,
+      this.name,
+      this.date,
+      this.description,
+      this.finishDate,
+      this.proposedBy});
 
   factory Resolution.fromJson(Map<String, dynamic> json) {
     return Resolution(
@@ -18,6 +23,7 @@ class Resolution {
       date: jsonToDate(json['date']),
       description: json['description'],
       finishDate: jsonToDate(json['finish_date']),
+      proposedBy: json['proposed_by'],
     );
   }
   Map<String, dynamic> toJson() => {
@@ -25,6 +31,7 @@ class Resolution {
         'name': name,
         'date': DateFormat('dd/MM/yyyy').format(date),
         'description': description,
-        'finish_date': DateFormat('dd/MM/yyyy').format(finishDate)
+        'finish_date': DateFormat('dd/MM/yyyy').format(finishDate),
+        'proposed_by': proposedBy
       };
 }

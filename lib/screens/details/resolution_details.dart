@@ -42,10 +42,13 @@ class ResolutionDetails extends StatelessWidget {
             child: Column(
               children: [
                 Text(item.description),
+                item.proposedBy != null
+                    ? Text('Resolution proposed by ${item.proposedBy}')
+                    : Container(),
                 Padding(
                   padding: const EdgeInsets.only(top: 8.0),
                   child: Text(
-                    "Data zakończenia ${DateFormat('dd-MM-yyyy').format(item.finishDate)}",
+                    "Finish Date: ${DateFormat('dd-MM-yyyy').format(item.finishDate)}",
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
                   ),
                 ),

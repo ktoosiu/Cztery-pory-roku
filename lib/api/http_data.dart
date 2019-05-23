@@ -106,7 +106,6 @@ checkSignatureId(int resolutionId, int memberID) async {
 Future<http.Response> createResolution(Resolution resolution) async {
   var url = urlBuilder('/resolutions');
   var body = json.encode(resolution.toJson());
-
   Map<String, String> headers = {
     'Content-type': 'application/json',
     'Accept': 'application/json',
@@ -115,4 +114,23 @@ Future<http.Response> createResolution(Resolution resolution) async {
   final response = await http.post(url, body: body, headers: headers);
 
   return response;
+}
+
+checkUserName(int memberId) async {
+  var url = urlBuilder('/members?_sort=id');
+  final response = await http.get(url);
+
+  if (response.statusCode == 200) {
+    // If server returns an OK response, parse the JSON
+    final parsed = json.decode(response.body);
+
+    var member = parsed.firstWhere((signature) => signature['id'] == memberId,
+        orElse: () => null);
+    if (member != null) {
+      return '${member["first_name"]} ${member["last_name"]}';
+    }
+  } else {
+    // If that response was not OK, throw an error.
+    throw Exception('Connection error: failed to load signatures');
+  }
 }

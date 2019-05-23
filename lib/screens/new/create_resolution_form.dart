@@ -2,6 +2,7 @@ import 'package:cztery_pory_roku/models/resolutions.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../api/http_data.dart';
 
@@ -13,6 +14,8 @@ class CreateResolutionForm extends StatefulWidget {
 class CreateResolutionFormState extends State<CreateResolutionForm> {
   final _createFormKey = GlobalKey<FormState>();
   final dateFormat = DateFormat('yyyy-MM-dd');
+  String fullName;
+  int userId;
   DateTime finishDate;
   int lastId;
   final formController = [
@@ -22,7 +25,9 @@ class CreateResolutionFormState extends State<CreateResolutionForm> {
 
   @override
   initState() {
+    checkUser();
     resolutionId();
+    memberName(userId);
     super.initState();
   }
 
@@ -39,6 +44,20 @@ class CreateResolutionFormState extends State<CreateResolutionForm> {
     var resolutionList = await fetchResolution();
     int tempId = resolutionList.last.id + 1;
     lastId = tempId;
+  }
+
+  memberName(int userId) async {
+    final val = await checkUserName(userId);
+    if (val != null) {
+      fullName = val;
+    }
+  }
+
+  checkUser() async {
+    final SharedPreferences user = await SharedPreferences.getInstance();
+    var savedId = user.getInt('id');
+    userId = savedId;
+    await memberName(savedId);
   }
 
   @override
@@ -97,13 +116,19 @@ class CreateResolutionFormState extends State<CreateResolutionForm> {
                   child: RaisedButton(
                     child: Text('Send'),
                     onPressed: () {
+                      setState(() {
+                        memberName(userId);
+                      });
                       if (_createFormKey.currentState.validate()) {
-                        createResolution(Resolution(
-                            id: lastId,
-                            name: formController[0].text,
-                            description: formController[1].text,
-                            date: DateTime.now(),
-                            finishDate: finishDate));
+                        createResolution(
+                          Resolution(
+                              id: lastId,
+                              name: formController[0].text,
+                              description: formController[1].text,
+                              date: DateTime.now(),
+                              finishDate: finishDate,
+                              proposedBy: fullName),
+                        );
 
                         Scaffold.of(context).showSnackBar(SnackBar(
                           content: Text('Sent'),

@@ -11,12 +11,11 @@ class Signature {
   Signature({this.id, this.date, this.type, this.idMember, this.idResolution});
   factory Signature.fromJson(Map<String, dynamic> json) {
     return Signature(
-      id: json['id'],
-      date: jsonToDate(json['date']),
-      type: TypeOfSign.values[json['type']],
-      idMember: json['id_member'],
-      idResolution: json['id_resolution'],
-    );
+        id: json['id'],
+        date: jsonToDate(json['date']),
+        type: TypeOfSign.values[json['type']],
+        idMember: json['id_member'],
+        idResolution: json['id_resolution']);
   }
   Map<String, dynamic> toJson() => {
         'id': id,
