@@ -41,62 +41,74 @@ class ResolutionListItem extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => ResolutionDetails(
-                    item: resolution,
-                  )),
+            builder: (context) => ResolutionDetails(
+                  item: resolution,
+                  userId: userId,
+                ),
+          ),
         );
       },
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                resolution.name,
-                style: TextStyle(
-                  fontSize: 22.0,
-                  fontWeight: FontWeight.bold,
+      child: Container(
+        decoration: BoxDecoration(
+            color: resolution.finishDate.isAfter(DateTime.now())
+                ? Colors.white
+                : Colors.grey[300]),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  resolution.name,
+                  style: TextStyle(
+                    fontSize: 22.0,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-              Text(DateFormat('dd-MM-yyyy').format(resolution.date))
-            ],
-          ),
-          Container(
-            child: Text(
-              resolution.description,
-              maxLines: 3,
-              overflow: TextOverflow.ellipsis,
+                Text(DateFormat('dd-MM-yyyy').format(resolution.date))
+              ],
             ),
-            padding: EdgeInsets.all(4.0),
-          ),
-          Container(
-            child: FutureBuilder(
-                future: checkChoice(userId, resolution.id),
-                builder: (BuildContext context, AsyncSnapshot snapshot) {
-                  if (snapshot.hasData) {
-                    if (snapshot.data != '') {
-                      return Text(
-                        'User choice: ${snapshot.data}',
-                        style: TextStyle(fontStyle: FontStyle.italic),
-                      );
+            Container(
+              child: Text(
+                resolution.description,
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
+              ),
+              padding: EdgeInsets.all(4.0),
+            ),
+            Container(
+              child: FutureBuilder(
+                  future: checkChoice(userId, resolution.id),
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    if (snapshot.hasData) {
+                      if (snapshot.data != '') {
+                        return Text(
+                          'User choice: ${snapshot.data}',
+                          style: TextStyle(fontStyle: FontStyle.italic),
+                        );
+                      } else {
+                        return Container();
+                      }
                     } else {
-                      return Container();
+                      return Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            CircularProgressIndicator(),
+                          ],
+                        ),
+                      );
                     }
-                  } else {
-                    return Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.max,
-                        children: <Widget>[
-                          CircularProgressIndicator(),
-                        ],
-                      ),
-                    );
-                  }
-                }),
-          ),
-          Divider(),
-        ],
+                  }),
+            ),
+            Container(
+                child: resolution.finishDate.isAfter(DateTime.now())
+                    ? Container()
+                    : Text('Resolution closed')),
+            Divider(),
+          ],
+        ),
       ),
     );
   }

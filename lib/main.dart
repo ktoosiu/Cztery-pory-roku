@@ -23,15 +23,15 @@ class MyApp extends StatelessWidget {
       },
     );
   }
-  // TODO: dodać kto wysłał rezolucję
+// TODO: dodać kto wysłał rezolucję
 // TODO: resolution details na początku przy pustym daje mi update a nie send
 //TODO:finish date check (colours), check if user can send a Signature
 //odświeżanie rezolucji przy wyjściu z add
 
-//TODO:redesign
 //TODO: Loader wszędzie gdzie async
+//TODO:redesign
 // TODO: spacje z loginu itp
-//Todo wysyłka może być jako floatingactionwidget
+//wysyłka może być jako floatingactionwidget
 //jakieś tam okienko z potwierdzeniem?
 //login case sensitive?
 //mieszamy językami/translacja
