@@ -28,6 +28,14 @@
       "description": "asfafsfas",
       "finish_date": "31/05/2019",
       "proposed_by": "Jan Kowalski"
+    },
+    {
+      "id": 5,
+      "name": "ram",
+      "date": "23/05/2019",
+      "description": "Pam pam",
+      "finish_date": "31/05/2019",
+      "proposed_by": "Jan Kowalski"
     }
   ],
   "members": [

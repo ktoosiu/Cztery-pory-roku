@@ -21,7 +21,8 @@ class ResolutionScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.pushNamed(context, Routes.createResolution);
+          Navigator.pushNamed(context, Routes.createResolution).then(
+              (object) => Navigator.pushNamed(context, Routes.resolutions));
         },
         child: Icon(Icons.add),
       ),

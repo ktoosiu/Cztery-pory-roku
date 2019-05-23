@@ -34,7 +34,7 @@ class ResolutionListState extends State<ResolutionList> {
     userId = val;
   }
 
-  Future<void> _refresh() async {
+  Future<void> refresh() async {
     setState(() {
       resolutionFuture = fetchResolution();
       getUserId();
@@ -71,7 +71,7 @@ class ResolutionListState extends State<ResolutionList> {
               );
             }
           }),
-      onRefresh: _refresh,
+      onRefresh: refresh,
     );
   }
 }

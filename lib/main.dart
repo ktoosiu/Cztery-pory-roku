@@ -23,17 +23,17 @@ class MyApp extends StatelessWidget {
       },
     );
   }
-// TODO: dodać kto wysłał rezolucję
 // TODO: resolution details na początku przy pustym daje mi update a nie send
 //odświeżanie rezolucji przy wyjściu z add
-
+//sprawdzić czy po add można dodać nowy bez wychodzenia
 //TODO: Loader wszędzie gdzie async
 //TODO:redesign
-// spacje z loginu itp
 
-//jakieś tam okienko z potwierdzeniem?
+// spacje z loginu itp?
 //login case sensitive?
+//jakieś tam okienko z potwierdzeniem?
 
+//Done: dodać kto wysłał rezolucję
 //Done:finish date check (colours), check if user can send a Signature
 //Done:floating buttons z dodawaniem ustawy
 //Done:pull to refresh
