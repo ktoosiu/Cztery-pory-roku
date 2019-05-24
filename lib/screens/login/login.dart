@@ -25,10 +25,25 @@ class Login extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Image.asset(
-                              'assets/euvic_with_tagline_blue.png',
+                              'assets/logo.png',
                               height: 150,
                             ),
-                            LoginForm()
+                            Text(
+                              'Cztery pory roku',
+                              style: TextStyle(
+                                  fontSize: 19, fontWeight: FontWeight.bold),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 32.0, vertical: 6),
+                              child: Text(
+                                'Witamy w aplikacji do głosowania nad uchwałami osiedla cztery pory roku.\n'
+                                'Aby zalogować się do aplikacji wpisz swój identyfikator oraz imie i nazwisko w poniższy formularz.'
+                                'W razie problemów z logowaniem skontaktuj się z administracją osiedla.',
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                            LoginForm(),
                           ],
                         ),
                       ),
