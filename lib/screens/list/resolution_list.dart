@@ -14,11 +14,10 @@ class ResolutionList extends StatefulWidget {
 
 class ResolutionListState extends State<ResolutionList> {
   var _resolutions = <Resolution>[];
-  Future<List<Resolution>> resolutionFuture;
+
   int userId;
   @override
   initState() {
-    resolutionFuture = fetchResolution();
     getUserId();
     super.initState();
   }
@@ -36,7 +35,6 @@ class ResolutionListState extends State<ResolutionList> {
 
   Future<void> refresh() async {
     setState(() {
-      resolutionFuture = fetchResolution();
       getUserId();
     });
   }
@@ -47,7 +45,7 @@ class ResolutionListState extends State<ResolutionList> {
       color: Colors.lightBlue[100],
       child: RefreshIndicator(
         child: FutureBuilder(
-            future: resolutionFuture,
+            future: fetchResolution(),
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               if (snapshot.hasData) {
                 _resolutions = snapshot.data;

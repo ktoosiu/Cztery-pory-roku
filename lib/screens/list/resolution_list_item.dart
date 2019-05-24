@@ -14,22 +14,35 @@ class ResolutionListItem extends StatelessWidget {
   const ResolutionListItem({Key key, this.resolution, this.userId})
       : super(key: key);
 
-  checkChoice(int userId, int resolutionId) async {
+  Future<Text> checkChoice(int userId, int resolutionId) async {
     final val = await checkSignatureId(resolutionId, userId);
     if (val is int) {
-      return '';
+      return null;
     } else {
       // TypeOfSign.values[val['type']];
       switch (TypeOfSign.values[val['type']]) {
         case TypeOfSign.accepted:
-          return 'Accepted';
-          break;
+          return Text('User choice: Accepted',
+              style: TextStyle(
+                  color: Colors.green,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 15));
+
         case TypeOfSign.declined:
-          return 'Declined';
-          break;
+          return Text('User choice: Declined',
+              style: TextStyle(
+                  color: Colors.red,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 15));
+
         case TypeOfSign.abstained:
-          return 'Abstained';
-          break;
+          return Text('User choice: Abstained',
+              style: TextStyle(
+                  color: Colors.yellow[900],
+                  fontWeight: FontWeight.bold,
+                  fontSize: 15));
+        default:
+          return null;
       }
     }
   }
@@ -76,41 +89,43 @@ class ResolutionListItem extends StatelessWidget {
             ),
             subtitle: Column(
               children: [
-                Text(
-                  resolution.description,
-                  maxLines: 3,
-                  overflow: TextOverflow.ellipsis,
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: Text(
+                    resolution.description,
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
-                Container(
-                  child: FutureBuilder(
-                      future: checkChoice(userId, resolution.id),
-                      builder: (BuildContext context, AsyncSnapshot snapshot) {
-                        if (snapshot.hasData) {
-                          if (snapshot.data != '') {
-                            return Text(
-                              'User choice: ${snapshot.data}',
-                              style: TextStyle(fontStyle: FontStyle.italic),
-                            );
-                          } else {
-                            return Container();
-                          }
-                        } else {
-                          return Center(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                CircularProgressIndicator(),
-                              ],
-                            ),
-                          );
-                        }
-                      }),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Container(
+                        child: FutureBuilder(
+                            future: checkChoice(userId, resolution.id),
+                            builder:
+                                (BuildContext context, AsyncSnapshot snapshot) {
+                              if (snapshot.hasData) {
+                                if (snapshot.data != null) {
+                                  return snapshot.data;
+                                }
+                              } else {
+                                return Container();
+                              }
+                            }),
+                      ),
+                      Container(
+                          child: resolution.finishDate.isAfter(DateTime.now())
+                              ? Container()
+                              : Text(
+                                  'Closed',
+                                  style: TextStyle(color: Colors.red),
+                                )),
+                    ],
+                  ),
                 ),
-                Container(
-                    child: resolution.finishDate.isAfter(DateTime.now())
-                        ? Container()
-                        : Text('Resolution closed.')),
               ],
             ),
             isThreeLine: true,

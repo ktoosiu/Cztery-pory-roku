@@ -4,7 +4,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../utils/routes.dart';
 import '../../screens/list/resolution_list.dart';
 
-class ResolutionScreen extends StatelessWidget {
+class ResolutionScreen extends StatefulWidget {
+  @override
+  _ResolutionScreenState createState() => _ResolutionScreenState();
+}
+
+class _ResolutionScreenState extends State<ResolutionScreen> {
+  final resolutionLIst = ResolutionList();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,8 +28,7 @@ class ResolutionScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          Navigator.pushNamed(context, Routes.createResolution).then(
-              (object) => Navigator.pushNamed(context, Routes.resolutions));
+          Navigator.pushNamed(context, Routes.createResolution);
         },
         icon: Icon(Icons.add),
         label: Text('Add'),
@@ -34,6 +40,6 @@ class ResolutionScreen extends StatelessWidget {
   Future logOut(context) async {
     final SharedPreferences user = await SharedPreferences.getInstance();
     user.remove('id');
-    Navigator.pop(context);
+    Navigator.pushReplacementNamed(context, Routes.home);
   }
 }

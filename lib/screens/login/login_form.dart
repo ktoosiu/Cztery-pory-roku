@@ -43,14 +43,18 @@ class LoginFormState extends State<LoginForm> {
     final SharedPreferences user = await SharedPreferences.getInstance();
     var savedId = user.getInt('id');
     if (savedId != null) {
-      Navigator.pushNamed(context, Routes.resolutions);
+      navigateToResolution(context);
     }
+  }
+
+  navigateToResolution(context) {
+    Navigator.pushReplacementNamed(context, Routes.resolutions);
   }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 32),
+      padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 32),
       child: Form(
         key: _loginFormKey,
         child: Column(
@@ -85,13 +89,14 @@ class LoginFormState extends State<LoginForm> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0)),
                 splashColor: Colors.blue,
-                color: Colors.lightBlue[50],
+                color: Colors.blue,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 20.0),
-                      child: Text('Sign In'),
+                      child: Text('Sign In',
+                          style: TextStyle(color: Colors.white)),
                     ),
                   ],
                 ),
@@ -102,7 +107,8 @@ class LoginFormState extends State<LoginForm> {
                         firstName: formController[1].text,
                         lastName: formController[2].text)) {
                       setUserId(formController[0].text);
-                      Navigator.pushNamed(context, Routes.resolutions);
+                      Navigator.pushReplacementNamed(
+                          context, Routes.resolutions);
                     } else {
                       Scaffold.of(context).showSnackBar(
                         SnackBar(
