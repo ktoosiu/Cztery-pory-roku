@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
@@ -7,7 +8,7 @@ import 'package:meta/meta.dart';
 import '../models/signatures.dart';
 import '../models/resolutions.dart';
 
-const _url = 'http://10.0.2.2:3000';
+const _url = 'http://localhost:3000';
 
 String urlBuilder(String endpoint) {
   return '$_url$endpoint';
@@ -15,15 +16,13 @@ String urlBuilder(String endpoint) {
 
 Future<List<Resolution>> fetchResolution() async {
   var url = urlBuilder('/resolutions');
+  //await Future.delayed(Duration(seconds: 5));
   final response = await http.get(url);
 
   if (response.statusCode == 200) {
-    // If server returns an OK response, parse the JSON
     final parsed = json.decode(response.body).cast<Map<String, dynamic>>();
-
     return parsed.map<Resolution>((json) => Resolution.fromJson(json)).toList();
   } else {
-    // If that response was not OK, throw an error.
     throw Exception('Failed to load resolutions');
   }
 }
@@ -114,23 +113,4 @@ Future<http.Response> createResolution(Resolution resolution) async {
   final response = await http.post(url, body: body, headers: headers);
 
   return response;
-}
-
-checkUserName(int memberId) async {
-  var url = urlBuilder('/members?_sort=id');
-  final response = await http.get(url);
-
-  if (response.statusCode == 200) {
-    // If server returns an OK response, parse the JSON
-    final parsed = json.decode(response.body);
-
-    var member = parsed.firstWhere((signature) => signature['id'] == memberId,
-        orElse: () => null);
-    if (member != null) {
-      return '${member["first_name"]} ${member["last_name"]}';
-    }
-  } else {
-    // If that response was not OK, throw an error.
-    throw Exception('Connection error: failed to load signatures');
-  }
 }

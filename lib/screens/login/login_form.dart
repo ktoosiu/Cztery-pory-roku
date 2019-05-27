@@ -1,7 +1,8 @@
-import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:cztery_pory_roku/models/user_data.dart';
+import 'package:cztery_pory_roku/screens/list/resolution_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../utils/routes.dart';
 import '../../api/http_data.dart';
@@ -13,42 +14,18 @@ class LoginForm extends StatefulWidget {
 
 class LoginFormState extends State<LoginForm> {
   final _loginFormKey = GlobalKey<FormState>();
-  final formController = [
+  final _formController = [
     TextEditingController(),
     TextEditingController(),
     TextEditingController()
   ];
 
   @override
-  initState() {
-    checkUser(context);
-    super.initState();
-  }
-
-  Future setUserId(String id) async {
-    final SharedPreferences user = await SharedPreferences.getInstance();
-    user.setInt('id', int.parse(id));
-  }
-
-  @override
   void dispose() {
-    // Clean up the controller when the Widget is disposed
-    for (var controller in formController) {
+    for (var controller in _formController) {
       controller.dispose();
     }
     super.dispose();
-  }
-
-  Future checkUser(context) async {
-    final SharedPreferences user = await SharedPreferences.getInstance();
-    var savedId = user.getInt('id');
-    if (savedId != null) {
-      navigateToResolution(context);
-    }
-  }
-
-  navigateToResolution(context) {
-    Navigator.pushReplacementNamed(context, Routes.resolutions);
   }
 
   @override
@@ -60,7 +37,7 @@ class LoginFormState extends State<LoginForm> {
         child: Column(
           children: [
             TextFormField(
-              controller: formController[0],
+              controller: _formController[0],
               inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
               keyboardType: TextInputType.number,
               decoration: InputDecoration(hintText: 'ID'),
@@ -70,66 +47,77 @@ class LoginFormState extends State<LoginForm> {
               autofocus: false,
             ),
             TextFormField(
-              controller: formController[1],
+              controller: _formController[1],
               decoration: InputDecoration(hintText: 'First Name'),
               validator: (value) {
                 if (value.isEmpty) return 'Enter First Name';
               },
             ),
             TextFormField(
-              controller: formController[2],
+              controller: _formController[2],
               decoration: InputDecoration(hintText: 'Last Name'),
               validator: (value) {
                 if (value.isEmpty) return 'Enter Last Name';
               },
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(64, 24, 64, 8),
-              child: FlatButton(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0)),
-                splashColor: Colors.blue,
-                color: Colors.blue,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 20.0),
-                      child: Text('Sign In',
-                          style: TextStyle(color: Colors.white)),
-                    ),
-                  ],
-                ),
-                onPressed: () async {
-                  if (_loginFormKey.currentState.validate()) {
-                    if (await checkMember(
-                        id: formController[0].text,
-                        firstName: formController[1].text,
-                        lastName: formController[2].text)) {
-                      setUserId(formController[0].text);
-                      Navigator.pushReplacementNamed(
-                          context, Routes.resolutions);
-                    } else {
-                      Scaffold.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(
-                              'User ${formController[0].text} ${formController[1].text} ${formController[2].text} doesn\'t exist!'),
-                          backgroundColor: Colors.redAccent[100],
-                        ),
-                      );
-                    }
-                  } else {
-                    Scaffold.of(context).showSnackBar(SnackBar(
-                      content: Text("Please enter values"),
-                      backgroundColor: Colors.redAccent[100],
-                    ));
-                  }
-                },
-              ),
-            ),
+            _renderLoginButton(),
           ],
         ),
       ),
     );
+  }
+
+  Padding _renderLoginButton() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 8.0),
+      child: FlatButton(
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(24.0)),
+        splashColor: Colors.blue,
+        padding: EdgeInsets.fromLTRB(56, 12, 56, 12),
+        color: Colors.blue,
+        child: Text('Sign In', style: TextStyle(color: Colors.white)),
+        onPressed: () async {
+          if (_loginFormKey.currentState.validate()) {
+            await _processOnPress();
+          } else {
+            _showErrorSnackbar('Please enter values');
+          }
+        },
+      ),
+    );
+  }
+
+  Future _processOnPress() async {
+    var id = _formController[0].text;
+    var firstName = _formController[1].text;
+    var lastName = _formController[2].text;
+
+    if (await checkMember(id: id, firstName: firstName, lastName: lastName)) {
+      _setUserData(id, firstName, lastName);
+      _navigateToResolution(UserData(int.parse(id), firstName, lastName));
+    } else {
+      _showErrorSnackbar('User $id $firstName $lastName doesn\'t exist!');
+    }
+  }
+
+  void _setUserData(String id, String name, String lastname) async {
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setInt('id', int.parse(id));
+    preferences.setString('name', name);
+    preferences.setString('lastName', lastname);
+  }
+
+  void _navigateToResolution(UserData userData) {
+    Navigator.of(context).pushReplacement(MaterialPageRoute(
+        settings: RouteSettings(name: Routes.resolutions),
+        builder: (context) => ResolutionScreen(userData: userData)));
+  }
+
+  void _showErrorSnackbar(String errorText) {
+    Scaffold.of(context).showSnackBar(SnackBar(
+      content: Text(errorText),
+      backgroundColor: Colors.redAccent[100],
+    ));
   }
 }

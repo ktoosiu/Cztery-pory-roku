@@ -1,41 +1,32 @@
+import 'dart:async';
+
+import 'package:cztery_pory_roku/api/http_data.dart';
+import 'package:cztery_pory_roku/models/user_data.dart';
+import 'package:cztery_pory_roku/screens/list/resolution_bloc.dart';
+import 'package:cztery_pory_roku/screens/list/resolution_list_events.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../models/resolutions.dart';
 import '../../screens/list/resolution_list_item.dart';
-import '../../api/http_data.dart';
 
 class ResolutionList extends StatefulWidget {
+  final ResolutionBloc parentBloc;
+  final UserData userData;
+
+  const ResolutionList(this.userData, this.parentBloc, {Key key})
+      : super(key: key);
+
   @override
   ResolutionListState createState() => ResolutionListState();
 }
 
 class ResolutionListState extends State<ResolutionList> {
-  var _resolutions = <Resolution>[];
-
-  int userId;
-  @override
-  initState() {
-    getUserId();
-    super.initState();
-  }
-
-  Future<int> getUser() async {
-    final SharedPreferences user = await SharedPreferences.getInstance();
-    var temp = user.getInt('id');
-    return temp;
-  }
-
-  getUserId() async {
-    final val = await getUser();
-    userId = val;
-  }
-
   Future<void> refresh() async {
     setState(() {
-      getUserId();
+      fetchResolution().then((list) => widget.parentBloc.fetchResolutionSink
+          .add(FetchResolutionListEvent(list)));
     });
   }
 
@@ -44,19 +35,19 @@ class ResolutionListState extends State<ResolutionList> {
     return Container(
       color: Colors.lightBlue[100],
       child: RefreshIndicator(
-        child: FutureBuilder(
-            future: fetchResolution(),
-            builder: (BuildContext context, AsyncSnapshot snapshot) {
-              if (snapshot.hasData) {
-                _resolutions = snapshot.data;
-
+        child: StreamBuilder<List<Resolution>>(
+            stream: widget.parentBloc.resolutionsStream,
+            initialData: [],
+            builder: (BuildContext context,
+                AsyncSnapshot<List<Resolution>> snapshot) {
+              if (snapshot.hasData && snapshot.data.isNotEmpty) {
                 return ListView.builder(
                     padding: const EdgeInsets.all(16.0),
-                    itemCount: _resolutions.length,
+                    itemCount: snapshot.data.length,
                     itemBuilder: (context, i) {
                       return ResolutionListItem(
-                        resolution: _resolutions[i],
-                        userId: userId,
+                        resolution: snapshot.data[i],
+                        userId: widget.userData.id,
                       );
                     });
               } else {

@@ -1,5 +1,6 @@
 class Routes {
-  static String home = '/';
-  static String resolutions = '/resolution';
-  static String createResolution = '/createResolution';
+  static String loading = 'loading';
+  static String login = 'login';
+  static String resolutions = 'resolution';
+  static String createResolution = 'resolution/createResolution';
 }
