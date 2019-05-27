@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import '../../models/resolutions.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -18,6 +20,7 @@ class CreateResolutionFormState extends State<CreateResolutionForm> {
   int userId;
   DateTime finishDate;
   int lastId;
+
   final formController = [
     TextEditingController(), //name
     TextEditingController(), //description
@@ -132,15 +135,14 @@ class CreateResolutionFormState extends State<CreateResolutionForm> {
                                     memberName(userId);
                                   });
                                   if (_createFormKey.currentState.validate()) {
-                                    createResolution(
-                                      Resolution(
-                                          id: lastId,
-                                          name: formController[0].text,
-                                          description: formController[1].text,
-                                          date: DateTime.now(),
-                                          finishDate: finishDate,
-                                          proposedBy: fullName),
-                                    );
+                                    var tempResolution = Resolution(
+                                        id: lastId,
+                                        name: formController[0].text,
+                                        description: formController[1].text,
+                                        date: DateTime.now(),
+                                        finishDate: finishDate,
+                                        proposedBy: fullName);
+                                    createResolution(tempResolution);
                                     Navigator.pop(context);
                                   } else {
                                     Scaffold.of(context).showSnackBar(SnackBar(
