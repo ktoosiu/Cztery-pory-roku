@@ -3,7 +3,6 @@ import 'package:cztery_pory_roku/viewModels/resolution_list_item_view_model.dart
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../../api/http_data.dart';
 import '../../models/signatures.dart';
 import 'resolution_form.dart';
 

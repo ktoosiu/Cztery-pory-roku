@@ -30,15 +30,6 @@ class _ResolutionScreenState extends State<ResolutionScreen> {
     super.initState();
   }
 
-  Future<UserData> getUser() async {
-    final SharedPreferences user = await SharedPreferences.getInstance();
-    var id = user.getInt('id');
-    var name = user.getString('name');
-    var lastName = user.getString('lastName');
-
-    return UserData(id, name, lastName);
-  }
-
   @override
   void dispose() {
     _bloc.dispose();

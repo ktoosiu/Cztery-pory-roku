@@ -96,7 +96,7 @@ class _LoadingScreenState extends State<LoadingScreen>
   }
 
   Future _checkUser() async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 3));
     final SharedPreferences user = await SharedPreferences.getInstance();
     var savedId = user.getInt('id');
     if (savedId != null) {

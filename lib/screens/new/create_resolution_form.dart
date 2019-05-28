@@ -93,8 +93,9 @@ class CreateResolutionFormState extends State<CreateResolutionForm> {
                 padding: const EdgeInsets.all(16.0),
                 child: RaisedButton(
                   child: Text('Send'),
-                  onPressed: () {
+                  onPressed: () async {
                     if (_createFormKey.currentState.validate()) {
+                      await Future.delayed(Duration(seconds: 5));
                       final resolution = Resolution(
                           name: formController[0].text,
                           description: formController[1].text,

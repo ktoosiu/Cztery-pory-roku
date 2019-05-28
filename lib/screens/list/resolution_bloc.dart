@@ -12,6 +12,7 @@ class ResolutionListBloc {
 
   final _resolutionsStreamController =
       StreamController<List<ResolutionListItemViewModel>>();
+
   StreamSink<List<ResolutionListItemViewModel>> get resolutionSink =>
       _resolutionsStreamController.sink;
   Stream<List<ResolutionListItemViewModel>> get resolutionsStream =>

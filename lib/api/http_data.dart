@@ -21,7 +21,6 @@ String urlBuilder(String endpoint) {
 
 Future<List<Resolution>> fetchResolution() async {
   var url = urlBuilder('/resolutions');
-  //await Future.delayed(Duration(seconds: 5));
   final response = await http.get(url);
 
   if (response.statusCode == 200) {
