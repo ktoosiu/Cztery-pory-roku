@@ -27,3 +27,10 @@ class MyApp extends StatelessWidget {
 //TODO: zapoznać się z ideologią redux, głównie redux.js (poczytać jak działa)https://redux.js.org/
 //https://github.com/brianegan/flutter_architecture_samples/tree/master/redux
 }
+
+//akcje
+//no mutation- return a new object if the state changes.
+//reducers-function that takes state and action as arguments, and returns the next state of the app
+//Single source of truth - state in 1 object
+//state is read only- changing state by actions
+//only functions (reducers) can make changes
