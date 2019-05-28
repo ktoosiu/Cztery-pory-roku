@@ -33,6 +33,11 @@ class ResolutionListBloc {
   Sink<AddResolutionEvent> get addResolutionSink =>
       _addResolutionsEventController.sink;
 
+  final _addSignatureEventController =
+      StreamController<AddUpdateSignatureEvent>();
+  Sink<AddUpdateSignatureEvent> get addSignatureSink =>
+      _addSignatureEventController.sink;
+
   final _updateResolutionsEventController =
       StreamController<UpdateResolutionEvent>();
   Sink<UpdateResolutionEvent> get updateResolutionSink =>
@@ -43,6 +48,7 @@ class ResolutionListBloc {
     _addResolutionsEventController.stream.listen(_onAddResolution);
     _updateResolutionsEventController.stream.listen(_onUpdateResolution);
     _fetchSignaturesEventController.stream.listen(_onFetchUserSignatures);
+    _addSignatureEventController.stream.listen(_onAddSignature);
   }
 
   _onFetchUserSignatures(FetchUserSignaturesEvent event) {
@@ -57,6 +63,18 @@ class ResolutionListBloc {
 
   _onAddResolution(AddResolutionEvent event) {
     _resolutions.add(event.item);
+    _processResolutionsStreamData();
+  }
+
+  _onAddSignature(AddUpdateSignatureEvent event) {
+    final index =
+        _signatures.indexWhere((signature) => signature.id == event.item.id);
+
+    if (index != -1) {
+      _signatures[index] = event.item;
+    } else {
+      _signatures.add(event.item);
+    }
     _processResolutionsStreamData();
   }
 
@@ -93,5 +111,6 @@ class ResolutionListBloc {
     _addResolutionsEventController.close();
     _updateResolutionsEventController.close();
     _fetchSignaturesEventController.close();
+    _addSignatureEventController.close();
   }
 }

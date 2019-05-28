@@ -49,6 +49,10 @@ class ResolutionListState extends State<ResolutionList> {
                       return ResolutionListItem(
                         viewModel: snapshot.data[i],
                         userData: widget.userData,
+                        callback: (signature) =>
+                            widget.parentBloc.addSignatureSink.add(
+                              AddUpdateSignatureEvent(signature),
+                            ),
                       );
                     });
               } else {

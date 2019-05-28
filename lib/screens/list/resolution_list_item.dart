@@ -11,7 +11,9 @@ import '../../screens/details/resolution_details.dart';
 class ResolutionListItem extends StatelessWidget {
   final ResolutionListItemViewModel viewModel;
   final UserData userData;
-  const ResolutionListItem({Key key, this.viewModel, this.userData})
+  final Function(Signature) callback;
+  const ResolutionListItem(
+      {Key key, this.viewModel, this.userData, @required this.callback})
       : super(key: key);
 
   Widget checkChoice() {
@@ -55,6 +57,7 @@ class ResolutionListItem extends StatelessWidget {
             builder: (context) => ResolutionDetails(
                   item: viewModel,
                   userData: userData,
+                  callback: callback,
                 ),
           ),
         );

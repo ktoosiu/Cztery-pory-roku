@@ -9,7 +9,9 @@ import 'resolution_form.dart';
 class ResolutionDetails extends StatelessWidget {
   final ResolutionListItemViewModel item;
   final UserData userData;
-  const ResolutionDetails({Key key, this.item, this.userData})
+  final Function(Signature) callback;
+  const ResolutionDetails(
+      {Key key, this.item, this.userData, @required this.callback})
       : super(key: key);
 
   String checkChoice() {
@@ -65,8 +67,12 @@ class ResolutionDetails extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: item.resolution.finishDate
                                 .isAfter(DateTime.now())
-                            ? ResolutionForm(userData, item.signature,
-                                resolutionId: item.resolution.id)
+                            ? ResolutionForm(
+                                userData,
+                                callback,
+                                item.signature,
+                                resolutionId: item.resolution.id,
+                              )
                             : Column(children: [
                                 Text(
                                   'Resolution is closed.',

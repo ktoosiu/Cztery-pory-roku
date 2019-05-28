@@ -8,12 +8,14 @@ import '../../models/signatures.dart';
 import '../../api/http_data.dart';
 
 class ResolutionForm extends StatefulWidget {
+  final Function(Signature) callback;
   final resolutionId;
   final UserData userData;
   final Signature _signature;
 
   const ResolutionForm(
     this.userData,
+    this.callback,
     this._signature, {
     Key key,
     this.resolutionId,
@@ -110,6 +112,7 @@ class ResolutionFormState extends State<ResolutionForm> {
                               idResolution: widget.resolutionId,
                               type: selectedValue))
                           .then((newSignature) {
+                        widget.callback(newSignature);
                         setState(() {
                           signature = newSignature;
                         });
@@ -118,7 +121,14 @@ class ResolutionFormState extends State<ResolutionForm> {
                       updateSignature(
                         id: signature.id,
                         choice: selectedValue,
-                      );
+                      ).then((response) {
+                        widget.callback(Signature(
+                            date: signature.date,
+                            id: signature.id,
+                            idMember: signature.idMember,
+                            idResolution: signature.idResolution,
+                            type: selectedValue));
+                      });
                     }
 
                     Scaffold.of(context).showSnackBar(

@@ -16,6 +16,12 @@ class AddResolutionEvent extends ResolutionListEvent {
   AddResolutionEvent(this.item);
 }
 
+class AddUpdateSignatureEvent extends ResolutionListEvent {
+  final Signature item;
+
+  AddUpdateSignatureEvent(this.item);
+}
+
 class UpdateResolutionEvent extends ResolutionListEvent {
   final Resolution item;
 

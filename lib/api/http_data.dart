@@ -8,7 +8,7 @@ import 'package:meta/meta.dart';
 import '../models/signatures.dart';
 import '../models/resolutions.dart';
 
-const _url = 'http://localhost:3000';
+const _url = 'http://10.0.2.2:3000';
 
 Map<String, String> _headers = {
   'Content-type': 'application/json',
