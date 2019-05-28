@@ -1,21 +1,28 @@
 import 'dart:async';
 
+import 'package:cztery_pory_roku/models/signatures.dart';
 import 'package:cztery_pory_roku/screens/list/resolution_list_events.dart';
+import 'package:cztery_pory_roku/viewModels/resolution_list_item_view_model.dart';
 
 import '../../models/resolutions.dart';
 
-class ResolutionBloc {
+class ResolutionListBloc {
   List<Resolution> _resolutions = [];
+  List<Signature> _signatures = [];
 
-  final _resolutionsStreamController = StreamController<List<Resolution>>();
-
-  StreamSink<List<Resolution>> get resolutionSink =>
+  final _resolutionsStreamController =
+      StreamController<List<ResolutionListItemViewModel>>();
+  StreamSink<List<ResolutionListItemViewModel>> get resolutionSink =>
       _resolutionsStreamController.sink;
-
-  Stream<List<Resolution>> get resolutionsStream =>
+  Stream<List<ResolutionListItemViewModel>> get resolutionsStream =>
       _resolutionsStreamController.stream;
 
   //Events
+  final _fetchSignaturesEventController =
+      StreamController<FetchUserSignaturesEvent>();
+  Sink<FetchUserSignaturesEvent> get fetchSignaturesSink =>
+      _fetchSignaturesEventController.sink;
+
   final _fetchResolutionsEventController =
       StreamController<FetchResolutionListEvent>();
   Sink<FetchResolutionListEvent> get fetchResolutionSink =>
@@ -30,20 +37,26 @@ class ResolutionBloc {
   Sink<UpdateResolutionEvent> get updateResolutionSink =>
       _updateResolutionsEventController.sink;
 
-  ResolutionBloc() {
+  ResolutionListBloc() {
     _fetchResolutionsEventController.stream.listen(_onFetchResolutions);
     _addResolutionsEventController.stream.listen(_onAddResolution);
     _updateResolutionsEventController.stream.listen(_onUpdateResolution);
+    _fetchSignaturesEventController.stream.listen(_onFetchUserSignatures);
+  }
+
+  _onFetchUserSignatures(FetchUserSignaturesEvent event) {
+    _signatures = event.items;
+    _processResolutionsStreamData();
   }
 
   _onFetchResolutions(FetchResolutionListEvent event) {
     _resolutions = event.items;
-    resolutionSink.add(_resolutions);
+    _processResolutionsStreamData();
   }
 
   _onAddResolution(AddResolutionEvent event) {
     _resolutions.add(event.item);
-    resolutionSink.add(_resolutions);
+    _processResolutionsStreamData();
   }
 
   _onUpdateResolution(UpdateResolutionEvent event) {
@@ -55,11 +68,22 @@ class ResolutionBloc {
 
     if (index != -1) {
       _resolutions[index] = event.item;
-      resolutionSink.add(_resolutions);
+      _processResolutionsStreamData();
     } else {
       resolutionSink
           .addError("Cannot update resolution of id ${event.item.id}");
     }
+  }
+
+  void _processResolutionsStreamData() {
+    List<ResolutionListItemViewModel> processedList = [];
+    _resolutions.forEach((resolution) {
+      final signature = _signatures.firstWhere((signature) {
+        return signature.idResolution == resolution.id;
+      }, orElse: () => null);
+      processedList.add(ResolutionListItemViewModel(resolution, signature));
+    });
+    resolutionSink.add(processedList);
   }
 
   dispose() {
@@ -67,5 +91,6 @@ class ResolutionBloc {
     _fetchResolutionsEventController.close();
     _addResolutionsEventController.close();
     _updateResolutionsEventController.close();
+    _fetchSignaturesEventController.close();
   }
 }

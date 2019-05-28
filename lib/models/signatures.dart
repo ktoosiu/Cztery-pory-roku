@@ -14,15 +14,15 @@ class Signature {
         id: json['id'],
         date: jsonToDate(json['date']),
         type: TypeOfSign.values[json['type']],
-        idMember: json['id_member'],
-        idResolution: json['id_resolution']);
+        idMember: json['memberId'],
+        idResolution: json['resolutionId']);
   }
   Map<String, dynamic> toJson() => {
         'id': id,
         'date': DateFormat('dd/MM/yyyy').format(date),
         'type': type.index,
-        'id_member': idMember,
-        'id_resolution': idResolution
+        'memberId': idMember,
+        'resolutionId': idResolution
       };
 }
 

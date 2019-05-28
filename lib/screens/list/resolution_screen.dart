@@ -19,12 +19,14 @@ class ResolutionScreen extends StatefulWidget {
 }
 
 class _ResolutionScreenState extends State<ResolutionScreen> {
-  ResolutionBloc _bloc = ResolutionBloc();
+  ResolutionListBloc _bloc = ResolutionListBloc();
 
   @override
   initState() {
     fetchResolution().then((list) =>
         _bloc.fetchResolutionSink.add(FetchResolutionListEvent(list)));
+    fetchUserSignatures(widget.userData.id).then((list) =>
+        _bloc.fetchSignaturesSink.add(FetchUserSignaturesEvent(list)));
     super.initState();
   }
 
@@ -63,7 +65,10 @@ class _ResolutionScreenState extends State<ResolutionScreen> {
               context,
               MaterialPageRoute(
                   fullscreenDialog: true,
-                  builder: (context) => CreateResolution(widget.userData)));
+                  builder: (context) => CreateResolution(
+                      widget.userData,
+                      (newResolution) => _bloc.addResolutionSink
+                          .add(AddResolutionEvent(newResolution)))));
         },
         icon: Icon(Icons.add),
         label: Text('Add'),

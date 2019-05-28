@@ -1,26 +1,24 @@
+import 'package:cztery_pory_roku/models/user_data.dart';
+import 'package:cztery_pory_roku/viewModels/resolution_list_item_view_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../../api/http_data.dart';
 import '../../models/signatures.dart';
-import '../../models/resolutions.dart';
 import '../details/resolution_details.dart';
 import '../../screens/details/resolution_details.dart';
 
 class ResolutionListItem extends StatelessWidget {
-  final Resolution resolution;
-  final int userId;
-  const ResolutionListItem({Key key, this.resolution, this.userId})
+  final ResolutionListItemViewModel viewModel;
+  final UserData userData;
+  const ResolutionListItem({Key key, this.viewModel, this.userData})
       : super(key: key);
 
-  Future<Text> checkChoice(int userId, int resolutionId) async {
-    final val = await checkSignatureId(resolutionId, userId);
-    if (val is int) {
-      return null;
+  Widget checkChoice() {
+    if (viewModel.signature == null) {
+      return Container();
     } else {
-      // TypeOfSign.values[val['type']];
-      switch (TypeOfSign.values[val['type']]) {
+      switch (viewModel.signature.type) {
         case TypeOfSign.accepted:
           return Text('User choice: Accepted',
               style: TextStyle(
@@ -55,8 +53,8 @@ class ResolutionListItem extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) => ResolutionDetails(
-                  item: resolution,
-                  userId: userId,
+                  item: viewModel,
+                  userData: userData,
                 ),
           ),
         );
@@ -66,7 +64,7 @@ class ResolutionListItem extends StatelessWidget {
         child: Card(
             child: Container(
           decoration: BoxDecoration(
-              color: resolution.finishDate.isAfter(DateTime.now())
+              color: viewModel.resolution.finishDate.isAfter(DateTime.now())
                   ? Colors.lightBlue[50]
                   : Colors.grey[300]),
           child: ListTile(
@@ -76,13 +74,14 @@ class ResolutionListItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      resolution.name,
+                      viewModel.resolution.name,
                       style: TextStyle(
                         fontSize: 22.0,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Text(DateFormat('dd-MM-yyyy').format(resolution.date))
+                    Text(DateFormat('dd-MM-yyyy')
+                        .format(viewModel.resolution.date))
                   ],
                 ),
               ],
@@ -92,7 +91,7 @@ class ResolutionListItem extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 8.0),
                   child: Text(
-                    resolution.description,
+                    viewModel.resolution.description,
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -103,21 +102,11 @@ class ResolutionListItem extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Container(
-                        child: FutureBuilder(
-                            future: checkChoice(userId, resolution.id),
-                            builder:
-                                (BuildContext context, AsyncSnapshot snapshot) {
-                              if (snapshot.hasData) {
-                                if (snapshot.data != null) {
-                                  return snapshot.data;
-                                }
-                              } else {
-                                return Container();
-                              }
-                            }),
+                        child: checkChoice(),
                       ),
                       Container(
-                          child: resolution.finishDate.isAfter(DateTime.now())
+                          child: viewModel.resolution.finishDate
+                                  .isAfter(DateTime.now())
                               ? Container()
                               : Text(
                                   'Closed',

@@ -10,6 +10,11 @@ import '../models/resolutions.dart';
 
 const _url = 'http://localhost:3000';
 
+Map<String, String> _headers = {
+  'Content-type': 'application/json',
+  'Accept': 'application/json',
+};
+
 String urlBuilder(String endpoint) {
   return '$_url$endpoint';
 }
@@ -42,18 +47,12 @@ Future<bool> checkMember({String id, String firstName, String lastName}) async {
   return Future<bool>.value(false);
 }
 
-Future<http.Response> createSignature(Signature signature) async {
+Future<Signature> createSignature(Signature signature) async {
   var url = urlBuilder('/signatures');
   var body = json.encode(signature.toJson());
 
-  Map<String, String> headers = {
-    'Content-type': 'application/json',
-    'Accept': 'application/json',
-  };
-
-  final response = await http.post(url, body: body, headers: headers);
-
-  return response;
+  final response = await http.post(url, body: body, headers: _headers);
+  return Signature.fromJson(json.decode(response.body).cast<String, dynamic>());
 }
 
 Future<http.Response> updateSignature(
@@ -64,53 +63,27 @@ Future<http.Response> updateSignature(
     'update_date': DateFormat('dd/MM/yyyy').format(DateTime.now()),
   });
 
-  Map<String, String> headers = {
-    'Content-type': 'application/json',
-    'Accept': 'application/json',
-  };
-
-  final response = await http.patch(url, body: body, headers: headers);
+  final response = await http.patch(url, body: body, headers: _headers);
   return response;
 }
 
-checkSignatureId(int resolutionId, int memberID) async {
-  var url = urlBuilder('/signatures?_sort=id&_order=asc');
+Future<List<Signature>> fetchUserSignatures(int userId) async {
+  var url = urlBuilder('/signatures?memberId=$userId');
   final response = await http.get(url);
 
   if (response.statusCode == 200) {
-    // If server returns an OK response, parse the JSON
-    final parsed = json.decode(response.body);
-
-    var possibleResolution = parsed.firstWhere(
-        (signature) =>
-            signature['id_resolution'] == resolutionId &&
-            signature['id_member'] == memberID,
-        orElse: () => null);
-    if (possibleResolution == null) {
-      if (parsed.isNotEmpty) {
-        var tempId = parsed.last['id'] + 1; //int
-        return tempId;
-      } else {
-        return 1;
-      }
-    } else {
-      return possibleResolution;
-    }
+    final parsed = json.decode(response.body).cast<Map<String, dynamic>>();
+    return parsed.map<Signature>((json) => Signature.fromJson(json)).toList();
   } else {
-    // If that response was not OK, throw an error.
-    throw Exception('Connection error: failed to load signatures');
+    throw Exception('Failed to load resolutions');
   }
 }
 
-Future<http.Response> createResolution(Resolution resolution) async {
+Future<Resolution> createResolution(Resolution resolution) async {
   var url = urlBuilder('/resolutions');
   var body = json.encode(resolution.toJson());
-  Map<String, String> headers = {
-    'Content-type': 'application/json',
-    'Accept': 'application/json',
-  };
 
-  final response = await http.post(url, body: body, headers: headers);
-
-  return response;
+  final response = await http.post(url, body: body, headers: _headers);
+  return Resolution.fromJson(
+      json.decode(response.body).cast<String, dynamic>());
 }

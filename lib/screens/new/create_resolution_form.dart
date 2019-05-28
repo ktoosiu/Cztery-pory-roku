@@ -1,16 +1,18 @@
 import 'package:cztery_pory_roku/models/user_data.dart';
 
-import '../../models/resolutions.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 
 import '../../api/http_data.dart';
+import '../../models/resolutions.dart';
 
 class CreateResolutionForm extends StatefulWidget {
   final UserData userData;
+  final Function(Resolution) callback;
 
-  const CreateResolutionForm(this.userData, {Key key}) : super(key: key);
+  const CreateResolutionForm(this.userData, this.callback, {Key key})
+      : super(key: key);
 
   @override
   CreateResolutionFormState createState() => CreateResolutionFormState();
@@ -93,16 +95,22 @@ class CreateResolutionFormState extends State<CreateResolutionForm> {
                   child: Text('Send'),
                   onPressed: () {
                     if (_createFormKey.currentState.validate()) {
-                      createResolution(
-                        Resolution(
-                            name: formController[0].text,
-                            description: formController[1].text,
-                            date: DateTime.now(),
-                            finishDate: finishDate,
-                            proposedBy:
-                                "${widget.userData.name} ${widget.userData.lastName}"),
-                      );
-                      Navigator.pop(context);
+                      final resolution = Resolution(
+                          name: formController[0].text,
+                          description: formController[1].text,
+                          date: DateTime.now(),
+                          finishDate: finishDate,
+                          proposedBy:
+                              "${widget.userData.name} ${widget.userData.lastName}");
+                      createResolution(resolution).then((createdResolution) {
+                        widget.callback(createdResolution);
+                        Navigator.pop(context);
+                      }).catchError((error) {
+                        Scaffold.of(context).showSnackBar(SnackBar(
+                          content: Text("Unknown error"),
+                          backgroundColor: Colors.redAccent[100],
+                        ));
+                      });
                     } else {
                       Scaffold.of(context).showSnackBar(SnackBar(
                         content: Text("Please enter value"),

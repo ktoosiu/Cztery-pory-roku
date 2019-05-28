@@ -1,22 +1,23 @@
+import 'package:cztery_pory_roku/models/user_data.dart';
+import 'package:cztery_pory_roku/viewModels/resolution_list_item_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../../api/http_data.dart';
 import '../../models/signatures.dart';
-import '../../models/resolutions.dart';
 import 'resolution_form.dart';
 
 class ResolutionDetails extends StatelessWidget {
-  final Resolution item;
-  final userId;
-  const ResolutionDetails({Key key, this.item, this.userId}) : super(key: key);
-  checkChoice(int userId, int resolutionId) async {
-    final val = await checkSignatureId(resolutionId, userId);
-    if (val is int) {
-      return '';
+  final ResolutionListItemViewModel item;
+  final UserData userData;
+  const ResolutionDetails({Key key, this.item, this.userData})
+      : super(key: key);
+
+  String checkChoice() {
+    if (item.signature == null) {
+      return '-';
     } else {
-      // TypeOfSign.values[val['type']];
-      switch (TypeOfSign.values[val['type']]) {
+      switch (item.signature.type) {
         case TypeOfSign.accepted:
           return 'Accepted';
           break;
@@ -28,13 +29,14 @@ class ResolutionDetails extends StatelessWidget {
           break;
       }
     }
+    return '-';
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(item.name),
+          title: Text(item.resolution.name),
         ),
         body: Container(
           color: Colors.lightBlue[100],
@@ -47,24 +49,25 @@ class ResolutionDetails extends StatelessWidget {
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
                     children: [
-                      Text(item.description),
-                      item.proposedBy != null
-                          ? Text('Resolution proposed by ${item.proposedBy}')
+                      Text(item.resolution.description),
+                      item.resolution.proposedBy != null
+                          ? Text(
+                              'Resolution proposed by ${item.resolution.proposedBy}')
                           : Container(),
                       Padding(
                         padding: const EdgeInsets.only(top: 8.0),
                         child: Text(
-                          "Finish Date: ${DateFormat('dd-MM-yyyy').format(item.finishDate)}",
+                          "Finish Date: ${DateFormat('dd-MM-yyyy').format(item.resolution.finishDate)}",
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 22),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: item.finishDate.isAfter(DateTime.now())
-                            ? ResolutionForm(
-                                resolutionId: item.id,
-                              )
+                        child: item.resolution.finishDate
+                                .isAfter(DateTime.now())
+                            ? ResolutionForm(userData, item.signature,
+                                resolutionId: item.resolution.id)
                             : Column(children: [
                                 Text(
                                   'Resolution is closed.',
@@ -72,33 +75,10 @@ class ResolutionDetails extends StatelessWidget {
                                       fontSize: 20,
                                       fontStyle: FontStyle.italic),
                                 ),
-                                FutureBuilder(
-                                    future: checkChoice(userId, item.id),
-                                    builder: (BuildContext context,
-                                        AsyncSnapshot snapshot) {
-                                      if (snapshot.hasData) {
-                                        if (snapshot.data != '') {
-                                          return Text(
-                                            'Your choice: ${snapshot.data}',
-                                            style: TextStyle(
-                                                fontStyle: FontStyle.italic),
-                                          );
-                                        } else {
-                                          return Text('You didn\'t vote.');
-                                        }
-                                      } else {
-                                        return Center(
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              CircularProgressIndicator(),
-                                            ],
-                                          ),
-                                        );
-                                      }
-                                    }),
+                                Text(
+                                  'Your choice: ${checkChoice()}',
+                                  style: TextStyle(fontStyle: FontStyle.italic),
+                                ),
                               ]),
                       )
                     ],

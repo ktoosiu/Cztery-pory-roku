@@ -1,3 +1,4 @@
+import 'package:cztery_pory_roku/models/resolutions.dart';
 import 'package:flutter/material.dart';
 
 import 'create_resolution_form.dart';
@@ -5,8 +6,10 @@ import '../../models/user_data.dart';
 
 class CreateResolution extends StatelessWidget {
   final UserData userData;
+  final Function(Resolution) callback;
 
-  const CreateResolution(this.userData, {Key key}) : super(key: key);
+  const CreateResolution(this.userData, this.callback, {Key key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +26,8 @@ class CreateResolution extends StatelessWidget {
                           padding: const EdgeInsets.all(16.0),
                           child: Card(
                               color: Colors.lightBlue[50],
-                              child: CreateResolutionForm(userData))))))
+                              child:
+                                  CreateResolutionForm(userData, callback))))))
         ]));
   }
 }

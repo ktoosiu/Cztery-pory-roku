@@ -1,71 +1,38 @@
+import 'package:cztery_pory_roku/models/user_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../models/signatures.dart';
 import '../../api/http_data.dart';
-import '../../utils/json_to_date.dart';
 
 class ResolutionForm extends StatefulWidget {
   final resolutionId;
+  final UserData userData;
+  final Signature _signature;
 
-  const ResolutionForm({Key key, this.resolutionId}) : super(key: key);
+  const ResolutionForm(
+    this.userData,
+    this._signature, {
+    Key key,
+    this.resolutionId,
+  }) : super(key: key);
 
   @override
-  ResolutionFormState createState() => ResolutionFormState();
+  ResolutionFormState createState() => ResolutionFormState(_signature);
 }
 
 class ResolutionFormState extends State<ResolutionForm> {
   TypeOfSign selectedValue;
+
   final _resolutionFormKey = GlobalKey<FormState>();
-  int userId;
-  int newSignatureID;
+
   DateTime editDate;
   Signature signature;
-  @override
-  initState() {
-    getUserId().then((result) {
-      // If we need to rebuild the widget with the resulting data,
-      // make sure to use `setState`
-      setState(() {
-        newSignatureID = result;
-      });
-    });
 
-    super.initState();
-  }
-
-  Future<int> getUser() async {
-    final SharedPreferences user = await SharedPreferences.getInstance();
-    var temp = user.getInt('id');
-    return temp;
-  }
-
-  getUserId() async {
-    final val = await getUser();
-    getSignatureId(val);
-    userId = val;
-    return getSignatureId(val);
-  }
-
-  getSignatureId(int userId) async {
-    final val = await checkSignatureId(widget.resolutionId, userId);
-
-    if (val is int) {
-      newSignatureID = val;
-      return newSignatureID;
-    } else {
-      newSignatureID = null;
-      signature = Signature.fromJson(val);
-      setState(() {
-        selectedValue = signature.type;
-        if (val['update_date'] != null) {
-          editDate = jsonToDate(val['update_date']);
-        }
-      });
-    }
+  ResolutionFormState(this.signature) {
+    selectedValue = this.signature?.type;
   }
 
   @override
@@ -128,7 +95,7 @@ class ResolutionFormState extends State<ResolutionForm> {
                     Padding(
                         padding: const EdgeInsets.symmetric(vertical: 12.0),
                         child: Text(
-                          newSignatureID != null ? 'Send' : 'Update',
+                          "Submit",
                           style: TextStyle(fontSize: 20),
                         )),
                   ],
@@ -136,13 +103,17 @@ class ResolutionFormState extends State<ResolutionForm> {
                 onPressed: () {
                   if (selectedValue != null &&
                       _resolutionFormKey.currentState.validate()) {
-                    if (newSignatureID != null) {
+                    if (signature == null) {
                       createSignature(Signature(
-                          id: newSignatureID,
-                          date: DateTime.now(),
-                          idMember: userId,
-                          idResolution: widget.resolutionId,
-                          type: selectedValue));
+                              date: DateTime.now(),
+                              idMember: widget.userData.id,
+                              idResolution: widget.resolutionId,
+                              type: selectedValue))
+                          .then((newSignature) {
+                        setState(() {
+                          signature = newSignature;
+                        });
+                      });
                     } else {
                       updateSignature(
                         id: signature.id,
@@ -152,16 +123,9 @@ class ResolutionFormState extends State<ResolutionForm> {
 
                     Scaffold.of(context).showSnackBar(
                       SnackBar(
-                        content:
-                            Text(newSignatureID != null ? 'Sent' : 'Updated'),
+                        content: Text(signature == null ? 'Sent' : 'Updated'),
                         backgroundColor: Colors.greenAccent[400],
                       ),
-                    );
-                    setState(
-                      () {
-                        getSignatureId(userId);
-                        newSignatureID = null;
-                      },
                     );
                   } else {
                     Scaffold.of(context).showSnackBar(SnackBar(
