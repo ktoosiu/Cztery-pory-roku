@@ -1,3 +1,4 @@
+import 'package:cztery_pory_roku/models/members.dart';
 import 'package:cztery_pory_roku/models/signatures.dart';
 
 import '../../models/resolutions.dart';
@@ -32,4 +33,16 @@ class FetchUserSignaturesEvent extends ResolutionListEvent {
   final List<Signature> items;
 
   FetchUserSignaturesEvent(this.items);
+}
+
+class FetchMemberListEvent extends ResolutionListEvent {
+  final List<Member> items;
+
+  FetchMemberListEvent(this.items);
+}
+
+class AddMemberEvent extends ResolutionListEvent {
+  final Member item;
+
+  AddMemberEvent(this.item);
 }

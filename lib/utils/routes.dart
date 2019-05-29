@@ -3,4 +3,5 @@ class Routes {
   static String login = 'login';
   static String resolutions = 'resolution';
   static String createResolution = 'resolution/createResolution';
+  static String member = 'member';
 }

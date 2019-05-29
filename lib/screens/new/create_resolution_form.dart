@@ -95,7 +95,7 @@ class CreateResolutionFormState extends State<CreateResolutionForm> {
                   child: Text('Send'),
                   onPressed: () async {
                     if (_createFormKey.currentState.validate()) {
-                      await Future.delayed(Duration(seconds: 5));
+                      //await Future.delayed(Duration(seconds: 5)); //TODO: tutaj
                       final resolution = Resolution(
                           name: formController[0].text,
                           description: formController[1].text,

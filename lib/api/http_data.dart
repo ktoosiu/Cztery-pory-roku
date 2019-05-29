@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:cztery_pory_roku/models/members.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
@@ -29,6 +30,26 @@ Future<List<Resolution>> fetchResolution() async {
   } else {
     throw Exception('Failed to load resolutions');
   }
+}
+
+Future<List<Member>> fetchMembers() async {
+  var url = urlBuilder('/members');
+  final response = await http.get(url);
+
+  if (response.statusCode == 200) {
+    final parsed = json.decode(response.body).cast<Map<String, dynamic>>();
+    return parsed.map<Member>((json) => Member.fromJson(json)).toList();
+  } else {
+    throw Exception('Failed to load resolutions');
+  }
+}
+
+Future<Member> addMember(Member member) async {
+  var url = urlBuilder('/members');
+  var body = json.encode(member.toJson());
+
+  final response = await http.post(url, body: body, headers: _headers);
+  return Member.fromJson(json.decode(response.body).cast<String, dynamic>());
 }
 
 Future<bool> checkMember({String id, String firstName, String lastName}) async {
