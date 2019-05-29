@@ -79,7 +79,8 @@ class _ResolutionScreenState extends State<ResolutionScreen> {
                     ],
                   ),
                 ),
-                decoration: BoxDecoration(color: Colors.blue), //dodać usera
+                decoration: BoxDecoration(
+                    color: Colors.blue), //TODO:dodać usera do drawera
               ),
             ),
             ListTile(

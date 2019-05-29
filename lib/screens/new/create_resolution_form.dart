@@ -20,10 +20,14 @@ class CreateResolutionForm extends StatefulWidget {
 
 class CreateResolutionFormState extends State<CreateResolutionForm> {
   final _createFormKey = GlobalKey<FormState>();
-
+  bool _isButtonDisabled;
   final dateFormat = DateFormat('yyyy-MM-dd');
-
   DateTime finishDate;
+  @override
+  void initState() {
+    _isButtonDisabled = false;
+    super.initState();
+  }
 
   final formController = [
     TextEditingController(), //name
@@ -91,40 +95,54 @@ class CreateResolutionFormState extends State<CreateResolutionForm> {
             Center(
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: RaisedButton(
-                  child: Text('Send'),
-                  onPressed: () async {
-                    if (_createFormKey.currentState.validate()) {
-                      //await Future.delayed(Duration(seconds: 5)); //TODO: tutaj
-                      final resolution = Resolution(
-                          name: formController[0].text,
-                          description: formController[1].text,
-                          date: DateTime.now(),
-                          finishDate: finishDate,
-                          proposedBy:
-                              "${widget.userData.name} ${widget.userData.lastName}");
-                      createResolution(resolution).then((createdResolution) {
-                        widget.callback(createdResolution);
-                        Navigator.pop(context);
-                      }).catchError((error) {
-                        Scaffold.of(context).showSnackBar(SnackBar(
-                          content: Text("Unknown error"),
-                          backgroundColor: Colors.redAccent[100],
-                        ));
-                      });
-                    } else {
-                      Scaffold.of(context).showSnackBar(SnackBar(
-                        content: Text("Please enter value"),
-                        backgroundColor: Colors.redAccent[100],
-                      ));
-                    }
-                  },
-                ),
+                child: _buildAddButton(),
               ),
             ),
           ],
         ),
       ),
     );
+  }
+
+  Widget _buildAddButton() {
+    return new RaisedButton(
+      child: Text('Send'),
+      onPressed: () {
+        _sendData();
+      },
+    );
+  }
+
+  _sendData() {
+    if (_isButtonDisabled) {
+      return null;
+    } else {
+      if (_createFormKey.currentState.validate()) {
+        setState(() {
+          _isButtonDisabled = true;
+        });
+        //await Future.delayed(Duration(seconds: 5));
+        final resolution = Resolution(
+            name: formController[0].text,
+            description: formController[1].text,
+            date: DateTime.now(),
+            finishDate: finishDate,
+            proposedBy: "${widget.userData.name} ${widget.userData.lastName}");
+        createResolution(resolution).then((createdResolution) {
+          widget.callback(createdResolution);
+          Navigator.pop(context);
+        }).catchError((error) {
+          Scaffold.of(context).showSnackBar(SnackBar(
+            content: Text("Unknown error"),
+            backgroundColor: Colors.redAccent[100],
+          ));
+        });
+      } else {
+        Scaffold.of(context).showSnackBar(SnackBar(
+          content: Text("Please enter value"),
+          backgroundColor: Colors.redAccent[100],
+        ));
+      }
+    }
   }
 }

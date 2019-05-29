@@ -48,7 +48,8 @@ class _MemberScreenState extends State<MemberScreen> {
                     ],
                   ),
                 ),
-                decoration: BoxDecoration(color: Colors.blue), //dodać usera
+                decoration: BoxDecoration(
+                    color: Colors.blue), //TODO:dodać usera do drawera
               ),
             ),
             ListTile(
@@ -91,7 +92,6 @@ class _MemberScreenState extends State<MemberScreen> {
       body: MemberList(widget.parentBloc),
     );
   }
-  // TODO: new member added. id, first name, last name
-  //drawer widget
-//edit member?
+
+//TODO: edit member?
 }

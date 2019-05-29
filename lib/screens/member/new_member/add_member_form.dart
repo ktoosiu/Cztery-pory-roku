@@ -13,16 +13,20 @@ class AddMemberForm extends StatefulWidget {
 
 class AddMemberFormState extends State<AddMemberForm> {
   final _memberFormKey = GlobalKey<FormState>();
-
+  bool _isButtonDisabled;
   final formController = [
     TextEditingController(), //first name
     TextEditingController(), //last name
     TextEditingController(), //address
   ];
+  @override
+  void initState() {
+    _isButtonDisabled = false;
+    super.initState();
+  }
 
   @override
   void dispose() {
-    // Clean up the controller when the Widget is disposed
     for (var controller in formController) {
       controller.dispose();
     }
@@ -77,46 +81,52 @@ class AddMemberFormState extends State<AddMemberForm> {
             Center(
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: RaisedButton(
-                  child: Text('Send'), //TODO: refresh
-                  onPressed: () async {
-                    if (_memberFormKey.currentState.validate()) {
-                      //await Future.delayed(Duration(seconds: 5)); //TODO: tutaj też
-                      final member = Member(
-                          firstName: formController[0].text,
-                          lastName: formController[1].text,
-                          address: formController[2].text);
-                      addMember(member).then((createdMember) {
-                        widget.callback(createdMember);
-                        Navigator.pop(context);
-                      }).catchError((error) {
-                        Scaffold.of(context).showSnackBar(SnackBar(
-                          content: Text("Unknown error"),
-                          backgroundColor: Colors.redAccent[100],
-                        ));
-                      });
-                      // createResolution(resolution).then((createdResolution) {
-                      //   widget.callback(createdResolution);
-                      //   Navigator.pop(context);
-                      // }).catchError((error) {
-                      //   Scaffold.of(context).showSnackBar(SnackBar(
-                      //     content: Text("Unknown error"),
-                      //     backgroundColor: Colors.redAccent[100],
-                      //   ));
-                      // });
-                    } else {
-                      Scaffold.of(context).showSnackBar(SnackBar(
-                        content: Text("Please enter values"),
-                        backgroundColor: Colors.redAccent[100],
-                      ));
-                    }
-                  },
-                ),
+                child: _buildAddButton(),
               ),
             ),
           ],
         ),
       ),
     );
+  }
+
+  Widget _buildAddButton() {
+    return new RaisedButton(
+      child: Text('Send'),
+      onPressed: () {
+        _sendData();
+      },
+    );
+  }
+
+  _sendData() async {
+    if (_isButtonDisabled) {
+      return null;
+    } else {
+      if (_memberFormKey.currentState.validate()) {
+        setState(() {
+          _isButtonDisabled = true;
+        });
+        await Future.delayed(Duration(seconds: 5)); //TODO: tutaj też
+        final member = Member(
+            firstName: formController[0].text,
+            lastName: formController[1].text,
+            address: formController[2].text);
+        addMember(member).then((createdMember) {
+          widget.callback(createdMember);
+          Navigator.pop(context);
+        }).catchError((error) {
+          Scaffold.of(context).showSnackBar(SnackBar(
+            content: Text("Unknown error"),
+            backgroundColor: Colors.redAccent[100],
+          ));
+        });
+      } else {
+        Scaffold.of(context).showSnackBar(SnackBar(
+          content: Text("Please enter values"),
+          backgroundColor: Colors.redAccent[100],
+        ));
+      }
+    }
   }
 }
