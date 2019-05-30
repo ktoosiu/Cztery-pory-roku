@@ -49,8 +49,7 @@ class ResolutionListBloc {
   Sink<UpdateResolutionEvent> get updateResolutionSink =>
       _updateResolutionsEventController.sink;
 
-  final _fetchMemberEventController =
-      StreamController<FetchMemberListEvent>.broadcast();
+  final _fetchMemberEventController = StreamController<FetchMemberListEvent>();
   Sink<FetchMemberListEvent> get fetchMemberSink =>
       _fetchMemberEventController.sink;
 
@@ -63,9 +62,7 @@ class ResolutionListBloc {
     _updateResolutionsEventController.stream.listen(_onUpdateResolution);
     _fetchSignaturesEventController.stream.listen(_onFetchUserSignatures);
     _addSignatureEventController.stream.listen(_onAddSignature);
-    _fetchMemberEventController.stream
-        .asBroadcastStream()
-        .listen(_onFetchMember);
+    _fetchMemberEventController.stream.listen(_onFetchMember);
     _addMemberEventController.stream.listen(_onAddMember);
   }
 

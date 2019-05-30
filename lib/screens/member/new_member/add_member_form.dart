@@ -107,7 +107,7 @@ class AddMemberFormState extends State<AddMemberForm> {
         setState(() {
           _isButtonDisabled = true;
         });
-        await Future.delayed(Duration(seconds: 5)); //TODO: tutaj też
+        // await Future.delayed(Duration(seconds: 5));
         final member = Member(
             firstName: formController[0].text,
             lastName: formController[1].text,

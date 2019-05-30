@@ -28,8 +28,6 @@ class _ResolutionScreenState extends State<ResolutionScreen> {
         _bloc.fetchResolutionSink.add(FetchResolutionListEvent(list)));
     fetchUserSignatures(widget.userData.id).then((list) =>
         _bloc.fetchSignaturesSink.add(FetchUserSignaturesEvent(list)));
-    fetchMembers()
-        .then((list) => _bloc.fetchMemberSink.add(FetchMemberListEvent(list)));
     super.initState();
   }
 
@@ -97,11 +95,11 @@ class _ResolutionScreenState extends State<ResolutionScreen> {
               trailing: Icon(Icons.arrow_forward),
               onTap: () {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => MemberScreen(
-                              parentBloc: _bloc,
-                            )));
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MemberScreen(),
+                  ),
+                );
               },
             ),
           ],

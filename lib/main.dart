@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import './utils/routes.dart';
 import './screens/list/resolution_screen.dart';
 import './screens/login/login.dart';
-import 'screens/member/member_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -21,7 +20,7 @@ class MyApp extends StatelessWidget {
         Routes.loading: (context) => LoadingScreen(),
         Routes.login: (context) => Login(),
         Routes.resolutions: (context) => ResolutionScreen(),
-        Routes.member: (context) => MemberScreen()
+        // Routes.member: (context) => MemberScreen()
       },
     );
   }
