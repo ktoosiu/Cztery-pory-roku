@@ -110,8 +110,8 @@ class LoginFormState extends State<LoginForm> {
 
   void _navigateToResolution(UserData userData) {
     Navigator.of(context).pushReplacement(MaterialPageRoute(
-        settings: RouteSettings(name: Routes.resolutions),
-        builder: (context) => ResolutionScreen(userData: userData)));
+        settings: RouteSettings(name: Routes.resolutionGroups),
+        builder: (context) => ResolutionScreen()));
   }
 
   void _showErrorSnackbar(String errorText) {

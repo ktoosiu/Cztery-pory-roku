@@ -1,5 +1,5 @@
-import 'package:cztery_pory_roku/models/user_data.dart';
-import 'package:cztery_pory_roku/screens/list/resolution_screen.dart';
+import 'package:cztery_pory_roku/screens/resolution_group/resolution_group_screen.dart';
+import 'package:cztery_pory_roku/utils/get_user.dart';
 import 'package:cztery_pory_roku/utils/routes.dart';
 import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
@@ -74,20 +74,11 @@ class _LoadingScreenState extends State<LoadingScreen>
     );
   }
 
-  Future<UserData> getUser() async {
-    final SharedPreferences user = await SharedPreferences.getInstance();
-    var id = user.getInt('id');
-    var name = user.getString('name');
-    var lastName = user.getString('lastName');
-
-    return UserData(id, name, lastName);
-  }
-
   void _navigateToResolution() {
     getUser().then((userData) {
       Navigator.of(context).pushReplacement(MaterialPageRoute(
-          settings: RouteSettings(name: Routes.resolutions),
-          builder: (context) => ResolutionScreen(userData: userData)));
+          settings: RouteSettings(name: Routes.resolutionGroups),
+          builder: (context) => ResolutionGroupScreen()));
     });
   }
 

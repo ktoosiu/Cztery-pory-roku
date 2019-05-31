@@ -14,8 +14,8 @@ import '../../screens/list/resolution_list_item.dart';
 class ResolutionList extends StatefulWidget {
   final ResolutionListBloc parentBloc;
   final UserData userData;
-
-  const ResolutionList(this.userData, this.parentBloc, {Key key})
+  final int groupId;
+  const ResolutionList(this.userData, this.parentBloc, this.groupId, {Key key})
       : super(key: key);
 
   @override
@@ -24,7 +24,8 @@ class ResolutionList extends StatefulWidget {
 
 class ResolutionListState extends State<ResolutionList> {
   Future<void> refresh() async {
-    fetchResolution().then((list) => widget.parentBloc.fetchResolutionSink
+    fetchResolution(widget.groupId).then((list) => widget
+        .parentBloc.fetchResolutionSink
         .add(FetchResolutionListEvent(list)));
     fetchUserSignatures(widget.userData.id).then((list) => widget
         .parentBloc.fetchSignaturesSink

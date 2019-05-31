@@ -4,14 +4,14 @@ import 'package:intl/intl.dart';
 class Resolution {
   final int id;
   final String name;
-  final DateTime date;
+  final int groupId;
   final String description;
   final DateTime finishDate;
   final String proposedBy;
   Resolution(
       {this.id,
       this.name,
-      this.date,
+      this.groupId,
       this.description,
       this.finishDate,
       this.proposedBy});
@@ -20,7 +20,7 @@ class Resolution {
     return Resolution(
       id: json['id'],
       name: json['name'],
-      date: jsonToDate(json['date']),
+      groupId: json['groupId'],
       description: json['description'],
       finishDate: jsonToDate(json['finish_date']),
       proposedBy: json['proposed_by'],
@@ -29,7 +29,7 @@ class Resolution {
   Map<String, dynamic> toJson() => {
         'id': id,
         'name': name,
-        'date': DateFormat('dd/MM/yyyy').format(date),
+        'groupId': groupId,
         'description': description,
         'finish_date': DateFormat('dd/MM/yyyy').format(finishDate),
         'proposed_by': proposedBy

@@ -125,7 +125,6 @@ class CreateResolutionFormState extends State<CreateResolutionForm> {
         final resolution = Resolution(
             name: formController[0].text,
             description: formController[1].text,
-            date: DateTime.now(),
             finishDate: finishDate,
             proposedBy: "${widget.userData.name} ${widget.userData.lastName}");
         createResolution(resolution).then((createdResolution) {

@@ -1,8 +1,8 @@
 import 'package:cztery_pory_roku/screens/loading/loading_screen.dart';
+import 'package:cztery_pory_roku/screens/resolution_group/resolution_group_screen.dart';
 import 'package:flutter/material.dart';
 
 import './utils/routes.dart';
-import './screens/list/resolution_screen.dart';
 import './screens/login/login.dart';
 
 void main() => runApp(MyApp());
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       routes: {
         Routes.loading: (context) => LoadingScreen(),
         Routes.login: (context) => Login(),
-        Routes.resolutions: (context) => ResolutionScreen(),
+        Routes.resolutionGroups: (context) => ResolutionGroupScreen(),
         // Routes.member: (context) => MemberScreen()
       },
     );

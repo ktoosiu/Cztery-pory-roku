@@ -2,7 +2,6 @@ import 'package:cztery_pory_roku/models/user_data.dart';
 import 'package:cztery_pory_roku/viewModels/resolution_list_item_view_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 import '../../models/signatures.dart';
 import '../details/resolution_details.dart';
@@ -83,8 +82,8 @@ class ResolutionListItem extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Text(DateFormat('dd-MM-yyyy')
-                        .format(viewModel.resolution.date))
+                    // Text(DateFormat('dd-MM-yyyy')
+                    //     .format(viewModel.resolution.date))//TODO date z group
                   ],
                 ),
               ],

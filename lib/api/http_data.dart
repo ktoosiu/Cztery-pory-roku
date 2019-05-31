@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:cztery_pory_roku/models/members.dart';
+import 'package:cztery_pory_roku/models/resolution_group.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
@@ -20,13 +21,27 @@ String urlBuilder(String endpoint) {
   return '$_url$endpoint';
 }
 
-Future<List<Resolution>> fetchResolution() async {
-  var url = urlBuilder('/resolutions');
+Future<List<Resolution>> fetchResolution(groupId) async {
+  var url = urlBuilder('/resolutions?groupId=$groupId');
   final response = await http.get(url);
 
   if (response.statusCode == 200) {
     final parsed = json.decode(response.body).cast<Map<String, dynamic>>();
     return parsed.map<Resolution>((json) => Resolution.fromJson(json)).toList();
+  } else {
+    throw Exception('Failed to load resolutions');
+  }
+}
+
+Future<List<ResolutionGroup>> fetchResolutionGroup() async {
+  var url = urlBuilder('/resolutionGroup');
+  final response = await http.get(url);
+
+  if (response.statusCode == 200) {
+    final parsed = json.decode(response.body).cast<Map<String, dynamic>>();
+    return parsed
+        .map<ResolutionGroup>((json) => ResolutionGroup.fromJson(json))
+        .toList();
   } else {
     throw Exception('Failed to load resolutions');
   }
