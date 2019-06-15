@@ -13,20 +13,21 @@ class LoadingScreen extends StatefulWidget {
 class _LoadingScreenState extends State<LoadingScreen>
     with SingleTickerProviderStateMixin {
   AnimationController _controller;
-
+  Animation<double> _animation;
   @override
   void initState() {
     super.initState();
 
-    _controller =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 750))
-          ..addStatusListener((status) {
-            if (status == AnimationStatus.completed) {
-              _controller.reverse();
-            } else if (status == AnimationStatus.dismissed) {
-              _controller.forward();
-            }
-          });
+    _controller = AnimationController(
+        vsync: this, duration: Duration(milliseconds: 1000));
+    _animation = CurvedAnimation(parent: _controller, curve: Curves.easeIn)
+      ..addStatusListener((status) {
+        if (status == AnimationStatus.completed) {
+          _controller.reverse();
+        } else if (status == AnimationStatus.dismissed) {
+          _controller.forward();
+        }
+      });
 
     _controller.forward();
     _checkUser();
@@ -56,14 +57,13 @@ class _LoadingScreenState extends State<LoadingScreen>
                       mainAxisAlignment: MainAxisAlignment.center,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        ScaleTransition(
-                          scale: Tween<double>(begin: 0.8, end: 1.1)
-                              .animate(_controller),
+                        FadeTransition(
+                          opacity: _animation,
                           child: Image.asset(
                             'assets/logo.png',
                             height: 150,
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),

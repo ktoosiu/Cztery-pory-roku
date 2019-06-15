@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:cztery_pory_roku/models/resolution_group.dart';
 
 abstract class ResolutionGroupEvent {}
