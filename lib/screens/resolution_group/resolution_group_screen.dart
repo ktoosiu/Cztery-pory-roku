@@ -1,3 +1,5 @@
+import 'package:cztery_pory_roku/bloc/groups/resolution_group_bloc.dart';
+import 'package:cztery_pory_roku/bloc/groups/resolution_group_event.dart';
 import 'package:cztery_pory_roku/screens/common/app_drawer.dart';
 import 'package:cztery_pory_roku/screens/resolution_group/resolution_group_list.dart';
 import 'package:cztery_pory_roku/utils/routes.dart';
@@ -6,8 +8,6 @@ import 'package:flutter/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'add_group/add_resolution_group.dart';
-import 'resolution_group_bloc.dart';
-import 'resolution_group_event.dart';
 
 class ResolutionGroupScreen extends StatefulWidget {
   @override
@@ -68,11 +68,8 @@ class ResolutionGroupScreenState extends State<ResolutionGroupScreen> {
     user.remove('id');
     Navigator.pushReplacementNamed(context, Routes.login);
   }
-
-  //TODO:
-
+  //Done:
   //refactoring: foldery, rename itp
-  //done
   //bloc members do osobnego
   //animacja na fade transition
   //dodawanie grupy => przechodzi od razu do grupy

@@ -1,10 +1,11 @@
 import 'dart:async';
 
 import 'package:cztery_pory_roku/models/signatures.dart';
-import 'package:cztery_pory_roku/screens/list/resolution_list_events.dart';
+
 import 'package:cztery_pory_roku/viewModels/resolution_list_item_view_model.dart';
 
 import '../../models/resolutions.dart';
+import 'resolution_list_events.dart';
 
 class ResolutionListBloc {
   List<Resolution> _resolutions = [];

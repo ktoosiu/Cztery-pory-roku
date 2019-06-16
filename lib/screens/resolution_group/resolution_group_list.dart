@@ -1,7 +1,8 @@
 import 'package:cztery_pory_roku/api/http_data.dart';
+import 'package:cztery_pory_roku/bloc/groups/resolution_group_bloc.dart';
+import 'package:cztery_pory_roku/bloc/groups/resolution_group_event.dart';
 import 'package:cztery_pory_roku/models/resolution_group.dart';
-import 'package:cztery_pory_roku/screens/resolution_group/resolution_group_bloc.dart';
-import 'package:cztery_pory_roku/screens/resolution_group/resolution_group_event.dart';
+
 import 'package:cztery_pory_roku/screens/resolution_group/resolution_group_list_item.dart';
 import 'package:flutter/material.dart';
 

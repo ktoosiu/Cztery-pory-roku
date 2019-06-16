@@ -1,11 +1,10 @@
+import 'package:cztery_pory_roku/api/http_data.dart';
+import 'package:cztery_pory_roku/models/resolutions.dart';
 import 'package:cztery_pory_roku/models/user_data.dart';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
-
-import '../../api/http_data.dart';
-import '../../models/resolutions.dart';
 
 class CreateResolutionForm extends StatefulWidget {
   final UserData userData;

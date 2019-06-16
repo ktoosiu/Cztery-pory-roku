@@ -1,15 +1,15 @@
 import 'dart:async';
 
 import 'package:cztery_pory_roku/api/http_data.dart';
+import 'package:cztery_pory_roku/bloc/resolutions/resolution_bloc.dart';
+import 'package:cztery_pory_roku/bloc/resolutions/resolution_list_events.dart';
 import 'package:cztery_pory_roku/models/user_data.dart';
-import 'package:cztery_pory_roku/screens/list/resolution_bloc.dart';
-import 'package:cztery_pory_roku/screens/list/resolution_list_events.dart';
+import 'package:cztery_pory_roku/screens/resolution_list/resolution_list_item.dart';
+
 import 'package:cztery_pory_roku/viewModels/resolution_list_item_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
-
-import '../../screens/list/resolution_list_item.dart';
 
 class ResolutionList extends StatefulWidget {
   final ResolutionListBloc parentBloc;

@@ -1,6 +1,7 @@
 import 'package:cztery_pory_roku/api/http_data.dart';
 import 'package:cztery_pory_roku/models/resolution_group.dart';
-import 'package:cztery_pory_roku/screens/list/resolution_screen.dart';
+import 'package:cztery_pory_roku/screens/resolution_list/resolution_screen.dart';
+
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';

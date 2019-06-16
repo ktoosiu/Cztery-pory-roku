@@ -1,12 +1,13 @@
 import 'package:cztery_pory_roku/api/http_data.dart';
+import 'package:cztery_pory_roku/bloc/resolutions/resolution_bloc.dart';
+import 'package:cztery_pory_roku/bloc/resolutions/resolution_list_events.dart';
 import 'package:cztery_pory_roku/models/user_data.dart';
-import 'package:cztery_pory_roku/screens/list/resolution_bloc.dart';
-import 'package:cztery_pory_roku/screens/list/resolution_list_events.dart';
-import 'package:cztery_pory_roku/screens/new/create_resolution.dart';
+
 import 'package:cztery_pory_roku/utils/get_user.dart';
 import 'package:flutter/material.dart';
 
-import '../../screens/list/resolution_list.dart';
+import 'new_resolution/create_resolution.dart';
+import 'resolution_list.dart';
 
 class ResolutionScreen extends StatefulWidget {
   final groupId;

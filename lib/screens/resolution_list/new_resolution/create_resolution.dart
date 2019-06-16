@@ -1,8 +1,8 @@
 import 'package:cztery_pory_roku/models/resolutions.dart';
+import 'package:cztery_pory_roku/models/user_data.dart';
 import 'package:flutter/material.dart';
 
 import 'create_resolution_form.dart';
-import '../../models/user_data.dart';
 
 class CreateResolution extends StatelessWidget {
   final UserData userData;

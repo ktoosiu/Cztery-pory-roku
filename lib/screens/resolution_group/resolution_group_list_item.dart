@@ -1,5 +1,5 @@
 import 'package:cztery_pory_roku/models/resolution_group.dart';
-import 'package:cztery_pory_roku/screens/list/resolution_screen.dart';
+import 'package:cztery_pory_roku/screens/resolution_list/resolution_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';

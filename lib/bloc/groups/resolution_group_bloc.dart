@@ -1,7 +1,8 @@
 import 'dart:async';
 
 import 'package:cztery_pory_roku/models/resolution_group.dart';
-import 'package:cztery_pory_roku/screens/resolution_group/resolution_group_event.dart';
+
+import 'resolution_group_event.dart';
 
 class ResolutionGroupBloc {
   List<ResolutionGroup> _resolutionGroups;
