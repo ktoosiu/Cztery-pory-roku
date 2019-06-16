@@ -13,9 +13,12 @@ import '../../screens/list/resolution_list_item.dart';
 
 class ResolutionList extends StatefulWidget {
   final ResolutionListBloc parentBloc;
+  final groupDate;
   final UserData userData;
   final int groupId;
-  const ResolutionList(this.userData, this.parentBloc, this.groupId, {Key key})
+  const ResolutionList(
+      this.userData, this.groupDate, this.parentBloc, this.groupId,
+      {Key key})
       : super(key: key);
 
   @override
@@ -48,7 +51,12 @@ class ResolutionListState extends State<ResolutionList> {
                     itemCount: snapshot.data.length,
                     itemBuilder: (context, i) {
                       return ResolutionListItem(
-                        viewModel: snapshot.data[i],
+                        // viewModel: snapshot.data[i],
+                        viewModel: ResolutionListItemViewModel(
+                            snapshot.data[i].resolution,
+                            snapshot.data[i].signature,
+                            date: widget.groupDate),
+
                         userData: widget.userData,
                         callback: (signature) =>
                             widget.parentBloc.addSignatureSink.add(

@@ -17,6 +17,7 @@ class ResolutionGroupListItem extends StatelessWidget {
             MaterialPageRoute(
                 builder: (context) => ResolutionScreen(
                       groupId: item.id,
+                      groupDate: item.date,
                     )));
       },
       child: Padding(

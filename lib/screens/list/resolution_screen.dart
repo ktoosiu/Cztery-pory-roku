@@ -10,8 +10,9 @@ import '../../screens/list/resolution_list.dart';
 
 class ResolutionScreen extends StatefulWidget {
   final groupId;
-
-  const ResolutionScreen({Key key, this.groupId}) : super(key: key);
+  final groupDate;
+  const ResolutionScreen({Key key, this.groupId, this.groupDate})
+      : super(key: key);
 
   @override
   _ResolutionScreenState createState() => _ResolutionScreenState();
@@ -63,7 +64,7 @@ class _ResolutionScreenState extends State<ResolutionScreen> {
         icon: Icon(Icons.add),
         label: Text('Add'),
       ),
-      body: ResolutionList(userData, _bloc, widget.groupId),
+      body: ResolutionList(userData, widget.groupDate, _bloc, widget.groupId),
     );
   }
 }
