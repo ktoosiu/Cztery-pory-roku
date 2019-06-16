@@ -1,6 +1,10 @@
 {
   "resolutionGroup": [
-    { "id": 1, "date": "10/03/2019", "name": "głosowanie nr 1" }
+    {
+      "id": 1,
+      "date": "10/03/2019",
+      "name": "głosowanie nr 1"
+    }
   ],
   "resolutions": [
     {

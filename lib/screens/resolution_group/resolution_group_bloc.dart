@@ -8,9 +8,9 @@ class ResolutionGroupBloc {
   final _resolutionGroupStreamController =
       StreamController<List<ResolutionGroup>>();
 
-  StreamSink<List<ResolutionGroup>> get resolutionSink =>
+  StreamSink<List<ResolutionGroup>> get resolutionGroupSink =>
       _resolutionGroupStreamController.sink;
-  Stream<List<ResolutionGroup>> get resolutionsStream =>
+  Stream<List<ResolutionGroup>> get resolutionGroupStream =>
       _resolutionGroupStreamController.stream;
 
   final _fetchResolutionGroupsEvent =
@@ -18,17 +18,28 @@ class ResolutionGroupBloc {
   Sink<FetchResolutionGroupsEvent> get fetchResolutionGroupsSink =>
       _fetchResolutionGroupsEvent.sink;
 
+  final _addResolutionGroupEventController =
+      StreamController<AddResolutionGroupEvent>();
+  Sink<AddResolutionGroupEvent> get addResolutionGroupSink =>
+      _addResolutionGroupEventController.sink;
+
   ResolutionGroupBloc() {
     _fetchResolutionGroupsEvent.stream.listen(onFetchResolutionGroup);
+    _addResolutionGroupEventController.stream.listen(_onAddResolutionGroup);
+  }
+  _onAddResolutionGroup(AddResolutionGroupEvent event) {
+    _resolutionGroups.add(event.item);
+    resolutionGroupSink.add(_resolutionGroups);
   }
 
   void onFetchResolutionGroup(FetchResolutionGroupsEvent event) {
     _resolutionGroups = event.items;
-    resolutionSink.add(_resolutionGroups);
+    resolutionGroupSink.add(_resolutionGroups);
   }
 
   dispose() {
     _resolutionGroupStreamController.close();
     _fetchResolutionGroupsEvent.close();
+    _addResolutionGroupEventController.close();
   }
 }

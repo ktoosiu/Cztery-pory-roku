@@ -6,15 +6,18 @@ import 'package:cztery_pory_roku/screens/resolution_group/resolution_group_list_
 import 'package:flutter/material.dart';
 
 class ResolutionGroupList extends StatefulWidget {
+  final ResolutionGroupBloc parentBloc;
+
+  const ResolutionGroupList(this.parentBloc, {Key key}) : super(key: key);
   @override
   ResolutionGroupListState createState() => ResolutionGroupListState();
 }
 
 class ResolutionGroupListState extends State<ResolutionGroupList> {
-  ResolutionGroupBloc _bloc = ResolutionGroupBloc();
   Future<void> refresh() async {
-    fetchResolutionGroup().then((list) =>
-        _bloc.fetchResolutionGroupsSink.add(FetchResolutionGroupsEvent(list)));
+    fetchResolutionGroup().then((list) => widget
+        .parentBloc.fetchResolutionGroupsSink
+        .add(FetchResolutionGroupsEvent(list)));
   }
 
   @override
@@ -29,7 +32,7 @@ class ResolutionGroupListState extends State<ResolutionGroupList> {
       color: Colors.lightBlue[100],
       child: RefreshIndicator(
         child: StreamBuilder<List<ResolutionGroup>>(
-            stream: _bloc.resolutionsStream,
+            stream: widget.parentBloc.resolutionGroupStream,
             initialData: [],
             builder: (BuildContext context,
                 AsyncSnapshot<List<ResolutionGroup>> snapshot) {

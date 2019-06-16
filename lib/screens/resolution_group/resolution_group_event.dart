@@ -6,3 +6,9 @@ class FetchResolutionGroupsEvent extends ResolutionGroupEvent {
   final List<ResolutionGroup> items;
   FetchResolutionGroupsEvent(this.items);
 }
+
+class AddResolutionGroupEvent extends ResolutionGroupEvent {
+  final ResolutionGroup item;
+
+  AddResolutionGroupEvent(this.item);
+}

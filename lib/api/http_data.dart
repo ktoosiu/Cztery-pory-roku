@@ -122,3 +122,12 @@ Future<Resolution> createResolution(Resolution resolution) async {
   return Resolution.fromJson(
       json.decode(response.body).cast<String, dynamic>());
 }
+
+Future<ResolutionGroup> addResolutionGroup(ResolutionGroup group) async {
+  var url = urlBuilder('/resolutionGroup');
+  var body = json.encode(group.toJson());
+
+  final response = await http.post(url, body: body, headers: _headers);
+  return ResolutionGroup.fromJson(
+      json.decode(response.body).cast<String, dynamic>());
+}

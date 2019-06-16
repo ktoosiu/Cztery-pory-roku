@@ -1,5 +1,6 @@
 import 'package:cztery_pory_roku/models/user_data.dart';
 import 'package:cztery_pory_roku/screens/list/resolution_screen.dart';
+import 'package:cztery_pory_roku/screens/resolution_group/resolution_group_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -111,7 +112,7 @@ class LoginFormState extends State<LoginForm> {
   void _navigateToResolution(UserData userData) {
     Navigator.of(context).pushReplacement(MaterialPageRoute(
         settings: RouteSettings(name: Routes.resolutionGroups),
-        builder: (context) => ResolutionScreen()));
+        builder: (context) => ResolutionGroupScreen()));
   }
 
   void _showErrorSnackbar(String errorText) {
