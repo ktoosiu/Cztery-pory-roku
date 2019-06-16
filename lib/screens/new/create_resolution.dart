@@ -6,9 +6,10 @@ import '../../models/user_data.dart';
 
 class CreateResolution extends StatelessWidget {
   final UserData userData;
+  final groupId;
   final Function(Resolution) callback;
 
-  const CreateResolution(this.userData, this.callback, {Key key})
+  const CreateResolution(this.userData, this.groupId, this.callback, {Key key})
       : super(key: key);
 
   @override
@@ -26,7 +27,7 @@ class CreateResolution extends StatelessWidget {
                 padding: const EdgeInsets.all(16.0),
                 child: Card(
                   color: Colors.lightBlue[50],
-                  child: CreateResolutionForm(userData, callback),
+                  child: CreateResolutionForm(userData, groupId, callback),
                 ),
               ),
             ),

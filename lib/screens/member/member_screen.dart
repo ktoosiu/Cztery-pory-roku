@@ -9,9 +9,6 @@ import 'package:flutter/widgets.dart';
 import 'new_member/add_member.dart';
 
 class MemberScreen extends StatefulWidget {
-  //final ResolutionListBloc parentBloc;
-
-  // const MemberScreen({Key key, this.parentBloc}) : super(key: key);
   const MemberScreen({Key key}) : super(key: key);
 
   @override

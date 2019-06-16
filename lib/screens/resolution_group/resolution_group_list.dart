@@ -42,14 +42,6 @@ class ResolutionGroupListState extends State<ResolutionGroupList> {
                     itemCount: snapshot.data.length,
                     itemBuilder: (context, i) {
                       return ResolutionGroupListItem(snapshot.data[i]);
-                      // return ResolutionListItem(
-                      //   viewModel: snapshot.data[i],
-                      //   userData: widget.userData,
-                      //   callback: (signature) =>
-                      //       widget.parentBloc.addSignatureSink.add(
-                      //         AddUpdateSignatureEvent(signature),
-                      //       ),
-                      // );
                     });
               } else {
                 return Center(

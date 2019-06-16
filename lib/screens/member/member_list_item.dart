@@ -24,5 +24,4 @@ class MemberListItem extends StatelessWidget {
       ),
     );
   }
-  //todo: jak 2 razy odpalę members to wypierdala
 }

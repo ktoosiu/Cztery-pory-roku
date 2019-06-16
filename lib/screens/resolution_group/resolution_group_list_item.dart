@@ -18,16 +18,6 @@ class ResolutionGroupListItem extends StatelessWidget {
                 builder: (context) => ResolutionScreen(
                       groupId: item.id,
                     )));
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(
-        //     builder: (context) => ResolutionDetails(
-        //           item: viewModel,
-        //           userData: userData,
-        //           callback: callback,
-        //         ),
-        //   ),
-        // );
       },
       child: Padding(
         padding: const EdgeInsets.only(bottom: 8),

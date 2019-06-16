@@ -1,4 +1,3 @@
-import 'package:cztery_pory_roku/api/http_data.dart';
 import 'package:cztery_pory_roku/screens/common/app_drawer.dart';
 import 'package:cztery_pory_roku/screens/resolution_group/resolution_group_list.dart';
 import 'package:cztery_pory_roku/utils/routes.dart';
@@ -70,9 +69,11 @@ class ResolutionGroupScreenState extends State<ResolutionGroupScreen> {
     Navigator.pushReplacementNamed(context, Routes.login);
   }
 
-  //TODO:  dodawanie grupy => przechodzi od razu do grupy
+  //TODO:
   //dodawanie od razu do grupy
+  //usunąć komentarze
   //bloc edit z members
   //refactoring: foldery, rename itp
-  //doneanimacja na fade transition
+  //done animacja na fade transition
+  //dodawanie grupy => przechodzi od razu do grupy
 }

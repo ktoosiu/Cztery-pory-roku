@@ -83,7 +83,7 @@ class ResolutionListItem extends StatelessWidget {
                       ),
                     ),
                     // Text(DateFormat('dd-MM-yyyy')
-                    //     .format(viewModel.resolution.date))//TODO date z group
+                    //     .format(viewModel.resolution.date))//TODO date z group brać
                   ],
                 ),
               ],

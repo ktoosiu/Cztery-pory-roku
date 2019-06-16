@@ -9,9 +9,11 @@ import '../../models/resolutions.dart';
 
 class CreateResolutionForm extends StatefulWidget {
   final UserData userData;
+  final groupId;
   final Function(Resolution) callback;
 
-  const CreateResolutionForm(this.userData, this.callback, {Key key})
+  const CreateResolutionForm(this.userData, this.groupId, this.callback,
+      {Key key})
       : super(key: key);
 
   @override
@@ -126,6 +128,7 @@ class CreateResolutionFormState extends State<CreateResolutionForm> {
             name: formController[0].text,
             description: formController[1].text,
             finishDate: finishDate,
+            groupId: widget.groupId,
             proposedBy: "${widget.userData.name} ${widget.userData.lastName}");
         createResolution(resolution).then((createdResolution) {
           widget.callback(createdResolution);

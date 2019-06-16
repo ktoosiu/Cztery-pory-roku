@@ -52,6 +52,7 @@ class _ResolutionScreenState extends State<ResolutionScreen> {
               fullscreenDialog: true,
               builder: (context) => CreateResolution(
                     userData,
+                    widget.groupId,
                     (newResolution) => _bloc.addResolutionSink.add(
                           AddResolutionEvent(newResolution),
                         ),
