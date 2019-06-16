@@ -70,10 +70,12 @@ class ResolutionGroupScreenState extends State<ResolutionGroupScreen> {
   }
 
   //TODO:
-  //dodawanie od razu do grupy
-  //usunąć komentarze
-  //bloc edit z members
+
   //refactoring: foldery, rename itp
-  //done animacja na fade transition
+  //done
+  //bloc members do osobnego
+  //animacja na fade transition
   //dodawanie grupy => przechodzi od razu do grupy
+  //dodawanie od razu do grupy
+
 }

@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:cztery_pory_roku/models/members.dart';
 import 'package:cztery_pory_roku/models/signatures.dart';
 import 'package:cztery_pory_roku/screens/list/resolution_list_events.dart';
 import 'package:cztery_pory_roku/viewModels/resolution_list_item_view_model.dart';
@@ -10,7 +9,6 @@ import '../../models/resolutions.dart';
 class ResolutionListBloc {
   List<Resolution> _resolutions = [];
   List<Signature> _signatures = [];
-  List<Member> _members = [];
 
   final _resolutionsStreamController =
       StreamController<List<ResolutionListItemViewModel>>();
@@ -19,10 +17,6 @@ class ResolutionListBloc {
       _resolutionsStreamController.sink;
   Stream<List<ResolutionListItemViewModel>> get resolutionsStream =>
       _resolutionsStreamController.stream;
-
-  final _membersStreamController = StreamController<List<Member>>();
-  StreamSink<List<Member>> get memberSink => _membersStreamController.sink;
-  Stream<List<Member>> get membersStream => _membersStreamController.stream;
 
   //Events
   final _fetchSignaturesEventController =
@@ -49,21 +43,12 @@ class ResolutionListBloc {
   Sink<UpdateResolutionEvent> get updateResolutionSink =>
       _updateResolutionsEventController.sink;
 
-  final _fetchMemberEventController = StreamController<FetchMemberListEvent>();
-  Sink<FetchMemberListEvent> get fetchMemberSink =>
-      _fetchMemberEventController.sink;
-
-  final _addMemberEventController = StreamController<AddMemberEvent>();
-  Sink<AddMemberEvent> get addMemberSink => _addMemberEventController.sink;
-
   ResolutionListBloc() {
     _fetchResolutionsEventController.stream.listen(_onFetchResolutions);
     _addResolutionsEventController.stream.listen(_onAddResolution);
     _updateResolutionsEventController.stream.listen(_onUpdateResolution);
     _fetchSignaturesEventController.stream.listen(_onFetchUserSignatures);
     _addSignatureEventController.stream.listen(_onAddSignature);
-    _fetchMemberEventController.stream.listen(_onFetchMember);
-    _addMemberEventController.stream.listen(_onAddMember);
   }
 
   _onFetchUserSignatures(FetchUserSignaturesEvent event) {
@@ -109,22 +94,6 @@ class ResolutionListBloc {
     }
   }
 
-  _onFetchMember(FetchMemberListEvent event) {
-    _members = event.items;
-    _processMembersStreamData();
-  }
-
-  _onAddMember(AddMemberEvent event) {
-    final index = _members.indexWhere((member) => member.id == event.item.id);
-
-    if (index != -1) {
-      _members[index] = event.item;
-    } else {
-      _members.add(event.item);
-    }
-    _processMembersStreamData();
-  }
-
   void _processResolutionsStreamData() {
     List<ResolutionListItemViewModel> processedList = [];
     _resolutions.forEach((resolution) {
@@ -136,10 +105,6 @@ class ResolutionListBloc {
     resolutionSink.add(processedList);
   }
 
-  void _processMembersStreamData() {
-    memberSink.add(_members);
-  }
-
   dispose() {
     _resolutionsStreamController.close();
     _fetchResolutionsEventController.close();
@@ -147,8 +112,5 @@ class ResolutionListBloc {
     _updateResolutionsEventController.close();
     _fetchSignaturesEventController.close();
     _addSignatureEventController.close();
-    _addMemberEventController.close();
-    _fetchMemberEventController.close();
-    _membersStreamController.close();
   }
 }

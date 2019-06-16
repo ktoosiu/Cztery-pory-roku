@@ -1,7 +1,7 @@
 import 'package:cztery_pory_roku/api/http_data.dart';
+import 'package:cztery_pory_roku/bloc/members/members_bloc.dart';
+import 'package:cztery_pory_roku/bloc/members/members_events.dart';
 import 'package:cztery_pory_roku/screens/common/app_drawer.dart';
-import 'package:cztery_pory_roku/screens/list/resolution_bloc.dart';
-import 'package:cztery_pory_roku/screens/list/resolution_list_events.dart';
 import 'package:cztery_pory_roku/screens/member/member_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -16,7 +16,7 @@ class MemberScreen extends StatefulWidget {
 }
 
 class _MemberScreenState extends State<MemberScreen> {
-  ResolutionListBloc _bloc = ResolutionListBloc();
+  MembersBloc _bloc = MembersBloc();
   @override
   initState() {
     fetchMembers()
