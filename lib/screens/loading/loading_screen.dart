@@ -1,3 +1,5 @@
+import 'package:cztery_pory_roku/app_container/app_container.dart';
+import 'package:cztery_pory_roku/models/app_state.dart';
 import 'package:cztery_pory_roku/screens/resolution_group/resolution_group_screen.dart';
 import 'package:cztery_pory_roku/utils/get_user.dart';
 import 'package:cztery_pory_roku/utils/routes.dart';
@@ -74,11 +76,12 @@ class _LoadingScreenState extends State<LoadingScreen>
     );
   }
 
-  void _navigateToResolution() {
+  void _navigateToResolutionGroup() {
     getUser().then((userData) {
       Navigator.of(context).pushReplacement(MaterialPageRoute(
           settings: RouteSettings(name: Routes.resolutionGroups),
-          builder: (context) => ResolutionGroupScreen()));
+          builder: (context) => AppContainer(
+              state: AppState(userData), child: ResolutionGroupScreen())));
     });
   }
 
@@ -91,9 +94,14 @@ class _LoadingScreenState extends State<LoadingScreen>
     final SharedPreferences user = await SharedPreferences.getInstance();
     var savedId = user.getInt('id');
     if (savedId != null) {
-      _navigateToResolution();
+      _navigateToResolutionGroup();
     } else {
       _navigateToLogin();
     }
   }
 }
+
+//TODO role userów
+//usuwanie userów
+//azure
+//apk

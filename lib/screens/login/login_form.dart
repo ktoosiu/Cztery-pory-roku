@@ -1,3 +1,5 @@
+import 'package:cztery_pory_roku/app_container/app_container.dart';
+import 'package:cztery_pory_roku/models/app_state.dart';
 import 'package:cztery_pory_roku/models/user_data.dart';
 import 'package:cztery_pory_roku/screens/resolution_group/resolution_group_screen.dart';
 import 'package:flutter/material.dart';
@@ -95,7 +97,7 @@ class LoginFormState extends State<LoginForm> {
 
     if (await checkMember(id: id, firstName: firstName, lastName: lastName)) {
       _setUserData(id, firstName, lastName);
-      _navigateToResolution(UserData(int.parse(id), firstName, lastName));
+      _navigateToResolutionGroup(UserData(int.parse(id), firstName, lastName));
     } else {
       _showErrorSnackbar('User $id $firstName $lastName doesn\'t exist!');
     }
@@ -108,10 +110,11 @@ class LoginFormState extends State<LoginForm> {
     preferences.setString('lastName', lastname);
   }
 
-  void _navigateToResolution(UserData userData) {
+  void _navigateToResolutionGroup(UserData userData) {
     Navigator.of(context).pushReplacement(MaterialPageRoute(
         settings: RouteSettings(name: Routes.resolutionGroups),
-        builder: (context) => ResolutionGroupScreen()));
+        builder: (context) => AppContainer(
+            state: AppState(userData), child: ResolutionGroupScreen())));
   }
 
   void _showErrorSnackbar(String errorText) {

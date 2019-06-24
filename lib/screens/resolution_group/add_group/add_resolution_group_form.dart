@@ -1,6 +1,5 @@
 import 'package:cztery_pory_roku/api/http_data.dart';
 import 'package:cztery_pory_roku/models/resolution_group.dart';
-import 'package:cztery_pory_roku/screens/resolution_list/resolution_screen.dart';
 
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
@@ -105,15 +104,15 @@ class AddResolutionGroupState extends State<AddResolutionGroupForm> {
 
           Navigator.pop(context);
 
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              fullscreenDialog: true,
-              builder: (context) => ResolutionScreen(
-                    groupId: createdGroup.id,
-                  ),
-            ),
-          );
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(
+          //     fullscreenDialog: true,
+          //     builder: (context) => ResolutionScreen(
+          //           groupId: createdGroup.id,
+          //         ),
+          //   ),
+          // );
         }).catchError((error) {
           Scaffold.of(context).showSnackBar(SnackBar(
             content: Text("Unknown error"),

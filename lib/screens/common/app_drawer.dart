@@ -1,3 +1,5 @@
+import 'package:cztery_pory_roku/app_container/app_container.dart';
+import 'package:cztery_pory_roku/models/app_state.dart';
 import 'package:cztery_pory_roku/screens/member/member_screen.dart';
 import 'package:cztery_pory_roku/screens/resolution_group/resolution_group_screen.dart';
 import 'package:cztery_pory_roku/utils/get_user.dart';
@@ -13,7 +15,8 @@ class AppDrawer extends StatelessWidget {
     getUser().then((userData) {
       Navigator.of(context).pushReplacement(MaterialPageRoute(
           settings: RouteSettings(name: Routes.resolutionGroups),
-          builder: (context) => ResolutionGroupScreen()));
+          builder: (context) => AppContainer(
+              state: AppState(userData), child: ResolutionGroupScreen())));
     });
   }
 

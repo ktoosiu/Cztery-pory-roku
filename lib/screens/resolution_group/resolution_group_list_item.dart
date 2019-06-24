@@ -1,3 +1,4 @@
+import 'package:cztery_pory_roku/app_container/app_container.dart';
 import 'package:cztery_pory_roku/models/resolution_group.dart';
 import 'package:cztery_pory_roku/screens/resolution_list/resolution_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,6 +9,7 @@ class ResolutionGroupListItem extends StatelessWidget {
   final ResolutionGroup item;
 
   const ResolutionGroupListItem(this.item, {Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -15,10 +17,10 @@ class ResolutionGroupListItem extends StatelessWidget {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => ResolutionScreen(
-                      groupId: item.id,
-                      groupDate: item.date,
-                    )));
+                builder: (itemContext) => ResolutionScreen(
+                    groupId: item.id,
+                    groupDate: item.date,
+                    userData: AppContainer.of(context).state.userData)));
       },
       child: Padding(
         padding: const EdgeInsets.only(bottom: 8),
@@ -51,6 +53,7 @@ class ResolutionGroupListItem extends StatelessWidget {
                     item.name,
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
+                    style: TextStyle(fontSize: 20),
                   ),
                 ),
               ],

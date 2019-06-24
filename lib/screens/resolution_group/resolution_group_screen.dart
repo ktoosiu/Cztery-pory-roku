@@ -16,16 +16,11 @@ class ResolutionGroupScreen extends StatefulWidget {
 
 class ResolutionGroupScreenState extends State<ResolutionGroupScreen> {
   ResolutionGroupBloc _bloc = ResolutionGroupBloc();
-  // Future<void> refresh() async {
-  //   fetchResolutionGroup().then((list) =>
-  //       _bloc.fetchResolutionGroupsSink.add(FetchResolutionGroupsEvent(list)));
-  // }
 
-  // @override
-  // void initState() {
-  //   refresh();
-  //   super.initState();
-  // }
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
