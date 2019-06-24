@@ -32,6 +32,14 @@ Future<List<Resolution>> fetchResolution(groupId) async {
   }
 }
 
+Future deleteMember(memberId) async {
+  if (memberId != 1) {
+    var url = urlBuilder('/members/$memberId');
+
+    await http.delete(url, headers: _headers);
+  }
+}
+
 Future<List<ResolutionGroup>> fetchResolutionGroup() async {
   var url = urlBuilder('/ResolutionGroups');
   final response = await http.get(url);

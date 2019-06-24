@@ -38,7 +38,10 @@ class MemberListState extends State<MemberList> {
                 padding: const EdgeInsets.all(16),
                 itemCount: snapshot.data.length,
                 itemBuilder: (context, i) {
-                  return MemberListItem(snapshot.data[i]);
+                  return MemberListItem(
+                    snapshot.data[i],
+                    callback: () => {refresh()},
+                  );
                 },
               );
             } else {
