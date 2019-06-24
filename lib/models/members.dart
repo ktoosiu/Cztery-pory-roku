@@ -8,15 +8,15 @@ class Member {
   factory Member.fromJson(Map<String, dynamic> json) {
     return Member(
       id: json['id'],
-      firstName: json['first_name'],
-      lastName: json['last_name'],
+      firstName: json['firstName'],
+      lastName: json['lastName'],
       address: json['address'],
     );
   }
   Map<String, dynamic> toJson() => {
         'id': id,
-        'first_name': firstName,
-        'last_name': lastName,
+        'firstName': firstName,
+        'lastName': lastName,
         'address': address
       };
 }

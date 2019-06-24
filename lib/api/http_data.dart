@@ -10,7 +10,7 @@ import 'package:meta/meta.dart';
 import '../models/signatures.dart';
 import '../models/resolutions.dart';
 
-const _url = 'http://10.0.2.2:3000';
+const _url = 'http://resolution.azurewebsites.net/api';
 
 Map<String, String> _headers = {
   'Content-type': 'application/json',
@@ -34,7 +34,7 @@ Future<List<Resolution>> fetchResolution(groupId) async {
 }
 
 Future<List<ResolutionGroup>> fetchResolutionGroup() async {
-  var url = urlBuilder('/resolutionGroup');
+  var url = urlBuilder('/ResolutionGroups');
   final response = await http.get(url);
 
   if (response.statusCode == 200) {
@@ -74,8 +74,7 @@ Future<bool> checkMember({String id, String firstName, String lastName}) async {
   if (response.statusCode == 200) {
     // If server returns an OK response, parse the JSON
     final parsed = json.decode(response.body);
-
-    if (parsed["first_name"] == firstName && parsed["last_name"] == lastName) {
+    if (parsed["firstName"] == firstName && parsed["lastName"] == lastName) {
       return Future<bool>.value(true);
     }
   }
@@ -124,7 +123,7 @@ Future<Resolution> createResolution(Resolution resolution) async {
 }
 
 Future<ResolutionGroup> addResolutionGroup(ResolutionGroup group) async {
-  var url = urlBuilder('/resolutionGroup');
+  var url = urlBuilder('/ResolutionGroups');
   var body = json.encode(group.toJson());
 
   final response = await http.post(url, body: body, headers: _headers);

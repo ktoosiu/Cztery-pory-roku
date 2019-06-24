@@ -22,8 +22,8 @@ class Resolution {
       name: json['name'],
       groupId: json['groupId'],
       description: json['description'],
-      finishDate: jsonToDate(json['finish_date']),
-      proposedBy: json['proposed_by'],
+      finishDate: jsonToDate(json['finishDate']),
+      proposedBy: json['proposedBy'],
     );
   }
   Map<String, dynamic> toJson() => {
@@ -31,7 +31,7 @@ class Resolution {
         'name': name,
         'groupId': groupId,
         'description': description,
-        'finish_date': DateFormat('dd/MM/yyyy').format(finishDate),
-        'proposed_by': proposedBy
+        'finishDate': DateFormat('dd/MM/yyyy').format(finishDate),
+        'proposedBy': proposedBy
       };
 }

@@ -63,11 +63,4 @@ class ResolutionGroupScreenState extends State<ResolutionGroupScreen> {
     user.remove('id');
     Navigator.pushReplacementNamed(context, Routes.login);
   }
-  //Done:
-  //refactoring: foldery, rename itp
-  //bloc members do osobnego
-  //animacja na fade transition
-  //dodawanie grupy => przechodzi od razu do grupy
-  //dodawanie od razu do grupy
-
 }
