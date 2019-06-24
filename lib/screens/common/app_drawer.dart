@@ -59,7 +59,7 @@ class AppDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            title: Text('Resolutions'),
+            title: Text('Uchwały'),
             leading: Icon(Icons.close),
             trailing: Icon(Icons.arrow_forward),
             onTap: () {
@@ -67,7 +67,7 @@ class AppDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            title: Text('Members'),
+            title: Text('Członkowie'),
             leading: Icon(Icons.close),
             trailing: Icon(Icons.arrow_forward),
             onTap: () {

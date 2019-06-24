@@ -57,7 +57,7 @@ class _Description extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 6),
       child: Text(
         'Witamy w aplikacji do głosowania nad uchwałami osiedla cztery pory roku.'
-        'Aby zalogować się do aplikacji wpisz swój identyfikator oraz imie i nazwisko w poniższy formularz.'
+        'Aby zalogować się do aplikacji wpisz swój identyfikator oraz imię i nazwisko w poniższy formularz.'
         'W razie problemów z logowaniem skontaktuj się z administracją osiedla.',
         textAlign: TextAlign.center,
         style: TextStyle(fontSize: 11),

@@ -12,7 +12,7 @@ class AddResolutionGroup extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Add new resolution group"),
+        title: Text("Nowa grupa uchwał"),
       ),
       body: Column(mainAxisSize: MainAxisSize.max, children: [
         Expanded(

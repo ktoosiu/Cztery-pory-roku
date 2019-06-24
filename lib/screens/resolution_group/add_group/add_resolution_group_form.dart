@@ -48,10 +48,10 @@ class AddResolutionGroupState extends State<AddResolutionGroupForm> {
               title: TextFormField(
                 controller: formController,
                 decoration: InputDecoration(
-                  hintText: "Resolution Group Name",
+                  hintText: "Nazwa grupy",
                 ),
                 validator: (value) {
-                  if (value.isEmpty) return 'Enter name';
+                  if (value.isEmpty) return 'Wprowadź nazwę';
                 },
               ),
             ),
@@ -61,7 +61,7 @@ class AddResolutionGroupState extends State<AddResolutionGroupForm> {
                 format: dateFormat,
                 inputType: InputType.date,
                 decoration: InputDecoration(
-                    labelText: 'Date', hasFloatingPlaceholder: true),
+                    labelText: 'Data', hasFloatingPlaceholder: true),
                 onChanged: (dt) => setState(() => finishDate = dt),
               ),
             ),
@@ -79,7 +79,7 @@ class AddResolutionGroupState extends State<AddResolutionGroupForm> {
 
   Widget _buildAddButton() {
     return new RaisedButton(
-      child: Text('Send'),
+      child: Text('Wyślij'),
       onPressed: () {
         _sendData();
       },
@@ -105,13 +105,13 @@ class AddResolutionGroupState extends State<AddResolutionGroupForm> {
           Navigator.pop(context);
         }).catchError((error) {
           Scaffold.of(context).showSnackBar(SnackBar(
-            content: Text("Unknown error"),
+            content: Text('Nieznany błąd'),
             backgroundColor: Colors.redAccent[100],
           ));
         });
       } else {
         Scaffold.of(context).showSnackBar(SnackBar(
-          content: Text("Please enter value"),
+          content: Text("Wprowadź wartości"),
           backgroundColor: Colors.redAccent[100],
         ));
       }

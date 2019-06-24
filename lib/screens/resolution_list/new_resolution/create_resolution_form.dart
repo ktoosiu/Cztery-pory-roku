@@ -56,16 +56,16 @@ class CreateResolutionFormState extends State<CreateResolutionForm> {
             ListTile(
                 leading: const Icon(Icons.calendar_today),
                 title: Text(
-                    'Date: ${DateFormat('yyyy-MM-dd').format(DateTime.now())}')),
+                    'Data: ${DateFormat('yyyy-MM-dd').format(DateTime.now())}')),
             ListTile(
               leading: const Icon(Icons.title),
               title: TextFormField(
                 controller: formController[0],
                 decoration: InputDecoration(
-                  hintText: "Resolution Title",
+                  hintText: "Tytuł",
                 ),
                 validator: (value) {
-                  if (value.isEmpty) return 'Enter title';
+                  if (value.isEmpty) return 'Wprowadź tytuł';
                 },
               ),
             ),
@@ -74,10 +74,10 @@ class CreateResolutionFormState extends State<CreateResolutionForm> {
               title: TextFormField(
                 controller: formController[1],
                 decoration: InputDecoration(
-                  hintText: "Description",
+                  hintText: "Treść",
                 ),
                 validator: (value) {
-                  if (value.isEmpty) return 'Enter description';
+                  if (value.isEmpty) return 'Wprowadź treść';
                 },
                 keyboardType: TextInputType.multiline,
                 maxLines: null,
@@ -89,7 +89,8 @@ class CreateResolutionFormState extends State<CreateResolutionForm> {
                 format: dateFormat,
                 inputType: InputType.date,
                 decoration: InputDecoration(
-                    labelText: 'Finish date', hasFloatingPlaceholder: true),
+                    labelText: 'Data zakończenia',
+                    hasFloatingPlaceholder: true),
                 onChanged: (dt) => setState(() => finishDate = dt),
               ),
             ),
@@ -107,7 +108,7 @@ class CreateResolutionFormState extends State<CreateResolutionForm> {
 
   Widget _buildAddButton() {
     return new RaisedButton(
-      child: Text('Send'),
+      child: Text('Wyślij'),
       onPressed: () {
         _sendData();
       },
@@ -134,13 +135,13 @@ class CreateResolutionFormState extends State<CreateResolutionForm> {
           Navigator.pop(context);
         }).catchError((error) {
           Scaffold.of(context).showSnackBar(SnackBar(
-            content: Text("Unknown error"),
+            content: Text("Nieznany błąd"),
             backgroundColor: Colors.redAccent[100],
           ));
         });
       } else {
         Scaffold.of(context).showSnackBar(SnackBar(
-          content: Text("Please enter value"),
+          content: Text("Wprowadź wartości"),
           backgroundColor: Colors.redAccent[100],
         ));
       }

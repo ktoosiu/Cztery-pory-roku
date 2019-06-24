@@ -128,6 +128,4 @@ Future<ResolutionGroup> addResolutionGroup(ResolutionGroup group) async {
   final response = await http.post(url, body: body, headers: _headers);
   return ResolutionGroup.fromJson(
       json.decode(response.body).cast<String, dynamic>());
-  //TODO:
-  //drawer, add
 }

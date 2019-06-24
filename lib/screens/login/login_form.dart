@@ -44,22 +44,22 @@ class LoginFormState extends State<LoginForm> {
               keyboardType: TextInputType.number,
               decoration: InputDecoration(hintText: 'ID'),
               validator: (value) {
-                if (value.isEmpty) return 'Enter ID';
+                if (value.isEmpty) return 'Wprowadź ID';
               },
               autofocus: false,
             ),
             TextFormField(
               controller: _formController[1],
-              decoration: InputDecoration(hintText: 'First Name'),
+              decoration: InputDecoration(hintText: 'Imię'),
               validator: (value) {
-                if (value.isEmpty) return 'Enter First Name';
+                if (value.isEmpty) return 'Wprowadź Imię';
               },
             ),
             TextFormField(
               controller: _formController[2],
-              decoration: InputDecoration(hintText: 'Last Name'),
+              decoration: InputDecoration(hintText: 'Nazwisko'),
               validator: (value) {
-                if (value.isEmpty) return 'Enter Last Name';
+                if (value.isEmpty) return 'Wprowadź Nazwisko';
               },
             ),
             _renderLoginButton(),
@@ -78,12 +78,12 @@ class LoginFormState extends State<LoginForm> {
         splashColor: Colors.blue,
         padding: EdgeInsets.fromLTRB(56, 12, 56, 12),
         color: Colors.blue,
-        child: Text('Sign In', style: TextStyle(color: Colors.white)),
+        child: Text('Zaloguj', style: TextStyle(color: Colors.white)),
         onPressed: () async {
           if (_loginFormKey.currentState.validate()) {
             await _processOnPress();
           } else {
-            _showErrorSnackbar('Please enter values');
+            _showErrorSnackbar('Wprowadź dane');
           }
         },
       ),
@@ -106,7 +106,7 @@ class LoginFormState extends State<LoginForm> {
       _navigateToResolutionGroup(
           UserData(int.parse(id), firstName, lastName, admin));
     } else {
-      _showErrorSnackbar('User $id $firstName $lastName doesn\'t exist!');
+      _showErrorSnackbar('Użytkownik $id $firstName $lastName nie istnieje!');
     }
   }
 

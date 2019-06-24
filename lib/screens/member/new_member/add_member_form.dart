@@ -47,10 +47,10 @@ class AddMemberFormState extends State<AddMemberForm> {
               title: TextFormField(
                 controller: formController[0],
                 decoration: InputDecoration(
-                  hintText: "First Name",
+                  hintText: "Imię",
                 ),
                 validator: (value) {
-                  if (value.isEmpty) return 'Enter First Name';
+                  if (value.isEmpty) return 'Wprowadź imię';
                 },
               ),
             ),
@@ -59,10 +59,10 @@ class AddMemberFormState extends State<AddMemberForm> {
               title: TextFormField(
                 controller: formController[1],
                 decoration: InputDecoration(
-                  hintText: "Last Name",
+                  hintText: "Nazwisko",
                 ),
                 validator: (value) {
-                  if (value.isEmpty) return 'Enter Last Name';
+                  if (value.isEmpty) return 'Wprowadź nazwisko';
                 },
               ),
             ),
@@ -71,10 +71,10 @@ class AddMemberFormState extends State<AddMemberForm> {
               title: TextFormField(
                 controller: formController[2],
                 decoration: InputDecoration(
-                  hintText: "Address",
+                  hintText: "Adres",
                 ),
                 validator: (value) {
-                  if (value.isEmpty) return 'Enter Address';
+                  if (value.isEmpty) return 'Wprowadź adres';
                 },
               ),
             ),
@@ -92,7 +92,7 @@ class AddMemberFormState extends State<AddMemberForm> {
 
   Widget _buildAddButton() {
     return new RaisedButton(
-      child: Text('Send'),
+      child: Text('Dodaj'),
       onPressed: () {
         _sendData();
       },
@@ -117,13 +117,13 @@ class AddMemberFormState extends State<AddMemberForm> {
           Navigator.pop(context);
         }).catchError((error) {
           Scaffold.of(context).showSnackBar(SnackBar(
-            content: Text("Unknown error"),
+            content: Text("Nieznany błąd"),
             backgroundColor: Colors.redAccent[100],
           ));
         });
       } else {
         Scaffold.of(context).showSnackBar(SnackBar(
-          content: Text("Please enter values"),
+          content: Text("Wprowadź dane"),
           backgroundColor: Colors.redAccent[100],
         ));
       }

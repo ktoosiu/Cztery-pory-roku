@@ -20,13 +20,13 @@ class ResolutionDetails extends StatelessWidget {
     } else {
       switch (item.signature.type) {
         case TypeOfSign.accepted:
-          return 'Accepted';
+          return 'ZA';
           break;
         case TypeOfSign.declined:
-          return 'Declined';
+          return 'PRZECIW';
           break;
         case TypeOfSign.abstained:
-          return 'Abstained';
+          return 'WSTRZYMAŁ SIĘ';
           break;
       }
     }
@@ -53,12 +53,12 @@ class ResolutionDetails extends StatelessWidget {
                       Text(item.resolution.description),
                       item.resolution.proposedBy != null
                           ? Text(
-                              'Resolution proposed by ${item.resolution.proposedBy}')
+                              'Uchwała utworzona przez ${item.resolution.proposedBy}')
                           : Container(),
                       Padding(
                         padding: const EdgeInsets.only(top: 8.0),
                         child: Text(
-                          "Finish Date: ${DateFormat('dd-MM-yyyy').format(item.resolution.finishDate)}",
+                          "Data zakończenia: ${DateFormat('dd-MM-yyyy').format(item.resolution.finishDate)}",
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 22),
                         ),
@@ -75,13 +75,13 @@ class ResolutionDetails extends StatelessWidget {
                               )
                             : Column(children: [
                                 Text(
-                                  'Resolution is closed.',
+                                  'Głosowanie zamknięte.',
                                   style: TextStyle(
                                       fontSize: 20,
                                       fontStyle: FontStyle.italic),
                                 ),
                                 Text(
-                                  'Your choice: ${checkChoice()}',
+                                  'Twój wybór: ${checkChoice()}',
                                   style: TextStyle(fontStyle: FontStyle.italic),
                                 ),
                               ]),

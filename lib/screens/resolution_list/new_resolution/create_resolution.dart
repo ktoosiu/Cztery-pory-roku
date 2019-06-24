@@ -16,7 +16,7 @@ class CreateResolution extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Create new resolution"),
+        title: Text("Dodaj uchwałę"),
       ),
       body: Column(mainAxisSize: MainAxisSize.max, children: [
         Expanded(

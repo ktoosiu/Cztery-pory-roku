@@ -1,5 +1,4 @@
 import 'package:cztery_pory_roku/api/http_data.dart';
-import 'package:cztery_pory_roku/app_container/app_container.dart';
 import 'package:cztery_pory_roku/bloc/resolutions/resolution_bloc.dart';
 import 'package:cztery_pory_roku/bloc/resolutions/resolution_list_events.dart';
 import 'package:cztery_pory_roku/models/user_data.dart';
@@ -43,7 +42,7 @@ class _ResolutionScreenState extends State<ResolutionScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Resolutions"),
+        title: Text("Uchwały"),
       ),
       floatingActionButton: widget.userData.isAdmin == true
           ? AddResolutionButton(widget: widget, bloc: _bloc)
@@ -84,7 +83,7 @@ class AddResolutionButton extends StatelessWidget {
         );
       },
       icon: Icon(Icons.add),
-      label: Text('Add'),
+      label: Text('Dodaj'),
     );
   }
 }

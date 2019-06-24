@@ -27,7 +27,7 @@ class ResolutionGroupScreenState extends State<ResolutionGroupScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Resolution Groups"),
+        title: Text("Głosowanie nad uchwałami"),
         actions: [
           IconButton(
             onPressed: () {
@@ -81,7 +81,7 @@ class AddGroupButton extends StatelessWidget {
         );
       },
       icon: Icon(Icons.add),
-      label: Text('Add'),
+      label: Text('Dodaj'),
     );
   }
 }

@@ -21,21 +21,21 @@ class ResolutionListItem extends StatelessWidget {
     } else {
       switch (viewModel.signature.type) {
         case TypeOfSign.accepted:
-          return Text('User choice: Accepted',
+          return Text('Twój wybór: ZA',
               style: TextStyle(
                   color: Colors.green,
                   fontWeight: FontWeight.bold,
                   fontSize: 15));
 
         case TypeOfSign.declined:
-          return Text('User choice: Declined',
+          return Text('Twój wybór: PRZECIW',
               style: TextStyle(
                   color: Colors.red,
                   fontWeight: FontWeight.bold,
                   fontSize: 15));
 
         case TypeOfSign.abstained:
-          return Text('User choice: Abstained',
+          return Text('Twój wybór: WSTRZYMAŁ SIĘ',
               style: TextStyle(
                   color: Colors.yellow[900],
                   fontWeight: FontWeight.bold,
@@ -110,7 +110,7 @@ class ResolutionListItem extends StatelessWidget {
                                   .isAfter(DateTime.now())
                               ? Container()
                               : Text(
-                                  'Closed',
+                                  'Zamknięta',
                                   style: TextStyle(color: Colors.red),
                                 )),
                     ],

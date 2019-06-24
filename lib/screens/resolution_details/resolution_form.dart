@@ -59,7 +59,7 @@ class ResolutionFormState extends State<ResolutionForm> {
                 selectedValue = value;
               });
             },
-            description: 'Accept',
+            description: 'ZA',
             radioValue: TypeOfSign.accepted,
           ),
           RadioButtonWiget(
@@ -69,7 +69,7 @@ class ResolutionFormState extends State<ResolutionForm> {
                 selectedValue = value;
               });
             },
-            description: 'Decline',
+            description: 'PRZECIW',
             radioValue: TypeOfSign.declined,
           ),
           RadioButtonWiget(
@@ -79,7 +79,7 @@ class ResolutionFormState extends State<ResolutionForm> {
                 selectedValue = value;
               });
             },
-            description: 'Abstain',
+            description: 'WSTRZYMAŁ SIĘ',
             radioValue: TypeOfSign.abstained,
           ),
           Center(
@@ -97,7 +97,7 @@ class ResolutionFormState extends State<ResolutionForm> {
                     Padding(
                         padding: const EdgeInsets.symmetric(vertical: 12.0),
                         child: Text(
-                          "Submit",
+                          "Wyślij",
                           style: TextStyle(fontSize: 20),
                         )),
                   ],
@@ -105,11 +105,6 @@ class ResolutionFormState extends State<ResolutionForm> {
                 onPressed: () {
                   if (selectedValue != null &&
                       _resolutionFormKey.currentState.validate()) {
-                    // createUpdateSignature(Signature(
-                    //     date: DateTime.now(),
-                    //     idMember: widget.userData.id,
-                    //     idResolution: widget.resolutionId,
-                    //     type: selectedValue));
                     if (signature == null) {
                       createSignature(Signature(
                               date: DateTime.now(),
@@ -140,13 +135,14 @@ class ResolutionFormState extends State<ResolutionForm> {
 
                     Scaffold.of(context).showSnackBar(
                       SnackBar(
-                        content: Text(signature == null ? 'Sent' : 'Updated'),
+                        content: Text(
+                            signature == null ? 'Wysłano' : 'Zaktualizowano'),
                         backgroundColor: Colors.greenAccent[400],
                       ),
                     );
                   } else {
                     Scaffold.of(context).showSnackBar(SnackBar(
-                      content: Text("Please select value"),
+                      content: Text("Proszę wybrać"),
                       backgroundColor: Colors.redAccent[100],
                     ));
                   }

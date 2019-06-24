@@ -12,7 +12,7 @@ class AddMember extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Add new member"),
+        title: Text("Dodaj członka"),
       ),
       body: Column(mainAxisSize: MainAxisSize.max, children: [
         Expanded(

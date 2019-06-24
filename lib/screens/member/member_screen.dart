@@ -28,7 +28,7 @@ class _MemberScreenState extends State<MemberScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Members'),
+        title: Text('Członkowie'),
       ),
       drawer: AppDrawer(),
       floatingActionButton: FloatingActionButton.extended(
@@ -46,11 +46,12 @@ class _MemberScreenState extends State<MemberScreen> {
           );
         },
         icon: Icon(Icons.add),
-        label: Text('Add'),
+        label: Text('Dodaj'),
       ),
       body: MemberList(_bloc),
     );
   }
 
 //TODO: edit member?
+//translacja
 }
