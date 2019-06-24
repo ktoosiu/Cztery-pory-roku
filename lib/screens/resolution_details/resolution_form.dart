@@ -105,6 +105,11 @@ class ResolutionFormState extends State<ResolutionForm> {
                 onPressed: () {
                   if (selectedValue != null &&
                       _resolutionFormKey.currentState.validate()) {
+                    // createUpdateSignature(Signature(
+                    //     date: DateTime.now(),
+                    //     idMember: widget.userData.id,
+                    //     idResolution: widget.resolutionId,
+                    //     type: selectedValue));
                     if (signature == null) {
                       createSignature(Signature(
                               date: DateTime.now(),
@@ -118,10 +123,12 @@ class ResolutionFormState extends State<ResolutionForm> {
                         });
                       });
                     } else {
-                      updateSignature(
-                        id: signature.id,
-                        choice: selectedValue,
-                      ).then((response) {
+                      updateSignature(Signature(
+                              date: DateTime.now(),
+                              idMember: widget.userData.id,
+                              idResolution: widget.resolutionId,
+                              type: selectedValue))
+                          .then((response) {
                         widget.callback(Signature(
                             date: signature.date,
                             id: signature.id,

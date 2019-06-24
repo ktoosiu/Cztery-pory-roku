@@ -89,15 +89,22 @@ Future<Signature> createSignature(Signature signature) async {
   return Signature.fromJson(json.decode(response.body).cast<String, dynamic>());
 }
 
-Future<http.Response> updateSignature(
-    {@required int id, @required TypeOfSign choice}) async {
-  var url = urlBuilder('/signatures/$id');
-  var body = json.encode({
-    'type': choice.index,
-    'update_date': DateFormat('dd/MM/yyyy').format(DateTime.now()),
-  });
+// Future<Signature> createUpdateSignature(Signature signature) async {
+//   var url = urlBuilder('/signatures');
+//   if (signature.id != null) {
+//     url += '/${signature.id}';
+//   }
+//   var body = json.encode(signature.toJson());
 
-  final response = await http.patch(url, body: body, headers: _headers);
+//   final response = await http.put(url, body: body, headers: _headers);
+//   return Signature.fromJson(json.decode(response.body).cast<String, dynamic>());
+// }
+
+Future<http.Response> updateSignature(Signature signature) async {
+  var url = urlBuilder('/signatures/${signature.id}');
+  var body = json.encode(signature.toJson());
+
+  final response = await http.put(url, body: body, headers: _headers);
   return response;
 }
 
