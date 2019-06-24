@@ -1,3 +1,4 @@
+import 'package:cztery_pory_roku/app_container/app_container.dart';
 import 'package:cztery_pory_roku/bloc/groups/resolution_group_bloc.dart';
 import 'package:cztery_pory_roku/bloc/groups/resolution_group_event.dart';
 import 'package:cztery_pory_roku/screens/common/app_drawer.dart';
@@ -36,24 +37,13 @@ class ResolutionGroupScreenState extends State<ResolutionGroupScreen> {
           )
         ],
       ),
-      drawer: AppDrawer(),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              fullscreenDialog: true,
-              builder: (context) => AddResolutionGroup(
-                    (group) => _bloc.addResolutionGroupSink.add(
-                          AddResolutionGroupEvent(group),
-                        ),
-                  ),
-            ),
-          );
-        },
-        icon: Icon(Icons.add),
-        label: Text('Add'),
-      ),
+      drawer: AppContainer.of(context).state.userData.isAdmin == true
+          ? AppDrawer()
+          : null,
+      floatingActionButton:
+          AppContainer.of(context).state.userData.isAdmin == true
+              ? AddGroupButton(bloc: _bloc)
+              : null,
       body: ResolutionGroupList(_bloc),
     );
   }
@@ -62,5 +52,36 @@ class ResolutionGroupScreenState extends State<ResolutionGroupScreen> {
     final SharedPreferences user = await SharedPreferences.getInstance();
     user.remove('id');
     Navigator.pushReplacementNamed(context, Routes.login);
+  }
+}
+
+class AddGroupButton extends StatelessWidget {
+  const AddGroupButton({
+    Key key,
+    @required ResolutionGroupBloc bloc,
+  })  : _bloc = bloc,
+        super(key: key);
+
+  final ResolutionGroupBloc _bloc;
+
+  @override
+  Widget build(BuildContext context) {
+    return FloatingActionButton.extended(
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            fullscreenDialog: true,
+            builder: (context) => AddResolutionGroup(
+                  (group) => _bloc.addResolutionGroupSink.add(
+                        AddResolutionGroupEvent(group),
+                      ),
+                ),
+          ),
+        );
+      },
+      icon: Icon(Icons.add),
+      label: Text('Add'),
+    );
   }
 }

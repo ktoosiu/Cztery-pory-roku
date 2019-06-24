@@ -94,20 +94,28 @@ class LoginFormState extends State<LoginForm> {
     var id = _formController[0].text;
     var firstName = _formController[1].text;
     var lastName = _formController[2].text;
-
-    if (await checkMember(id: id, firstName: firstName, lastName: lastName)) {
-      _setUserData(id, firstName, lastName);
-      _navigateToResolutionGroup(UserData(int.parse(id), firstName, lastName));
+    bool exists;
+    bool admin;
+    await checkMember(id: id, firstName: firstName, lastName: lastName)
+        .then((x) => {
+              exists = x.memberExist == true ? true : false,
+              admin = x.isAdmin == true ? true : false
+            });
+    if (exists == true) {
+      _setUserData(id, firstName, lastName, admin);
+      _navigateToResolutionGroup(
+          UserData(int.parse(id), firstName, lastName, admin));
     } else {
       _showErrorSnackbar('User $id $firstName $lastName doesn\'t exist!');
     }
   }
 
-  void _setUserData(String id, String name, String lastname) async {
+  void _setUserData(String id, String name, String lastname, bool admin) async {
     final SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.setInt('id', int.parse(id));
     preferences.setString('name', name);
     preferences.setString('lastName', lastname);
+    preferences.setBool('admin', admin);
   }
 
   void _navigateToResolutionGroup(UserData userData) {

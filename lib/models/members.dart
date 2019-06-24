@@ -13,10 +13,15 @@ class Member {
       address: json['address'],
     );
   }
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'firstName': firstName,
-        'lastName': lastName,
-        'address': address
-      };
+  Map<String, dynamic> toJson() {
+    if (id == null) {
+      return {'firstName': firstName, 'lastName': lastName, 'address': address};
+    }
+    return {
+      'id': id,
+      'firstName': firstName,
+      'lastName': lastName,
+      'address': address
+    };
+  }
 }

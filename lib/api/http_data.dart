@@ -1,11 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:cztery_pory_roku/models/login_model.dart';
 import 'package:cztery_pory_roku/models/members.dart';
 import 'package:cztery_pory_roku/models/resolution_group.dart';
 import 'package:http/http.dart' as http;
-import 'package:intl/intl.dart';
-import 'package:meta/meta.dart';
 
 import '../models/signatures.dart';
 import '../models/resolutions.dart';
@@ -67,7 +66,8 @@ Future<Member> addMember(Member member) async {
   return Member.fromJson(json.decode(response.body).cast<String, dynamic>());
 }
 
-Future<bool> checkMember({String id, String firstName, String lastName}) async {
+Future<LoginModel> checkMember(
+    {String id, String firstName, String lastName}) async {
   var url = urlBuilder('/members/$id');
   final response = await http.get(url);
 
@@ -75,10 +75,13 @@ Future<bool> checkMember({String id, String firstName, String lastName}) async {
     // If server returns an OK response, parse the JSON
     final parsed = json.decode(response.body);
     if (parsed["firstName"] == firstName && parsed["lastName"] == lastName) {
-      return Future<bool>.value(true);
+      if (parsed["admin"] == true) {
+        return LoginModel(true, true);
+      }
+      return LoginModel(true, false);
     }
   }
-  return Future<bool>.value(false);
+  return LoginModel(false, false);
 }
 
 Future<Signature> createSignature(Signature signature) async {
@@ -88,17 +91,6 @@ Future<Signature> createSignature(Signature signature) async {
   final response = await http.post(url, body: body, headers: _headers);
   return Signature.fromJson(json.decode(response.body).cast<String, dynamic>());
 }
-
-// Future<Signature> createUpdateSignature(Signature signature) async {
-//   var url = urlBuilder('/signatures');
-//   if (signature.id != null) {
-//     url += '/${signature.id}';
-//   }
-//   var body = json.encode(signature.toJson());
-
-//   final response = await http.put(url, body: body, headers: _headers);
-//   return Signature.fromJson(json.decode(response.body).cast<String, dynamic>());
-// }
 
 Future<http.Response> updateSignature(Signature signature) async {
   var url = urlBuilder('/signatures/${signature.id}');
@@ -136,8 +128,6 @@ Future<ResolutionGroup> addResolutionGroup(ResolutionGroup group) async {
   final response = await http.post(url, body: body, headers: _headers);
   return ResolutionGroup.fromJson(
       json.decode(response.body).cast<String, dynamic>());
+  //TODO:
+  //drawer, add
 }
-
-//TODO:
-// daty ogarnąć xD
-// patch na put

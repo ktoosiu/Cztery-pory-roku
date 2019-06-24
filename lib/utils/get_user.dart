@@ -6,6 +6,6 @@ Future<UserData> getUser() async {
   var id = user.getInt('id');
   var name = user.getString('name');
   var lastName = user.getString('lastName');
-
-  return UserData(id, name, lastName);
+  bool isAdmin = user.getBool('admin');
+  return UserData(id, name, lastName, isAdmin);
 }
