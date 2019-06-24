@@ -40,7 +40,7 @@ class ResolutionGroupListItem extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Text(DateFormat('dd-MM-yyyy').format(item.date))
+                    Text(DateFormat('yyyy-MM-dd').format(item.date))
                   ],
                 ),
               ],
@@ -48,7 +48,7 @@ class ResolutionGroupListItem extends StatelessWidget {
             subtitle: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
+                  padding: const EdgeInsets.only(top: 4.0, bottom: 8.0),
                   child: Text(
                     item.name,
                     maxLines: 3,

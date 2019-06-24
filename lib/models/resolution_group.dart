@@ -14,9 +14,18 @@ class ResolutionGroup {
       name: json['name'],
     );
   }
-  Map<String, dynamic> toJson() => {
-        'id': id,
+
+  Map<String, dynamic> toJson() {
+    if (id == null) {
+      return {
         'name': name,
-        'date': DateFormat('dd/MM/yyyy').format(date),
+        'date': DateFormat('yyyy-MM-dd').format(date),
       };
+    }
+    return {
+      'id': id,
+      'name': name,
+      'date': DateFormat('yyyy-MM-dd').format(date),
+    };
+  }
 }

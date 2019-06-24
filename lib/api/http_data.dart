@@ -130,3 +130,7 @@ Future<ResolutionGroup> addResolutionGroup(ResolutionGroup group) async {
   return ResolutionGroup.fromJson(
       json.decode(response.body).cast<String, dynamic>());
 }
+
+//TODO:
+// daty ogarnąć xD
+// patch na put

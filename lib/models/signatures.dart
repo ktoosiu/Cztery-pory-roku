@@ -17,13 +17,23 @@ class Signature {
         idMember: json['memberId'],
         idResolution: json['resolutionId']);
   }
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'date': DateFormat('dd/MM/yyyy').format(date),
+  Map<String, dynamic> toJson() {
+    if (id == null) {
+      return {
+        'date': DateFormat('yyyy-MM-dd').format(date),
         'type': type.index,
         'memberId': idMember,
         'resolutionId': idResolution
       };
+    }
+    return {
+      'id': id,
+      'date': DateFormat('yyyy-MM-dd').format(date),
+      'type': type.index,
+      'memberId': idMember,
+      'resolutionId': idResolution
+    };
+  }
 }
 
 enum TypeOfSign { accepted, declined, abstained }

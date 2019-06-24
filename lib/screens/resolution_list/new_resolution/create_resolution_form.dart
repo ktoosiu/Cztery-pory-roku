@@ -22,7 +22,7 @@ class CreateResolutionForm extends StatefulWidget {
 class CreateResolutionFormState extends State<CreateResolutionForm> {
   final _createFormKey = GlobalKey<FormState>();
   bool _isButtonDisabled;
-  final dateFormat = DateFormat('yyyy-MM-dd');
+  final dateFormat = DateFormat();
   DateTime finishDate;
   @override
   void initState() {
@@ -56,7 +56,7 @@ class CreateResolutionFormState extends State<CreateResolutionForm> {
             ListTile(
                 leading: const Icon(Icons.calendar_today),
                 title: Text(
-                    'Date: ${DateFormat('dd/MM/yyyy').format(DateTime.now())}')),
+                    'Date: ${DateFormat('yyyy-MM-dd').format(DateTime.now())}')),
             ListTile(
               leading: const Icon(Icons.title),
               title: TextFormField(

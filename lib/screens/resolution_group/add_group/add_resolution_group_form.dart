@@ -17,7 +17,7 @@ class AddResolutionGroupForm extends StatefulWidget {
 class AddResolutionGroupState extends State<AddResolutionGroupForm> {
   final _addGroupKey = GlobalKey<FormState>();
   bool _isButtonDisabled;
-  final dateFormat = DateFormat('yyyy-MM-dd');
+  final dateFormat = DateFormat();
   DateTime finishDate;
   @override
   void initState() {
@@ -103,16 +103,6 @@ class AddResolutionGroupState extends State<AddResolutionGroupForm> {
           widget.callback(createdGroup);
 
           Navigator.pop(context);
-
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(
-          //     fullscreenDialog: true,
-          //     builder: (context) => ResolutionScreen(
-          //           groupId: createdGroup.id,
-          //         ),
-          //   ),
-          // );
         }).catchError((error) {
           Scaffold.of(context).showSnackBar(SnackBar(
             content: Text("Unknown error"),

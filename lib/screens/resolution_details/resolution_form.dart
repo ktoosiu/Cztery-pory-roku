@@ -47,7 +47,7 @@ class ResolutionFormState extends State<ResolutionForm> {
           Center(
             child: editDate != null
                 ? Text(
-                    'Last updated: ${DateFormat('dd/MM/yyyy').format(editDate)}',
+                    'Last updated: ${DateFormat('yyyy-MM-dd').format(editDate)}',
                     style: TextStyle(fontStyle: FontStyle.italic),
                   )
                 : null,

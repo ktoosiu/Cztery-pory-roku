@@ -26,12 +26,23 @@ class Resolution {
       proposedBy: json['proposedBy'],
     );
   }
-  Map<String, dynamic> toJson() => {
-        'id': id,
+  Map<String, dynamic> toJson() {
+    if (id == null) {
+      return {
         'name': name,
         'groupId': groupId,
         'description': description,
-        'finishDate': DateFormat('dd/MM/yyyy').format(finishDate),
+        'finishDate': DateFormat('yyyy-MM-dd').format(finishDate),
         'proposedBy': proposedBy
       };
+    }
+    return {
+      'id': id,
+      'name': name,
+      'groupId': groupId,
+      'description': description,
+      'finishDate': DateFormat('yyyy-MM-dd').format(finishDate),
+      'proposedBy': proposedBy
+    };
+  }
 }

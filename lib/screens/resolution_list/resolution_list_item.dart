@@ -82,7 +82,7 @@ class ResolutionListItem extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Text(DateFormat('dd-MM-yyyy').format(viewModel.date))
+                    Text(DateFormat('yyyy-MM-dd').format(viewModel.date))
                   ],
                 ),
               ],
