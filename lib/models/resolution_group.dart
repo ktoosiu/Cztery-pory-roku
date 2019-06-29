@@ -8,6 +8,7 @@ class ResolutionGroup {
   final DateTime finishDate;
 
   ResolutionGroup({this.id, this.date, this.name, this.finishDate});
+
   factory ResolutionGroup.fromJson(Map<String, dynamic> json) {
     return ResolutionGroup(
       id: json['id'],
@@ -22,14 +23,14 @@ class ResolutionGroup {
       return {
         'name': name,
         'date': DateFormat('yyyy-MM-dd').format(date),
-        'finishDate': DateFormat('yyyy-MM-dd').format(finishDate),
+        'finishDate': DateFormat('yyyy-MM-dd H:m').format(finishDate),
       };
     }
     return {
       'id': id,
       'name': name,
       'date': DateFormat('yyyy-MM-dd').format(date),
-      'finishDate': DateFormat('yyyy-MM-dd').format(finishDate),
+      'finishDate': DateFormat('yyyy-MM-dd Hm').format(finishDate),
     };
   }
 }

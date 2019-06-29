@@ -92,6 +92,5 @@ class AddResolutionButton extends StatelessWidget {
     );
   }
   //TODO:
-  //żeby datę dodawało 24:00
   //admin możliwość zmiany daty
 }
