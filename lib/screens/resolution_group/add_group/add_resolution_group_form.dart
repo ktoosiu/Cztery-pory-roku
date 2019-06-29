@@ -18,7 +18,9 @@ class AddResolutionGroupState extends State<AddResolutionGroupForm> {
   final _addGroupKey = GlobalKey<FormState>();
   bool _isButtonDisabled;
   final dateFormat = DateFormat();
+  DateTime date;
   DateTime finishDate;
+
   @override
   void initState() {
     _isButtonDisabled = false;
@@ -61,7 +63,18 @@ class AddResolutionGroupState extends State<AddResolutionGroupForm> {
                 format: dateFormat,
                 inputType: InputType.date,
                 decoration: InputDecoration(
-                    labelText: 'Data', hasFloatingPlaceholder: true),
+                    labelText: 'Data Uchwał', hasFloatingPlaceholder: true),
+                onChanged: (dt) => setState(() => date = dt),
+              ),
+            ),
+            ListTile(
+              leading: const Icon(Icons.calendar_view_day),
+              title: DateTimePickerFormField(
+                format: dateFormat,
+                inputType: InputType.date,
+                decoration: InputDecoration(
+                    labelText: 'Data Zakończenia',
+                    hasFloatingPlaceholder: true),
                 onChanged: (dt) => setState(() => finishDate = dt),
               ),
             ),
@@ -96,7 +109,9 @@ class AddResolutionGroupState extends State<AddResolutionGroupForm> {
         });
         //await Future.delayed(Duration(seconds: 5));
         final group = ResolutionGroup(
-          date: finishDate,
+          date: date,
+          finishDate: DateTime(
+              finishDate.year, finishDate.month, finishDate.day, 23, 59, 00),
           name: formController.text,
         );
         addResolutionGroup(group).then((createdGroup) {
