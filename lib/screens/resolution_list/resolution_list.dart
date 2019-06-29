@@ -14,10 +14,11 @@ import 'package:flutter/widgets.dart';
 class ResolutionList extends StatefulWidget {
   final ResolutionListBloc parentBloc;
   final groupDate;
+  final finishDate;
   final UserData userData;
   final int groupId;
-  const ResolutionList(
-      this.userData, this.groupDate, this.parentBloc, this.groupId,
+  const ResolutionList(this.userData, this.groupDate, this.parentBloc,
+      this.groupId, this.finishDate,
       {Key key})
       : super(key: key);
 
@@ -56,7 +57,8 @@ class ResolutionListState extends State<ResolutionList> {
                           viewModel: ResolutionListItemViewModel(
                               snapshot.data[i].resolution,
                               snapshot.data[i].signature,
-                              date: widget.groupDate),
+                              date: widget.groupDate,
+                              finishDate: widget.finishDate),
 
                           userData: widget.userData,
                           callback: (signature) =>

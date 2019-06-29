@@ -11,9 +11,14 @@ import 'resolution_list.dart';
 class ResolutionScreen extends StatefulWidget {
   final groupId;
   final groupDate;
+  final finishDate;
   final UserData userData;
   const ResolutionScreen(
-      {Key key, this.groupId, this.groupDate, @required this.userData})
+      {Key key,
+      this.groupId,
+      this.groupDate,
+      this.finishDate,
+      @required this.userData})
       : super(key: key);
 
   @override
@@ -47,8 +52,8 @@ class _ResolutionScreenState extends State<ResolutionScreen> {
       floatingActionButton: widget.userData.isAdmin == true
           ? AddResolutionButton(widget: widget, bloc: _bloc)
           : null,
-      body: ResolutionList(
-          widget.userData, widget.groupDate, _bloc, widget.groupId),
+      body: ResolutionList(widget.userData, widget.groupDate, _bloc,
+          widget.groupId, widget.finishDate),
     );
   }
 }
@@ -87,6 +92,6 @@ class AddResolutionButton extends StatelessWidget {
     );
   }
   //TODO:
-  //termin zakończenia uchwał w danej grupie
+  //żeby datę dodawało 24:00
   //admin możliwość zmiany daty
 }

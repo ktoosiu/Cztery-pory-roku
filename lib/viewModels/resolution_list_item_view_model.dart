@@ -5,5 +5,7 @@ class ResolutionListItemViewModel {
   final Resolution resolution;
   final Signature signature;
   DateTime date;
-  ResolutionListItemViewModel(this.resolution, this.signature, {this.date});
+  DateTime finishDate;
+  ResolutionListItemViewModel(this.resolution, this.signature,
+      {this.date, this.finishDate});
 }

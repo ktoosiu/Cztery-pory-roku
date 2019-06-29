@@ -1,20 +1,11 @@
-import '../utils/json_to_date.dart';
-import 'package:intl/intl.dart';
-
 class Resolution {
   final int id;
   final String name;
   final int groupId;
   final String description;
-  final DateTime finishDate;
   final String proposedBy;
   Resolution(
-      {this.id,
-      this.name,
-      this.groupId,
-      this.description,
-      this.finishDate,
-      this.proposedBy});
+      {this.id, this.name, this.groupId, this.description, this.proposedBy});
 
   factory Resolution.fromJson(Map<String, dynamic> json) {
     return Resolution(
@@ -22,7 +13,6 @@ class Resolution {
       name: json['name'],
       groupId: json['groupId'],
       description: json['description'],
-      finishDate: jsonToDate(json['finishDate']),
       proposedBy: json['proposedBy'],
     );
   }
@@ -32,7 +22,6 @@ class Resolution {
         'name': name,
         'groupId': groupId,
         'description': description,
-        'finishDate': DateFormat('yyyy-MM-dd').format(finishDate),
         'proposedBy': proposedBy
       };
     }
@@ -41,7 +30,6 @@ class Resolution {
       'name': name,
       'groupId': groupId,
       'description': description,
-      'finishDate': DateFormat('yyyy-MM-dd').format(finishDate),
       'proposedBy': proposedBy
     };
   }

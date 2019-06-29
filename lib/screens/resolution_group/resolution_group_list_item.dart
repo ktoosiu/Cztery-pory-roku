@@ -20,6 +20,7 @@ class ResolutionGroupListItem extends StatelessWidget {
                 builder: (itemContext) => ResolutionScreen(
                     groupId: item.id,
                     groupDate: item.date,
+                    finishDate: item.finishDate,
                     userData: AppContainer.of(context).state.userData)));
       },
       child: Padding(

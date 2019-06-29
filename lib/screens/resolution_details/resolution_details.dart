@@ -58,15 +58,14 @@ class ResolutionDetails extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(top: 8.0),
                         child: Text(
-                          "Data zakończenia: ${DateFormat('dd-MM-yyyy').format(item.resolution.finishDate)}",
+                          "Data zakończenia: ${DateFormat('dd-MM-yyyy').format(item.finishDate)}",
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 22),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: item.resolution.finishDate
-                                .isAfter(DateTime.now())
+                        child: item.finishDate.isAfter(DateTime.now())
                             ? ResolutionForm(
                                 userData,
                                 callback,

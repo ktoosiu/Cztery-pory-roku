@@ -4,7 +4,6 @@ import 'package:cztery_pory_roku/models/user_data.dart';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 
 class CreateResolutionForm extends StatefulWidget {
   final UserData userData;
@@ -22,8 +21,7 @@ class CreateResolutionForm extends StatefulWidget {
 class CreateResolutionFormState extends State<CreateResolutionForm> {
   final _createFormKey = GlobalKey<FormState>();
   bool _isButtonDisabled;
-  final dateFormat = DateFormat();
-  DateTime finishDate;
+
   @override
   void initState() {
     _isButtonDisabled = false;
@@ -83,17 +81,6 @@ class CreateResolutionFormState extends State<CreateResolutionForm> {
                 maxLines: null,
               ),
             ),
-            ListTile(
-              leading: const Icon(Icons.calendar_view_day),
-              title: DateTimePickerFormField(
-                format: dateFormat,
-                inputType: InputType.date,
-                decoration: InputDecoration(
-                    labelText: 'Data zakończenia',
-                    hasFloatingPlaceholder: true),
-                onChanged: (dt) => setState(() => finishDate = dt),
-              ),
-            ),
             Center(
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
@@ -127,7 +114,6 @@ class CreateResolutionFormState extends State<CreateResolutionForm> {
         final resolution = Resolution(
             name: formController[0].text,
             description: formController[1].text,
-            finishDate: finishDate,
             groupId: widget.groupId,
             proposedBy: "${widget.userData.name} ${widget.userData.lastName}");
         createResolution(resolution).then((createdResolution) {

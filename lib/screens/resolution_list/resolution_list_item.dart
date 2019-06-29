@@ -66,7 +66,7 @@ class ResolutionListItem extends StatelessWidget {
         child: Card(
             child: Container(
           decoration: BoxDecoration(
-              color: viewModel.resolution.finishDate.isAfter(DateTime.now())
+              color: viewModel.finishDate.isAfter(DateTime.now())
                   ? Colors.lightBlue[50]
                   : Colors.grey[300]),
           child: ListTile(
@@ -106,8 +106,7 @@ class ResolutionListItem extends StatelessWidget {
                         child: checkChoice(),
                       ),
                       Container(
-                          child: viewModel.resolution.finishDate
-                                  .isAfter(DateTime.now())
+                          child: viewModel.finishDate.isAfter(DateTime.now())
                               ? Container()
                               : Text(
                                   'Zamknięta',
