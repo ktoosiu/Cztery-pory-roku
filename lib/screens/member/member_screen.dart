@@ -51,7 +51,4 @@ class _MemberScreenState extends State<MemberScreen> {
       body: MemberList(_bloc),
     );
   }
-
-//TODO: edit member?
-//translacja
 }

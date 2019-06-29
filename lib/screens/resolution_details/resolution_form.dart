@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 
 import '../../models/signatures.dart';
 import '../../api/http_data.dart';
+import 'radio_button.dart';
 
 class ResolutionForm extends StatefulWidget {
   final Function(Signature) callback;
@@ -52,7 +53,7 @@ class ResolutionFormState extends State<ResolutionForm> {
                   )
                 : null,
           ),
-          RadioButtonWiget(
+          RadioButtonWidget(
             selectedValue: selectedValue,
             onChangeCallback: (TypeOfSign value) {
               setState(() {
@@ -62,7 +63,7 @@ class ResolutionFormState extends State<ResolutionForm> {
             description: 'ZA',
             radioValue: TypeOfSign.accepted,
           ),
-          RadioButtonWiget(
+          RadioButtonWidget(
             selectedValue: selectedValue,
             onChangeCallback: (TypeOfSign value) {
               setState(() {
@@ -72,7 +73,7 @@ class ResolutionFormState extends State<ResolutionForm> {
             description: 'PRZECIW',
             radioValue: TypeOfSign.declined,
           ),
-          RadioButtonWiget(
+          RadioButtonWidget(
             selectedValue: selectedValue,
             onChangeCallback: (TypeOfSign value) {
               setState(() {
@@ -152,37 +153,6 @@ class ResolutionFormState extends State<ResolutionForm> {
           ),
         ],
       ),
-    );
-  }
-}
-
-class RadioButtonWiget extends StatelessWidget {
-  const RadioButtonWiget({
-    Key key,
-    @required this.selectedValue,
-    @required this.onChangeCallback,
-    this.description,
-    this.radioValue,
-  }) : super(key: key);
-
-  final TypeOfSign selectedValue;
-  final Function onChangeCallback;
-  final description;
-  final TypeOfSign radioValue;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Radio(
-          value: radioValue,
-          onChanged: (TypeOfSign value) {
-            onChangeCallback(value);
-          },
-          groupValue: selectedValue,
-        ),
-        Text(description)
-      ],
     );
   }
 }

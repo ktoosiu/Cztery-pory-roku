@@ -54,8 +54,7 @@ class AppDrawer extends StatelessWidget {
                   ],
                 ),
               ),
-              decoration: BoxDecoration(
-                  color: Colors.blue), //TODO:dodać usera do drawera
+              decoration: BoxDecoration(color: Colors.blue),
             ),
           ),
           ListTile(

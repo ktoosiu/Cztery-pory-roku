@@ -86,4 +86,7 @@ class AddResolutionButton extends StatelessWidget {
       label: Text('Dodaj'),
     );
   }
+  //TODO:
+  //termin zakończenia uchwał w danej grupie
+  //admin możliwość zmiany daty
 }

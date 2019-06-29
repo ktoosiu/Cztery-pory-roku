@@ -87,10 +87,34 @@ class MemberDetails extends StatelessWidget {
                                 ],
                               ),
                               onPressed: () {
-                                deleteMember(member.id).then((x) {
-                                  callback();
-                                });
-                                Navigator.pop(context);
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        title: Text('Usunąć użytkownika?'),
+                                        content: Text(
+                                            'Czy na pewno chcesz usunąć użytkownika ${member.firstName} ${member.lastName}?'),
+                                        actions: [
+                                          FlatButton(
+                                            child: Text('Anuluj'),
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                          ),
+                                          FlatButton(
+                                            child: Text('Usuń'),
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                              deleteMember(member.id).then((x) {
+                                                Navigator.pop(context);
+
+                                                callback();
+                                              });
+                                            },
+                                          )
+                                        ],
+                                      );
+                                    });
                               },
                             )
                           : Container(),
