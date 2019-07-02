@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cztery_pory_roku/api/http_data.dart';
 import 'package:cztery_pory_roku/bloc/resolutions/resolution_bloc.dart';
 import 'package:cztery_pory_roku/bloc/resolutions/resolution_list_events.dart';
+import 'package:cztery_pory_roku/models/resolution_group.dart';
 import 'package:cztery_pory_roku/models/user_data.dart';
 import 'package:cztery_pory_roku/screens/resolution_list/resolution_list_item.dart';
 
@@ -13,13 +14,11 @@ import 'package:flutter/widgets.dart';
 
 class ResolutionList extends StatefulWidget {
   final ResolutionListBloc parentBloc;
-  final groupDate;
-  final finishDate;
+  final ResolutionGroup group;
+
   final UserData userData;
-  final int groupId;
-  const ResolutionList(this.userData, this.groupDate, this.parentBloc,
-      this.groupId, this.finishDate,
-      {Key key})
+
+  const ResolutionList(this.userData, this.group, this.parentBloc, {Key key})
       : super(key: key);
 
   @override
@@ -28,7 +27,7 @@ class ResolutionList extends StatefulWidget {
 
 class ResolutionListState extends State<ResolutionList> {
   Future<void> refresh() async {
-    fetchResolution(widget.groupId).then((list) => widget
+    fetchResolution(widget.group.id).then((list) => widget
         .parentBloc.fetchResolutionSink
         .add(FetchResolutionListEvent(list)));
     fetchUserSignatures(widget.userData.id).then((list) => widget
@@ -57,8 +56,8 @@ class ResolutionListState extends State<ResolutionList> {
                           viewModel: ResolutionListItemViewModel(
                               snapshot.data[i].resolution,
                               snapshot.data[i].signature,
-                              date: widget.groupDate,
-                              finishDate: widget.finishDate),
+                              date: widget.group.date,
+                              finishDate: widget.group.finishDate),
 
                           userData: widget.userData,
                           callback: (signature) =>

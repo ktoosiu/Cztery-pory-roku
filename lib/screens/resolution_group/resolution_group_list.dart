@@ -42,7 +42,8 @@ class ResolutionGroupListState extends State<ResolutionGroupList> {
                     padding: const EdgeInsets.all(16.0),
                     itemCount: snapshot.data.length,
                     itemBuilder: (context, i) {
-                      return ResolutionGroupListItem(snapshot.data[i]);
+                      return ResolutionGroupListItem(
+                          snapshot.data[i], widget.parentBloc);
                     });
               } else {
                 return Center(

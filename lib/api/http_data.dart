@@ -137,3 +137,11 @@ Future<ResolutionGroup> addResolutionGroup(ResolutionGroup group) async {
   return ResolutionGroup.fromJson(
       json.decode(response.body).cast<String, dynamic>());
 }
+
+Future<http.Response> editResolutionGroup(ResolutionGroup group) async {
+  var url = urlBuilder('/ResolutionGroups/${group.id}');
+  var body = json.encode(group.toJson());
+
+  final response = await http.put(url, body: body, headers: _headers);
+  return response;
+}

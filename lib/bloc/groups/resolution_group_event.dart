@@ -12,3 +12,9 @@ class AddResolutionGroupEvent extends ResolutionGroupEvent {
 
   AddResolutionGroupEvent(this.item);
 }
+
+class EditGroupEvent extends ResolutionGroupEvent {
+  final ResolutionGroup item;
+
+  EditGroupEvent(this.item);
+}
